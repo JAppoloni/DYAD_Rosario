@@ -27,35 +27,35 @@ public class dEmpresa {
     }
 // </editor-fold>
     
-    private dTipo empresaTipo = new dTipo();
+    private dCliente empresaCliente = new dCliente();
 
-    // <editor-fold defaultstate="collapsed" desc=" Tipo ">
-    public cTipo buscarTipo(cTipo pTipo) throws cDatosException {
-        cTipo unTipo = new cTipo();
-        if (pTipo != null) {
-            if (pTipo.getId() != 0) {
+    // <editor-fold defaultstate="collapsed" desc=" Cliente ">
+    public cliente buscarCliente(cliente pCliente) throws cDatosException {
+        cliente unCliente = new cliente();
+        if (pCliente != null) {
+            if (pCliente.getIdClie() != 0) {
                 try {
-                    unTipo = empresaTipo.buscar(pTipo);
+                    unCliente = empresaCliente.buscar(pCliente);
                 } catch (cDatosException ex) {
-                    throw new cDatosException("Error al buscar tipo:" + ex.getMessage());
+                    throw new cDatosException("Error al buscar cliente:" + ex.getMessage());
                 }
             }
         }
-        if (unTipo != null) {
-            return unTipo;
+        if (unCliente != null) {
+            return unCliente;
         } else {
             return null;
         }
     }
 
-    public ArrayList buscarTodosTipos() throws cDatosException {
-        dTipo unTipo = new dTipo();
+    public ArrayList buscarTodosClientes() throws cDatosException {
+        dCliente unCliente = new dCliente();
         ArrayList coleccion;
         coleccion = new ArrayList();
         try {
-            coleccion = unTipo.buscarTodos();
+            coleccion = unCliente.buscarTodos();
         } catch (cDatosException ex) {
-            throw new cDatosException("Error al buscar todos los tipos:" + ex.getMessage());
+            throw new cDatosException("Error al buscar todos los clientes:" + ex.getMessage());
         }
         if (coleccion != null) {
             return coleccion;
@@ -64,24 +64,15 @@ public class dEmpresa {
         }
     }
 
-    public int generarIdTipo() throws cDatosException {
-        dTipo unTipo = new dTipo();
-        int num = 0;
-        try {
-            num = unTipo.generarId();
-        } catch (cDatosException ex) {
-            throw new cDatosException("Error al buscar el tipo:" + ex.getMessage());
-        }
-        return num;
-    }
+    
 
-    public boolean agregarTipo(cTipo tipo) throws cDatosException {
-        if (tipo != null) {
+    public boolean agregarCliente(cliente clien) throws cDatosException {
+        if (clien != null) {
             try {
-                empresaTipo.guardar(tipo);
+                empresaCliente.guardar(clien);
                 return true;
             } catch (cDatosException ex) {
-                throw new cDatosException("Error al ingresar el tipo:" + ex.getMessage());
+                throw new cDatosException("Error al ingresar el cliente:" + ex.getMessage());
             }
 
 
@@ -90,26 +81,26 @@ public class dEmpresa {
         }
     }
 
-    public boolean modificarTipo(cTipo tipo) throws cDatosException {
-        if (tipo != null) {
+    public boolean modificarCliente(cliente clien) throws cDatosException {
+        if (clien != null) {
             try {
-                empresaTipo.modificar(tipo);
+                empresaCliente.modificar(clien);
                 return true;
             } catch (cDatosException ex) {
-                throw new cDatosException("Error al modificar tipo:" + ex.getMessage());
+                throw new cDatosException("Error al modificar cliente:" + ex.getMessage());
             }
         } else {
             return false;
         }
     }
 
-    public boolean eliminarTipo(cTipo tipo) throws cDatosException {
-        if (tipo != null) {
+    public boolean eliminarCliente(cliente clien) throws cDatosException {
+        if (clien != null) {
             try {
-                empresaTipo.eliminar(tipo);
+                empresaCliente.eliminar(clien);
                 return true;
             } catch (cDatosException ex) {
-                throw new cDatosException("Error al eliminar tipo:" + ex.getMessage());
+                throw new cDatosException("Error al eliminar cliente:" + ex.getMessage());
             }
         } else {
             return false;
