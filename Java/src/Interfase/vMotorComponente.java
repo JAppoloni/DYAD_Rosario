@@ -5,6 +5,8 @@
  */
 package Interfase;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
@@ -37,6 +39,11 @@ public class vMotorComponente extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -177,6 +184,10 @@ public class vMotorComponente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.CargarDatosList();
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -222,4 +233,24 @@ public class vMotorComponente extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
+
+ public void CargarDatosList() {
+        ArrayList<motor> coleccion = new ArrayList<motor>();
+        try {
+            coleccion = empresa.buscarTodosTipos();
+            ListaTipos = coleccion;
+            Iterator<cTipo> it = coleccion.iterator();
+            while (it.hasNext()) {
+                cTipo unTipo = it.next();
+                DefaultTableModel tm = (DefaultTableModel) tblTiposEli.getModel();
+                tm.addRow(new Object[]{new Integer(unTipo.getId()), new String(unTipo.getDesc()), new String(Utilidades.convertirDateUtilAString(unTipo.getFecha()))});
+                tblTiposEli.setModel(tm);
+            }
+        } catch (Common.cDatosException e) {
+            JOptionPane.showMessageDialog(this, e.toString(), "Tipo", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
+
 }
