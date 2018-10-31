@@ -5,17 +5,24 @@
  */
 package Persistencia;
 
+import Common.cDatosException;
 import java.lang.reflect.Constructor;
 import java.lang.Object;
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
  * @author jmanu
  */
 public class pGenerico extends pPersistencia {
+
+    public pGenerico() {
+        super.getInstancia();
+    }
 
     // <editor-fold defaultstate="collapsed" desc=" Propiedades_Informacion_Objetos">     
     public static boolean IsPrimitio(Field propiedades) {
@@ -57,7 +64,7 @@ public class pGenerico extends pPersistencia {
         return null;
     }
 
-    public static Object SetValorObjeto(Object pObject, ResultSet reader) throws SQLException {
+    public Object SetValorObjeto(Object pObject, ResultSet reader) throws SQLException {
         Object retorno = CreateInstance(pObject);
         java.lang.reflect.Field[] MyFields = getPropertiesFields(pObject);
 
@@ -74,7 +81,7 @@ public class pGenerico extends pPersistencia {
                 valorRetorno = caprutatValor.toString();
             }
             if (property.getType().isAssignableFrom(java.util.Date.class)) {
-                // valorRetorno = DateTime.Parse(caprutatValor.toString());
+                // valorRetorno = DateTime.Parse(caprutatValor.toString());Metodo de fechasss
             }
             if (property.getType().isAssignableFrom(java.lang.Integer.class)) {
                 valorRetorno = Integer.parseInt(caprutatValor.toString());
@@ -96,7 +103,7 @@ public class pGenerico extends pPersistencia {
                             if (IsPK(Instance.getClass().getSimpleName(), info.getName())) {
                                 info.setAccessible(true);
                                 info.set(Instance, caprutatValor);
-                                Instance = TraerEspecifico_Con_Eliminados(Instance);
+                                Instance = TraerEspecifico_Eliminado(Instance);
                                 valorRetorno = Instance;
                                 break;
                             }
@@ -117,137 +124,165 @@ public class pGenerico extends pPersistencia {
         return retorno;
     }
 
-    public static bool EsString(Object pObject) {
-        if (pObject.GetType() == typeof(String)) {
+    public static Boolean EsString(Object pObject) {
+        if (pObject.getClass().isAssignableFrom(java.lang.String.class)) {
             return true;
         }
-
-        if (pObject.GetType() == typeof(DateTime)) {
+        if (pObject.getClass().isAssignableFrom(java.util.Date.class)) {
             return true;
         }
-
-        if (pObject.GetType() == typeof(bool)) {
+        if (pObject.getClass().isAssignableFrom(java.lang.Boolean.class)) {
             return true;
         }
-
         return false;
     }
 
-    public static bool IsPK(String TablaSQL, String Campo) {
-        List<String> PKs = new List<string>();
-        try {
-            var conn = new SqlConnection(CadenaDeConexion);
-            // Se Abre la Conexion con BD
+    /*
+            super.abrirConexion();
+            // Creo una nueva sentecia para ser ejecutada
+            Statement st= super.getDistribuidora().createStatement();//igual al command
+            // arma la sentencia sql
+               String insertSql="INSERT INTO Cliente(Ci,Nombre,IdTipo)" +
+               "VALUES(´" + cli.getCi() + "´ ,´" + cli.getNombre()  + "´, " + cli.getIdtipo().getId() + " )";
+                // esto es solo para mostrar el sql que se va a ejecutar
+               System.out.println(insertSql);
+               // ejecuta la sentencia
+               st.executeUpdate(insertSql);//execute nonquery
+               super.cerrarConexion();
+    
+     */
 
-            String sentenciaSQL = "SELECT COLUMN_NAME FROM Taller_Integrador_Prog.INFORMATION_SCHEMA.KEY_COLUMN_USAGE"
-                    + " WHERE TABLE_NAME LIKE '" + TablaSQL + "' AND CONSTRAINT_NAME LIKE 'PK%'";
+ /*
+    
+    
+    
+            super.abrirConexion();
+            // Creo una nueva sentecia para ser ejecutada
+            Statement st= super.getDistribuidora().createStatement();
+            // arma la sentencia sql
+            String selectSql="SELECT * FROM CLiente ";
+            if (!"".equals(cli.getCi())){
+                // si pasaron el registro busco solo por eso
+                selectSql=selectSql + " WHERE Ci = ´" + cli.getCi()+"´ ";
+            }
+            // esto es solo para mostrar el sql que se va a ejecutar
+            System.out.println(selectSql);
+            // ejecuta la sentencia
+            ResultSet rs=st.executeQuery(selectSql);
+            
+            cli = null;
+            
+            while(rs.next()){
+                cli = new cCliente();
+                int num;
+                pTipo pt = new pTipo();
+                // recorre el Resultset y crea un objeto con los datos de
+                // cada linea.
+                num = rs.getInt("tid");
+                cli.setCi(rs.getString("Ci"));
+                cli.setNombre(rs.getString("Nombre"));
+                cTipo untipo = new cTipo();
+                untipo.setId(rs.getInt("IdTipo"));
+                untipo = pt.buscarTipo(untipo);
+                cli.setIdtipo(untipo);
+            }
+            super.cerrarConexion();
+            // devuelve el objeto encontrado
+            if (cli != null){
+                return cli;
+            }else{
+                return null;
+            }
+        }catch(SQLException e){throw new cDatosException("Error al buscar accion:" + e.getMessage());}
+    }
+    
+    
+     */
+    public Boolean IsPK(String TablaSQL, String Campo) throws cDatosException {
+        ArrayList<String> PKs = new ArrayList();
+        try {
+            super.abrirConexion();
+            // Creo una nueva sentecia para ser ejecutada
+            Statement st = super.getDistribuidora().createStatement();
+
+            String selectSql = "SELECT COLUMN_NAME FROM Taller_Integrador_Prog.INFORMATION_SCHEMA.KEY_COLUMN_USAGE"
+                    + " WHERE TABLE_NAME LIKE ´" + TablaSQL + "´ AND CONSTRAINT_NAME LIKE ´PK%´";
             // https://stackoverflow.com/questions/3930338/sql-server-get-table-primary-key-using-sql-query
 
-            // Se Abre la Conexion con BD
-            conn.Open();
-
-            SqlCommand cmd = new SqlCommand(sentenciaSQL, conn);
-
-            using(SqlDataReader reader = cmd.ExecuteReader()
-            
-            
-            
-            
-                )
-                {
-                    while (reader.Read()) {
-                    String Aux = reader["COLUMN_NAME"].ToString();
-                    PKs.Add(Aux);
-                }
-                conn.Close();
+            System.out.println(selectSql);
+            // ejecuta la sentencia
+            ResultSet rs = st.executeQuery(selectSql);
+            while (rs.next()) {
+                String aux = rs.getString("Nombre_Columna");
+                PKs.add(aux);
             }
+
+            cerrarConexion();
         } catch (Exception e) {
-            throw e;
+            throw new cDatosException("ERROR: " + e.getMessage());
         }
-        foreach(String s in PKs
-        
-        
-        
-        
-            )
-            {
-                if (s.Equals(Campo)) {
+        for (String s : PKs) {
+            if (s.equals(Campo)) {
                 return true;
             }
         }
-
         return false;
     }
 
-    public static bool IsAutoincremental(String TablaSQL, String Campo) {
-        List<String> PKs = new List<string>();
+    public Boolean IsAutoincremental(String TablaSQL, String Campo) throws cDatosException {
+        ArrayList<String> PKs = new ArrayList();
         try {
-            var conn = new SqlConnection(CadenaDeConexion);
-            // Se Abre la Conexion con BD
+            super.abrirConexion();
+            // Creo una nueva sentecia para ser ejecutada
+            Statement st = super.getDistribuidora().createStatement();
 
-            String sentenciaSQL = "SELECT name From(Select name,"
-                    + " IsIdentity= COLUMNPROPERTY(id, name, 'IsIdentity') FROM syscolumns WHERE OBJECT_NAME(id) = '"
-                    + TablaSQL + "') S where S.IsIdentity > 0 group by name;";
-            // https://social.msdn.microsoft.com/Forums/sqlserver/en-US/4708d229-679c-4ecf-a3da-efa4624607bc/how-do-i-find-identity-columns-on-table-using-tsql?forum=transactsql
+            String selectSql = "SELECT COLUMN_NAME FROM Taller_Integrador_Prog.INFORMATION_SCHEMA.KEY_COLUMN_USAGE"
+                    + " WHERE TABLE_NAME LIKE ´" + TablaSQL + "´ AND CONSTRAINT_NAME LIKE ´PK%´";
+            // https://stackoverflow.com/questions/3930338/sql-server-get-table-primary-key-using-sql-query
 
-            // Se Abre la Conexion con BD
-            conn.Open();
-
-            SqlCommand cmd = new SqlCommand(sentenciaSQL, conn);
-
-            using(SqlDataReader reader = cmd.ExecuteReader()
-            
-            
-            
-            
-                )
-                {
-                    while (reader.Read()) {
-                    String Aux = reader["name"].ToString();
-                    PKs.Add(Aux);
-                }
-                conn.Close();
+            System.out.println(selectSql);
+            // ejecuta la sentencia
+            ResultSet rs = st.executeQuery(selectSql);
+            while (rs.next()) {
+                String aux = rs.getString("Nombre_Columna");
+                PKs.add(aux);
             }
+
+            cerrarConexion();
         } catch (Exception e) {
-            throw e;
+            throw new cDatosException("ERROR: " + e.getMessage());
         }
-        foreach(String s in PKs
-        
-        
-        
-        
-            )
-            {
-                if (s.Equals(Campo)) {
+        for (String s : PKs) {
+            if (s.equals(Campo)) {
                 return true;
             }
         }
-
         return false;
     }
 
-    public static String PasarAString(Object pObject) {
-        return EsString(pObject) ? "'" + pObject.ToString() + "'" : pObject.ToString();
+    public static String PasarAString(Object pObject) {//Cambiar por fecha
+        return EsString(pObject) ? "´" + pObject.toString() + "´" : pObject.toString();
     }
 
-    public static Object DevolverValor(Object pObject, PropertyInfo property, bool IsRecursivo) {
+    public Object DevolverValor(Object pObject, Field property, Boolean IsRecursivo) throws cDatosException {
         try {
             if (IsRecursivo == false) {
                 if (IsPrimitio(property)) {
-                    return (IsAutoincremental(pObject.GetType().Name, property.Name)) ? null
-                            : property.GetValue(pObject, null); // Es Incremental retorna null sino el valor del obj
+                    if (IsAutoincremental(pObject.getClass().getSimpleName(), property.getName())) {
+                        return null;
+                    } else {
+                        property.setAccessible(true);
+                        property.get(pObject);
+                        return property;
+                    }
                 } else {
-                    object reflejado = (property.GetValue(pObject, null));
-                    // recorer objeto abstracto
-                    foreach(PropertyInfo property2 in reflejado.GetType().GetProperties()
-                    
-                    
-                    
-                    
-                        )
-                        {
-                            //propertyA.GetValue(property.GetValue(pObject, null), null)
-                            Object rtn = DevolverValor(reflejado, property2, true);
+                    Object reflejado;
+
+                    property.setAccessible(true);
+                    reflejado = property.get(pObject);
+                    for (Field property2 : reflejado.getClass().getDeclaredFields()) {
+                        //propertyA.GetValue(property.GetValue(pObject, null), null)
+                        Object rtn = DevolverValor(reflejado, property2, true);
                         if (rtn != null) {
                             return rtn;
                         }
@@ -255,22 +290,19 @@ public class pGenerico extends pPersistencia {
                 }
             } else {
                 if (IsPrimitio(property)) {
-                    string a = pObject.ToString().Replace("Common.Clases.", "");
-                    if (IsPK(a, property.Name)) {
-                        return property.GetValue(pObject, null);
+                    String a = pObject.getClass().getSimpleName().toString();
+                    if (IsPK(a, property.getName())) {
+                        property.setAccessible(true);
+                        property.get(pObject);
+                        return property;
                     }
                 } else {
-                    object reflejado = (property.GetValue(pObject, null));
-                    // recorer objeto abstracto
-                    foreach(PropertyInfo property2 in reflejado.GetType().GetProperties()
-                    
-                    
-                    
-                    
-                        )
-                        {
-                            //propertyA.GetValue(property.GetValue(pObject, null), null)
-                            Object rtn = DevolverValor(reflejado, property2, true);
+                    Object reflejado;
+                    property.setAccessible(true);
+                    reflejado = property.get(pObject);
+
+                    for (Field property2 : reflejado.getClass().getDeclaredFields()) {        //propertyA.GetValue(property.GetValue(pObject, null), null)
+                        Object rtn = DevolverValor(reflejado, property2, true);
                         if (rtn != null) {
                             return rtn;
                         }
@@ -278,225 +310,161 @@ public class pGenerico extends pPersistencia {
                 }
             }
         } catch (Exception e) {
-            throw e;
-        } // Ctrl+K, Ctrl+C para comentar código y Ctrl+K, Ctrl+U para quitar un comentario
+            throw new cDatosException("ERROR: " + e.getMessage());
+        }
         return null;
     }
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc=" ABM (ALTAS, BAJAS, MODIF.)">      
-    public static boolean Agregar(Object pObject) {
+    public boolean Agregar(Object pObject) throws cDatosException {
         boolean retorno = true;
         try {
-            var conn = new SqlConnection(CadenaDeConexion);
-            conn.Open();
-            string Insert_In_Table = ("INSERT INTO "
-                    + (pObject.GetType().Name + "  ("));
-            string parametro = "";
-            string value = " VALUES (";
-            Type type = pObject.GetType();
-            for (PropertyInfo property : type.GetProperties()) {
-                if ((property.PropertyType == typeof(List < Object >))) {
-                    // TODO: Warning!!! continue If
+
+            super.abrirConexion();
+
+            Statement st = super.getDistribuidora().createStatement();
+
+            String Insert_In_Table = "INSERT INTO " + pObject.getClass().getSimpleName() + "  (";
+            String parametro = " ";
+            String value = " VALUES (";
+
+            for (Field property : pObject.getClass().getDeclaredFields()) {
+                if (property.getClass().isAssignableFrom(java.util.List.class)) {
+                    continue;
+                }
+                Object Valor = DevolverValor(pObject, property, false);
+                if (Valor == null) {
+                    continue;
                 }
 
-                object Valor = Persistencia.DevolverValor(pObject, property, false);
-                if ((Valor == null)) {
-                    // TODO: Warning!!! continue If
-                }
-
-                value = (value
-                        + (Persistencia.PasarAString(Valor) + ","));
-                parametro = (parametro
-                        + (property.Name + ","));
+                value += PasarAString(Valor) + ",";
+                parametro += property.getName() + ",";
             }
+            value = value.substring(0, value.length() - 1) + ")";
+            parametro = parametro.substring(0, parametro.length() - 1) + ")";
+            Insert_In_Table += parametro;
+            Insert_In_Table += value;
 
-            //  se concatenan los strings
-            value = (value.Remove((value.Length - 1), 1) + ")");
-            parametro = (parametro.Remove((parametro.Length - 1), 1) + ")");
-            Insert_In_Table = (Insert_In_Table + parametro);
-            Insert_In_Table = (Insert_In_Table + value);
-            //  Se crea la sentencia a ejecutar en SQL
-            SqlCommand cmd = new SqlCommand(Insert_In_Table, conn);
-            int rtn = cmd.ExecuteNonQuery();
-            //  Verif que se modificaron datos
-            if ((rtn <= 0)) {
-                retorno = false;
-            }
+            System.out.println(Insert_In_Table);
 
-            //  Se cierra la conexion con BD
-            if ((conn.State == ConnectionState.Open)) {
-                conn.Close();
-            }
+            st.executeUpdate(Insert_In_Table);
 
-        } catch (Exception ex) {
-            throw ex;
+            cerrarConexion();
+        } catch (Exception e) {
+            throw new cDatosException("ERROR: " + e.getMessage());
         }
 
         return retorno;
     }
 
-    public static boolean Modificar_Objeto(Object pObject) {
+    public boolean Modificar(Object pObject) throws cDatosException {
         boolean retorno = true;
         try {
-            //  Se estable ce la conexion con BD
-            var conn = new SqlConnection(CadenaDeConexion);
-            //  Se abre la cadena de Conexion
-            conn.Open();
-            //  Creacion del Insert para el Objeto deseado
-            string Insert_In_Table = ("UPDATE "
-                    + (pObject.GetType().Name + " SET "));
-            //  String en el que se almacenara el nombre del Objeto+ Valor del mismo
-            string Tipe = " ";
-            string Condicion = "  Where  ";
-            //  Creacion de una variable del tipo 
-            Type type = pObject.GetType();
-            for (PropertyInfo property : type.GetProperties()) {
-                if ((property.PropertyType == typeof(List < Object >))) {
-                    // TODO: Warning!!! continue If
-                }
 
-                if (Persistencia.IsPK(pObject.GetType().Name, property.Name)) {
-                    Object Valor = Persistencia.DevolverValor(pObject, property, true);
+            super.abrirConexion();
+
+            Statement st = super.getDistribuidora().createStatement();
+            String Insert_In_Table = "UPDATE  " + pObject.getClass().getSimpleName() + " SET ";
+            String Tipe = " ";
+            String Condicion = "  Where  ";
+
+            for (Field property : pObject.getClass().getDeclaredFields()) {
+
+                if (IsPK(pObject.getClass().getSimpleName(), property.getName())) {
+                    Object Valor = DevolverValor(pObject, property, true);
                     if ((Valor == null)) {
-                        // TODO: Warning!!! continue If
+                        continue;
                     }
+                    Condicion += property.getName() + "=" + PasarAString(Valor) + " AND ";
 
-                    Condicion = (Condicion
-                            + (property.Name + ("="
-                            + (Persistencia.PasarAString(Valor) + " AND"))));
                 } else {
-                    Object Valor = Persistencia.DevolverValor(pObject, property, false);
-                    Tipe = (Tipe
-                            + (property.Name + ("="
-                            + (Persistencia.PasarAString(Valor) + " ,"))));
+                    Object Valor = DevolverValor(pObject, property, false);
+                    Tipe += property.getName() + "=" + PasarAString(Valor) + " ,";
                 }
-
             }
+            Tipe = Tipe.substring(0, Tipe.length() - 1) + ")";
+            Condicion = Condicion.substring(0, Condicion.length() - 1) + ")";
+            Insert_In_Table += Condicion;
+            Insert_In_Table += Tipe;
 
-            Tipe = (Tipe.Remove((Tipe.Length - 1), 1) + "");
-            Condicion = (Condicion.Remove((Condicion.Length - 3), 3) + "");
-            //  se concatenan los strings
-            Insert_In_Table = (Insert_In_Table + Tipe);
-            Insert_In_Table = (Insert_In_Table + Condicion);
-            //  Se crea la sentencia a ejecutar en SQL
-            SqlCommand cmd = new SqlCommand(Insert_In_Table, conn);
-            int rtn = cmd.ExecuteNonQuery();
-            //  Verif que se modificaron datos
-            if ((rtn <= 0)) {
-                retorno = false;
-            }
+            System.out.println(Insert_In_Table);
 
-            //  Se cierra la conexion con BD
-            if ((conn.State == ConnectionState.Open)) {
-                conn.Close();
-            }
+            st.executeUpdate(Insert_In_Table);
 
-        } catch (Exception ex) {
-            throw ex;
+            cerrarConexion();
+        } catch (Exception e) {
+            throw new cDatosException("ERROR: " + e.getMessage());
         }
 
         return retorno;
     }
 
-    public static boolean Eliminar_Objeto_Logico(Object pObject) {
+    public boolean Eliminar_Logico(Object pObject) throws cDatosException {
         boolean retorno = true;
         try {
-            //  Se estable ce la conexion con BD
-            var conn = new SqlConnection(CadenaDeConexion);
-            //  Se abre la cadena de Conexion
-            conn.Open();
-            //  Creacion del Insert para el Objeto deseado
-            string Insert_In_Table = ("UPDATE "
-                    + (pObject.GetType().Name + "SET * WHERE"));
-            //  SET ++ Valor +
-            //  String en el que se almaceara los datos de los atributos del objeto
-            string Condicion = "";
+            super.abrirConexion();
+
+            Statement st = super.getDistribuidora().createStatement();
+            String Condicion = "UPDATE  " + pObject.getClass().getSimpleName() + " SET isDeleted=´true´ WHERE ";
+
             //  Creacion de una variable del tipo 
-            for (PropertyInfo property : pObject.GetType().GetProperties()) {
+            for (Field property : pObject.getClass().getDeclaredFields()) {
                 // pObject.GetType().GetProperties()  -------- Lista de Campos
-                if (Persistencia.IsPK(pObject.GetType().Name, property.Name)) {
-                    Object Valor = Persistencia.DevolverValor(pObject, property, true);
+                if (IsPK(pObject.getClass().getName(), property.getName())) {
+                    Object Valor = DevolverValor(pObject, property, true);
                     if ((Valor == null)) {
-                        // TODO: Warning!!! continue If
+                        continue;
                     }
 
-                    Condicion = (Condicion
-                            + (property.Name + ("="
-                            + (Persistencia.PasarAString(Valor) + " AND"))));
+                    Condicion += " " + property.getName() + "=" + PasarAString(Valor) + " AND";
                 }
 
             }
+            Condicion = Condicion.substring(0, Condicion.length() - 3);
 
-            Condicion = (Condicion + (" Eliminado_"
-                    + (pObject.GetType().Name + "= false")));
-            Insert_In_Table = (Insert_In_Table + Condicion);
-            //  Se crea la sentencia a ejecutar en SQL
-            SqlCommand cmd = new SqlCommand(Insert_In_Table, conn);
-            int rtn = cmd.ExecuteNonQuery();
-            //  Verif que se modificaron datos
-            if ((rtn <= 0)) {
-                retorno = false;
-            }
+            System.out.println(Condicion);
 
-            //  Se cierra la conexion con BD
-            if ((conn.State == ConnectionState.Open)) {
-                conn.Close();
-            }
+            st.executeUpdate(Condicion);
 
-        } catch (Exception ex) {
-            throw ex;
+            cerrarConexion();
+        } catch (Exception e) {
+            throw new cDatosException("ERROR: " + e.getMessage());
         }
 
         return retorno;
     }
 
-    public static boolean Eliminar_Objeto(Object pObject) {
+    public boolean Eliminar(Object pObject) throws cDatosException {
         boolean retorno = true;
         try {
-            //  Se estable ce la conexion con BD
-            var conn = new SqlConnection(CadenaDeConexion);
-            //  Se abre la cadena de Conexion
-            conn.Open();
-            //  Creacion del Insert para el Objeto deseado
-            string Insert_In_Table = ("UPDATE "
-                    + (pObject.GetType().Name + "SET * WHERE"));
-            //  SET ++ Valor +
-            //  String en el que se almaceara los datos de los atributos del objeto
-            string Condicion = "";
+            super.abrirConexion();
+
+            Statement st = super.getDistribuidora().createStatement();
+            String Condicion = "DELETE  " + pObject.getClass().getSimpleName() + " WHERE ";
+
             //  Creacion de una variable del tipo 
-            for (PropertyInfo property : pObject.GetType().GetProperties()) {
+            for (Field property : pObject.getClass().getDeclaredFields()) {
                 // pObject.GetType().GetProperties()  -------- Lista de Campos
-                if (Persistencia.IsPK(pObject.GetType().Name, property.Name)) {
-                    Object Valor = Persistencia.DevolverValor(pObject, property, true);
+                if (IsPK(pObject.getClass().getName(), property.getName())) {
+                    Object Valor = DevolverValor(pObject, property, true);
                     if ((Valor == null)) {
-                        // TODO: Warning!!! continue If
+                        continue;
                     }
 
-                    Condicion = (Condicion
-                            + (property.Name + ("="
-                            + (Persistencia.PasarAString(Valor) + " AND"))));
+                    Condicion += " " + property.getName() + "=" + PasarAString(Valor) + " AND";
                 }
 
             }
+            Condicion = Condicion.substring(0, Condicion.length() - 3);
 
-            Condicion = Condicion.Remove((Condicion.Length - 3), 3);
-            Insert_In_Table = (Insert_In_Table + Condicion);
-            //  Se crea la sentencia a ejecutar en SQL
-            SqlCommand cmd = new SqlCommand(Insert_In_Table, conn);
-            int rtn = cmd.ExecuteNonQuery();
-            //  Verif que se modificaron datos
-            if ((rtn <= 0)) {
-                retorno = false;
-            }
+            System.out.println(Condicion);
 
-            //  Se cierra la conexion con BD
-            if ((conn.State == ConnectionState.Open)) {
-                conn.Close();
-            }
+            st.executeUpdate(Condicion);
 
-        } catch (Exception ex) {
-            throw ex;
+            cerrarConexion();
+        } catch (Exception e) {
+            throw new cDatosException("ERROR: " + e.getMessage());
         }
 
         return retorno;
@@ -504,343 +472,153 @@ public class pGenerico extends pPersistencia {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc=" Consultas">      
-    public static dynamic Traer_Objeto_ConEliminados(Object pObject) {
-        //  Creacion del string que contiene la sentencia a ejecutar
-        string SecuenciaSQL = ("select * from "
-                + (pObject.GetType().Name + " where "));
+    public Object TraerEspecifico(Object pObject) throws cDatosException {
+        Object retorno = null;
+
         try {
-            var conn = new SqlConnection(CadenaDeConexion);
-            conn.Open();
-            string Condicion = "";
-            for (PropertyInfo property : pObject.GetType().GetProperties()) {
-                if (Persistencia.IsPK(pObject.GetType().Name, property.Name)) {
-                    Object Valor = Persistencia.DevolverValor(pObject, property, true);
-                    if ((Valor == null)) {
-                        // TODO: Warning!!! continue If
-                    }
 
-                    Condicion = (Condicion
-                            + (property.Name + ("="
-                            + (Persistencia.PasarAString(Valor) + " AND"))));
+            super.abrirConexion();
+            Statement st = super.getDistribuidora().createStatement();
+            String SecuenciaSQL = "select * from " + pObject.getClass().getSimpleName() + " where ";
+
+            for (Field property : pObject.getClass().getDeclaredFields()) {
+                if (IsPK(pObject.getClass().getName(), property.getName())) {
+                    Object Valor = DevolverValor(pObject, property, true);
+
+                    if (Valor == null) {
+                        continue;
+                    }
+                    SecuenciaSQL += " " + property.getName() + "=" + PasarAString(Valor) + " AND";
                 }
-
             }
 
-            Condicion = (Condicion.Remove((Condicion.Length - 3), 3) + "");
-            SecuenciaSQL = (SecuenciaSQL + Condicion);
-            SqlCommand cmd = new SqlCommand(SecuenciaSQL, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read()) {
-                Object retorno = null;
-                Type type = Type.GetType(pObject.GetType().Name, true);
-                retorno = Activator.CreateInstance(type);
-                for (var property : pObject.GetType().GetProperties()) {
-                    Object caprutatValor = reader[property.Name];
-                    object valorRetorno = null;
-                    if ((property.PropertyType == typeof(String))) {
-                        valorRetorno = caprutatValor.ToString();
-                    }
+            SecuenciaSQL += " isDeleted= 'false'";
 
-                    if ((property.PropertyType == typeof(int))) {
-                        valorRetorno = int.Parse
-                        (caprutatValor.ToString()
-                    
-                    
-                    
-                    
-                    
-                    );
-                        }
-                        
-                        if ((property.PropertyType == typeof(boolean))) {
-                        caprutatValor = boolean.Parse
-                        (caprutatValor.ToString()
-                    
-                    
-                    
-                    
-                    
-                    );
-                        }
-                        
-                        if (!Persistencia.IsPrimitio(property)) {
-                        Object aux = property.GetValue(pObject);
-                        Type tipo_ObjC = Type.GetType(aux.GetType().Name, true);
-                        Object Instance = Activator.CreateInstance(tipo_ObjC);
-                        for (PropertyInfo info : Instance.GetType().GetProperties()) {
-                            if (Persistencia.IsPK(Instance.GetType().Name, info.Name)) {
-                                info.SetValue(Instance, caprutatValor);
-                                Instance = Persistencia.Traer_Lista_Objeto_ConELiminados(Instance);
-                                valorRetorno = Instance;
-                                break;
-                            }
+            System.out.println(SecuenciaSQL);
 
-                        }
-
-                    }
-
-                    property.SetValue(retorno, caprutatValor);
-                }
-
-                return retorno;
+            ResultSet rs = st.executeQuery(SecuenciaSQL);
+            while (rs.next()) {
+                retorno = SetValorObjeto(pObject, rs);
             }
+            cerrarConexion();
 
-            if ((conn.State == ConnectionState.Open)) {
-                conn.Close();
-            }
+            return retorno;
 
-            return null;
-        } catch (Exception ex) {
-            throw ex;
+        } catch (Exception e) {
+            throw new cDatosException("ERROR: " + e.getMessage());
         }
-
     }
 
-    public static dynamic Traer_Lista_Objeto_ConELiminados(Object pObject) {
-        //  Creacion del string que contiene la sentencia a ejecutar
-        string SecuenciaSQL = ("select  *  from " + pObject.GetType().Name);
-        var retornoLista = new List<dynamic>();
+    public Object TraerTodos(Object pObject) throws  cDatosException{
+        // Creacion del string que contiene la sentencia a ejecutar
+        String SecuenciaSQL = "select  *  from " + pObject.getClass().getSimpleName() + " WHERE isDeleted=´false´";
+
+        ArrayList<Object> retornoLista = new ArrayList<Object>();
+
         try {
-            var conn = new SqlConnection(CadenaDeConexion);
-            //  Se Abre la Conexion con BD
-            conn.Open();
-            SqlCommand cmd = new SqlCommand(SecuenciaSQL, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read()) {
-                Object retorno = null;
-                Type type = Type.GetType(pObject.GetType().Name, true);
-                retorno = Activator.CreateInstance(type);
-                for (var property : pObject.GetType().GetProperties()) {
-                    Object caprutatValor = reader[property.Name];
-                    object valorRetorno = null;
-                    if ((property.PropertyType == typeof(String))) {
-                        valorRetorno = caprutatValor.ToString();
-                    }
+            super.abrirConexion();
+            Statement st = super.getDistribuidora().createStatement();
+            System.out.println(SecuenciaSQL);
 
-                    if ((property.PropertyType == typeof(int))) {
-                        valorRetorno = int.Parse
-                        (caprutatValor.ToString()
-                    
-                    
-                    
-                    
-                    
-                    );
-                        }
-                        
-                        if ((property.PropertyType == typeof(boolean))) {
-                        caprutatValor = boolean.Parse
-                        (caprutatValor.ToString()
-                    
-                    
-                    
-                    
-                    
-                    );
-                        }
-                        
-                        if (!Persistencia.IsPrimitio(property)) {
-                        Object aux = property.GetValue(pObject);
-                        Type tipo_ObjC = Type.GetType(aux.GetType().Name, true);
-                        Object Instance = Activator.CreateInstance(tipo_ObjC);
-                        for (PropertyInfo info : Instance.GetType().GetProperties()) {
-                            if (Persistencia.IsPK(Instance.GetType().Name, info.Name)) {
-                                info.SetValue(Instance, caprutatValor);
-                                Instance = Persistencia.Traer_Lista_Objeto_ConELiminados(Instance);
-                                valorRetorno = Instance;
-                                break;
-                            }
-
-                        }
-
-                    }
-
-                    property.SetValue(retorno, caprutatValor);
-                }
-
-                retornoLista.Add(retorno);
+            ResultSet rs = st.executeQuery(SecuenciaSQL);
+            while (rs.next()) {
+              Object  retorno = SetValorObjeto(pObject, rs);
+            retornoLista.add(retorno);
             }
-
-            if ((conn.State == ConnectionState.Open)) {
-                conn.Close();
-            }
+            cerrarConexion();
 
             return retornoLista;
-        } catch (Exception ex) {
-            throw ex;
-        }
 
+        } catch (Exception e) {
+            throw new cDatosException("ERROR: " + e.getMessage());
+        }
     }
 
-    public static dynamic Traer_Objeto(Object pObject) {
-        //  Creacion del string que contiene la sentencia a ejecutar
-        string SecuenciaSQL = ("select * from "
-                + (pObject.GetType().Name + " where "));
+      public Object TraerEspecifico_Eliminado(Object pObject) throws cDatosException {
+        Object retorno = null;
+
         try {
-            var conn = new SqlConnection(CadenaDeConexion);
-            conn.Open();
-            string Condicion = "";
-            for (PropertyInfo property : pObject.GetType().GetProperties()) {
-                if (Persistencia.IsPK(pObject.GetType().Name, property.Name)) {
-                    Object Valor = Persistencia.DevolverValor(pObject, property, true);
-                    if ((Valor == null)) {
-                        // TODO: Warning!!! continue If
-                    }
 
-                    Condicion = (Condicion
-                            + (property.Name + ("="
-                            + (Persistencia.PasarAString(Valor) + " AND"))));
+            super.abrirConexion();
+            Statement st = super.getDistribuidora().createStatement();
+            String SecuenciaSQL = "select * from " + pObject.getClass().getSimpleName() + " where ";
+
+            for (Field property : pObject.getClass().getDeclaredFields()) {
+                if (IsPK(pObject.getClass().getName(), property.getName())) {
+                    Object Valor = DevolverValor(pObject, property, true);
+
+                    if (Valor == null) {
+                        continue;
+                    }
+                    SecuenciaSQL += " " + property.getName() + "=" + PasarAString(Valor) + " AND";
                 }
-
             }
 
-            Condicion = (Condicion + (" Eliminado_"
-                    + (pObject.GetType().Name + "= false")));
-            SecuenciaSQL = (SecuenciaSQL + Condicion);
-            SqlCommand cmd = new SqlCommand(SecuenciaSQL, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read()) {
-                Object retorno = null;
-                Type type = Type.GetType(pObject.GetType().Name, true);
-                retorno = Activator.CreateInstance(type);
-                for (var property : pObject.GetType().GetProperties()) {
-                    Object caprutatValor = reader[property.Name];
-                    object valorRetorno = null;
-                    if ((property.PropertyType == typeof(String))) {
-                        valorRetorno = caprutatValor.ToString();
-                    }
+            SecuenciaSQL = SecuenciaSQL.substring(0,SecuenciaSQL.length()-3);
 
-                    if ((property.PropertyType == typeof(int))) {
-                        valorRetorno = int.Parse
-                        (caprutatValor.ToString()
-                    
-                    
-                    
-                    
-                    
-                    );
-                        }
-                        
-                        if ((property.PropertyType == typeof(boolean))) {
-                        caprutatValor = boolean.Parse
-                        (caprutatValor.ToString()
-                    
-                    
-                    
-                    
-                    
-                    );
-                        }
-                        
-                        if (!Persistencia.IsPrimitio(property)) {
-                        Object aux = property.GetValue(pObject);
-                        Type tipo_ObjC = Type.GetType(aux.GetType().Name, true);
-                        Object Instance = Activator.CreateInstance(tipo_ObjC);
-                        for (PropertyInfo info : Instance.GetType().GetProperties()) {
-                            if (Persistencia.IsPK(Instance.GetType().Name, info.Name)) {
-                                info.SetValue(Instance, caprutatValor);
-                                Instance = Persistencia.Traer_Lista_Objeto_ConELiminados(Instance);
-                                valorRetorno = Instance;
-                                break;
-                            }
+            System.out.println(SecuenciaSQL);
 
-                        }
-
-                    }
-
-                    property.SetValue(retorno, caprutatValor);
-                }
-
-                return retorno;
+            ResultSet rs = st.executeQuery(SecuenciaSQL);
+            while (rs.next()) {
+                retorno = SetValorObjeto(pObject, rs);
             }
+            cerrarConexion();
 
-            if ((conn.State == ConnectionState.Open)) {
-                conn.Close();
-            }
+            return retorno;
 
-            return null;
-        } catch (Exception ex) {
-            throw ex;
+        } catch (Exception e) {
+            throw new cDatosException("ERROR: " + e.getMessage());
         }
-
     }
 
-    public static dynamic Traer_Lista_Objeto(Object pObject) {
-        //  Creacion del string que contiene la sentencia a ejecutar
-        string SecuenciaSQL = ("select  *  from "
-                + (pObject.GetType().Name + (" WHERE Eliminado_"
-                + (pObject.GetType().Name + "= false"))));
-        var retornoLista = new List<dynamic>();
+    public Object TraerTodos_Eliminado(Object pObject) throws  cDatosException{
+        // Creacion del string que contiene la sentencia a ejecutar
+        String SecuenciaSQL = "select  *  from " + pObject.getClass().getSimpleName();
+
+        ArrayList<Object> retornoLista = new ArrayList<Object>();
+
         try {
-            var conn = new SqlConnection(CadenaDeConexion);
-            //  Se Abre la Conexion con BD
-            conn.Open();
-            SqlCommand cmd = new SqlCommand(SecuenciaSQL, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read()) {
-                Object retorno = null;
-                Type type = Type.GetType(pObject.GetType().Name, true);
-                retorno = Activator.CreateInstance(type);
-                for (var property : pObject.GetType().GetProperties()) {
-                    Object caprutatValor = reader[property.Name];
-                    object valorRetorno = null;
-                    if ((property.PropertyType == typeof(String))) {
-                        valorRetorno = caprutatValor.ToString();
-                    }
+            super.abrirConexion();
+            Statement st = super.getDistribuidora().createStatement();
+            System.out.println(SecuenciaSQL);
 
-                    if ((property.PropertyType == typeof(int))) {
-                        valorRetorno = int.Parse
-                        (caprutatValor.ToString()
-                    
-                    
-                    
-                    
-                    
-                    );
-                        }
-                        
-                        if ((property.PropertyType == typeof(boolean))) {
-                        caprutatValor = boolean.Parse
-                        (caprutatValor.ToString()
-                    
-                    
-                    
-                    
-                    
-                    );
-                        }
-                        
-                        if (!Persistencia.IsPrimitio(property)) {
-                        Object aux = property.GetValue(pObject);
-                        Type tipo_ObjC = Type.GetType(aux.GetType().Name, true);
-                        Object Instance = Activator.CreateInstance(tipo_ObjC);
-                        for (PropertyInfo info : Instance.GetType().GetProperties()) {
-                            if (Persistencia.IsPK(Instance.GetType().Name, info.Name)) {
-                                info.SetValue(Instance, caprutatValor);
-                                Instance = Persistencia.Traer_Lista_Objeto_ConELiminados(Instance);
-                                valorRetorno = Instance;
-                                break;
-                            }
-
-                        }
-
-                    }
-
-                    property.SetValue(retorno, caprutatValor);
-                }
-
-                retornoLista.Add(retorno);
+            ResultSet rs = st.executeQuery(SecuenciaSQL);
+            while (rs.next()) {
+              Object  retorno = SetValorObjeto(pObject, rs);
+            retornoLista.add(retorno);
             }
-
-            if ((conn.State == ConnectionState.Open)) {
-                conn.Close();
-            }
+            cerrarConexion();
 
             return retornoLista;
-        } catch (Exception ex) {
-            throw ex;
-        }
 
+        } catch (Exception e) {
+            throw new cDatosException("ERROR: " + e.getMessage());
+        }
     }
+
+
+    public  ArrayList<Object> TraerTodos_PorFKs(Object pObject, String SecuenciaSQL) throws  cDatosException{
+
+        ArrayList<Object> retornoLista = new ArrayList<Object>();
+
+        try {
+           super.abrirConexion();
+            Statement st = super.getDistribuidora().createStatement();
+            System.out.println(SecuenciaSQL);
+
+            ResultSet rs = st.executeQuery(SecuenciaSQL);
+            while (rs.next()) {
+              Object  retorno = SetValorObjeto(pObject, rs);
+            retornoLista.add(retorno);
+            }
+            cerrarConexion();
+
+            return retornoLista;
+
+        } catch (Exception e) {
+            throw new cDatosException("ERROR: " + e.getMessage());
+        }
+    }
+
     // </editor-fold>
 }
