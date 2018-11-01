@@ -5,12 +5,21 @@
  */
 package Interfase;
 
+import Common.componente;
+import Common.Utilidades;
+import Common.cliente;
+import Dominio.dEmpresa;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Felipe
  */
 public class vComponente extends javax.swing.JFrame {
-
+private ArrayList<cliente> ListaComponentes = new ArrayList<cliente>();
     /**
      * Creates new form vComponente
      */
@@ -53,7 +62,7 @@ public class vComponente extends javax.swing.JFrame {
         txtCostoComp1 = new javax.swing.JTextField();
         txtDescComp1 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        txtIdComp = new javax.swing.JTextField();
+        txtIdComp1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -198,9 +207,9 @@ public class vComponente extends javax.swing.JFrame {
 
         jLabel13.setText("Id:");
 
-        txtIdComp.addActionListener(new java.awt.event.ActionListener() {
+        txtIdComp1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdCompActionPerformed(evt);
+                txtIdComp1ActionPerformed(evt);
             }
         });
 
@@ -232,7 +241,7 @@ public class vComponente extends javax.swing.JFrame {
                             .addComponent(txtCantStockComp1)
                             .addComponent(txtDescComp1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtCantMinStockComp1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtIdComp)))
+                            .addComponent(txtIdComp1)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnModificar)
@@ -249,7 +258,7 @@ public class vComponente extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(txtIdComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIdComp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDescComp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -299,39 +308,40 @@ public class vComponente extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        cTipo unTipo;
+        componente unComponente;
         int num;
+        
 
         try {
             //Verifica el ingreso de los datos requeridos
-            if (this.txtDescComp.getText().length() > 0 && this.txtCostoComp.getText().length() > 0) {
-                String ID = this.txtDescComp.getText().toString();
-                //Verifico que hayan ingresado un número
-                if (Utilidades.isNumeric(ID) == true) {
-                    //Busco si el tipo ya no ha sido ingresado
-                    unTipo = new cTipo();
+            if (this.txtDescComp.getText().length() > 0 && this.txtCostoComp.getText().length() > 0 && this.txtCantStockComp.getText().length() > 0 && this.txtCantMinStockComp.getText().length() > 0) {
+                
+                    //Busco si el componente ya no ha sido ingresado
+                    unComponente = new componente();
                     num = Integer.parseInt(this.txtDescComp.getText());
-                    unTipo.setId(num);
-                    unTipo = empresa.buscarTipo(unTipo);
+                    this.txtCostoComp.getText();
+                    unComponente.setIdComp(num);
+                    unComponente = dEmpresa.buscarComponente(unComponente);
                     ////////////////////////////////////////////////////////////////////////////////////
 
-                    if (unTipo == null) {
-                        //Si el tipo no ha sido ingresado lo crea y le pasa los datos para ingresarlo
-                        unTipo = new cTipo();
-                        unTipo.setId(num);
-                        unTipo.setDesc(this.txtCostoComp.getText());
-                        empresa.agregarTipo(unTipo);
-                        JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Tipo", JOptionPane.INFORMATION_MESSAGE);
+                    if (unComponente == null) {
+                        //Si el componente no ha sido ingresado lo crea y le pasa los datos para ingresarlo
+                        unComponente = new componente();
+                        unComponente.setIdComp(num);
+                        unComponente.setDescripcionComp(this.txtDescComp.getText());
+                        unComponente.setCostoComp(Integer.parseInt(this.txtCostoComp.getText()));
+                        unComponente.setCantStockComp(Integer.parseInt(this.txtCantStockComp.getText()));
+                        unComponente.setCantMinStockComp(Integer.parseInt(this.txtCantMinStockComp.getText()));
+                        dEmpresa.agregarComponente(unComponente);
+                        JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Componente", JOptionPane.INFORMATION_MESSAGE);
 
                         ReiniciarControles();
 
                     } else {
-                        JOptionPane.showMessageDialog(this, "Id tipo ya existe", "Accion", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Id componente ya existe", "Accion", JOptionPane.INFORMATION_MESSAGE);
                     }
-                } else {
-                    JOptionPane.showMessageDialog(this, "El número del código del tipo debe ser un número", "Tipo", JOptionPane.INFORMATION_MESSAGE);
-                }
-            } else {
+                } 
+            else {
                 JOptionPane.showMessageDialog(this, "Datos ingresados incorrectamente", "Accion", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Common.cDatosException e) {
@@ -347,12 +357,18 @@ public class vComponente extends javax.swing.JFrame {
             int numFilas = tm.getRowCount();
             if ((fila < numFilas) && (fila >= 0)) {
 
-                // tomo los datos de los tipos existentes
+                // tomo los datos de los componentes existentes
                 String id = String.valueOf(tm.getValueAt(fila, 0));
                 String desc = (String) tm.getValueAt(fila, 1);
+                String cost = (String) tm.getValueAt(fila, 2);
+                String stock = (String) tm.getValueAt(fila, 3);
+                String cantmin = (String) tm.getValueAt(fila, 4);
 
-                this.txtIdEliminar.setText(id);
-                this.txtDescEliminar.setText(desc);
+                this.txtIdComp1.setText(id);
+                this.txtDescComp1.setText(desc);
+                this.txtCostoComp1.setText(cost);
+                this.txtCantStockComp1.setText(stock);
+                this.txtCantMinStockComp1.setText(cantmin);
 
             }
         }
@@ -375,40 +391,53 @@ public class vComponente extends javax.swing.JFrame {
     }//GEN-LAST:event_tblEliCompPropertyChange
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        cTipo unTipo = new cTipo();
+        componente unComponente = new componente();
         int num;
         try {
-            if (!this.txtIdEliminar.getText().equals("")) {
-                num = Integer.parseInt(this.txtIdEliminar.getText());
-                unTipo.setId(num);
-                empresa.eliminarTipo(unTipo);
-                JOptionPane.showMessageDialog(this, "Se dado eliminado correctamente", "Tipo", JOptionPane.INFORMATION_MESSAGE);
+            if (!this.txtIdComp1.getText().equals("")) {
+                num = Integer.parseInt(this.txtIdComp1.getText());
+                unComponente.setIdComp(num);
+                dEmpresa.eliminarComponente(unComponente);
+                JOptionPane.showMessageDialog(this, "Se dado eliminado correctamente", "Componente", JOptionPane.INFORMATION_MESSAGE);
                 ReiniciarControles();
             } else {
-                JOptionPane.showMessageDialog(this, "Debe seleccionar un registro", "Tipo", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Debe seleccionar un registro", "Componente", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (Common.cDatosException e) {
-            JOptionPane.showMessageDialog(this, e.toString(), "Tipo", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.toString(), "Componente", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
-        if (!this.txtDescEliminar.getText().equals("")
-            && !this.txtIdEliminar.getText().equals("")) {
+        if (!this.txtIdComp1.getText().equals("")
+            && !this.txtDescComp1.getText().equals("")
+                && !this.txtCostoComp1.getText().equals("")
+                && !this.txtCantStockComp1.getText().equals("")
+                && !this.txtCantMinStockComp.getText().equals("")) {
 
             try {
 
                 Integer num;
                 String desc;
-                cTipo unTipo = new cTipo();
+                Integer costo;
+                Integer cants;
+                Integer cantsm;
+                componente unComponente = new componente();
 
-                num = Integer.parseInt(this.txtIdEliminar.getText());
-                desc = this.txtDescEliminar.getText();
-                unTipo.setId(num);
-                unTipo.setDesc(desc);
-                empresa.modificarTipo(unTipo);
+                num = Integer.parseInt(this.txtIdComp1.getText());
+                desc = this.txtDescComp1.getText();
+                costo = Integer.parseInt(this.txtIdComp1.getText());
+                cants = Integer.parseInt(this.txtIdComp1.getText());
+                cantsm = Integer.parseInt(this.txtIdComp1.getText());
+               
+                unComponente.setIdComp(num);
+                unComponente.setDescripcionComp(this.txtDescComp.getText());
+                unComponente.setCostoComp(Integer.parseInt(this.txtCostoComp.getText()));
+                unComponente.setCantStockComp(Integer.parseInt(this.txtCantStockComp.getText()));
+                unComponente.setCantMinStockComp(Integer.parseInt(this.txtCantMinStockComp.getText()));
+                dEmpresa.modificarComponente(unComponente);
                 ReiniciarControles();
                 JOptionPane.showMessageDialog(this, "Se ha modificado correctamente", "Tipo", JOptionPane.INFORMATION_MESSAGE);
 
@@ -421,9 +450,9 @@ public class vComponente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
-    private void txtIdCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCompActionPerformed
+    private void txtIdComp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdComp1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdCompActionPerformed
+    }//GEN-LAST:event_txtIdComp1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -459,6 +488,52 @@ public class vComponente extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void ReiniciarControles() {
+        this.LimpiarCampos();
+        this.LimpiarList();
+        this.CargarDatosList();
+    }
+    
+    public void LimpiarList() {
+        DefaultTableModel dm = (DefaultTableModel) this.tblEliComp.getModel();
+        dm.setRowCount(0);
+        this.tblEliComp.setModel(dm);//limpia el jtable
+    }
+
+    public void CargarDatosList() {
+        ArrayList<cliente> coleccion = new ArrayList<cliente>();
+        try {
+            coleccion = dEmpresa.buscarTodosComponentes();
+            ListaComponentes = coleccion;
+            Iterator<cliente> it = coleccion.iterator();
+            while (it.hasNext()) {
+                cliente unCliente = it.next();
+                DefaultTableModel tm = (DefaultTableModel) tblEliComp.getModel();
+                tm.addRow(new Object[]{new Integer(unCliente.getIdClie()),
+                new String(unCliente.getNombreEmpresaClie()),
+                new String(unCliente.getNombreFantasiaClie()),
+                new String(unCliente.getPaisClie()),
+                new String(unCliente.getDireccionClie()),
+                new String(unCliente.getContactoClie()),});
+                tblEliComp.setModel(tm);
+            }
+        } catch (Common.cDatosException e) {
+            JOptionPane.showMessageDialog(this, e.toString(), "Tipo", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void LimpiarCampos() {
+        this.txtIdComp1.setText("");
+        this.txtDescComp.setText("");
+        this.txtDescComp1.setText("");
+        this.txtCostoComp.setText("");
+        this.txtCostoComp1.setText("");
+        this.txtCantStockComp.setText("");
+        this.txtCantStockComp1.setText("");
+        this.txtCantMinStockComp.setText("");
+        this.txtCantMinStockComp1.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
@@ -487,6 +562,6 @@ public class vComponente extends javax.swing.JFrame {
     private javax.swing.JTextField txtCostoComp1;
     private javax.swing.JTextField txtDescComp;
     private javax.swing.JTextField txtDescComp1;
-    private javax.swing.JTextField txtIdComp;
+    private javax.swing.JTextField txtIdComp1;
     // End of variables declaration//GEN-END:variables
 }
