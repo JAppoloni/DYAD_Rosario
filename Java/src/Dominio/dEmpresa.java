@@ -28,7 +28,6 @@ public class dEmpresa {
 // </editor-fold>
     
     private dCliente empresaCliente = new dCliente();
-
     // <editor-fold defaultstate="collapsed" desc=" Cliente ">
     public cliente buscarCliente(cliente pCliente) throws cDatosException {
         cliente unCliente = new cliente();
@@ -101,6 +100,87 @@ public class dEmpresa {
                 return true;
             } catch (cDatosException ex) {
                 throw new cDatosException("Error al eliminar cliente:" + ex.getMessage());
+            }
+        } else {
+            return false;
+        }
+    }
+// </editor-fold>
+    
+    
+    private dComponente empresaComponente = new dComponente();
+    // <editor-fold defaultstate="collapsed" desc=" Componente ">
+    public componente buscarComponente(componente pComponente) throws cDatosException {
+        componente unComponente = new componente();
+        if (pComponente != null) {
+            if (pComponente.getIdComp() != 0) {
+                try {
+                    unComponente = empresaComponente.buscar(pComponente);
+                } catch (cDatosException ex) {
+                    throw new cDatosException("Error al buscar componente:" + ex.getMessage());
+                }
+            }
+        }
+        if (unComponente != null) {
+            return unComponente;
+        } else {
+            return null;
+        }
+    }
+
+    public ArrayList buscarTodosComponentes() throws cDatosException {
+        dComponente unComponente = new dComponente();
+        ArrayList coleccion;
+        coleccion = new ArrayList();
+        try {
+            coleccion = unComponente.buscarTodos();
+        } catch (cDatosException ex) {
+            throw new cDatosException("Error al buscar todos los componentes:" + ex.getMessage());
+        }
+        if (coleccion != null) {
+            return coleccion;
+        } else {
+            return null;
+        }
+    }
+
+    
+
+    public boolean agregarComponente(componente compo) throws cDatosException {
+        if (compo != null) {
+            try {
+                empresaComponente.guardar(compo);
+                return true;
+            } catch (cDatosException ex) {
+                throw new cDatosException("Error al ingresar el componente:" + ex.getMessage());
+            }
+
+
+        } else {
+            return false;
+        }
+    }
+
+    public boolean modificarComponente(componente compo) throws cDatosException {
+        if (compo != null) {
+            try {
+                empresaComponente.modificar(compo);
+                return true;
+            } catch (cDatosException ex) {
+                throw new cDatosException("Error al modificar componente:" + ex.getMessage());
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public boolean eliminarComponente(componente compo) throws cDatosException {
+        if (compo != null) {
+            try {
+                empresaComponente.eliminar(compo);
+                return true;
+            } catch (cDatosException ex) {
+                throw new cDatosException("Error al eliminar componente:" + ex.getMessage());
             }
         } else {
             return false;
