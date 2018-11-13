@@ -6,45 +6,41 @@
 package Dominio;
 
 import Common.cDatosException;
-import Common.factura;
+import Common.pedido;
 import Persistencia.pGenerico;
 import java.util.ArrayList;
 
-/**
- *
- * @author jmanu
- */
-public class dFactura {
-
-    public void Alta(factura pfactura) throws cDatosException {
-        if (pfactura == null) {
+public class dPedido {
+ 
+        public void Alta(pedido ppedido) throws cDatosException {
+        if (ppedido == null) {
             pGenerico pPersistencia = new pGenerico();
-            pPersistencia.agregar(pfactura);
+            pPersistencia.agregar(ppedido);
         }
     }
 
-    public void modificar(factura pfactura) throws cDatosException {
-        if (pfactura == null) {
+    public void modificar(pedido ppedido) throws cDatosException {
+        if (ppedido == null) {
             pGenerico pPersistencia = new pGenerico();
-            pPersistencia.modificar(pfactura);
+            pPersistencia.modificar(ppedido);
         }
     }
 
-    public void eliminar(factura pfactura) throws cDatosException {
-        if (pfactura == null) {
+    public void eliminar(pedido ppedido) throws cDatosException {
+        if (ppedido == null) {
             pGenerico pPersistencia = new pGenerico();
-            pPersistencia.eliminar(pfactura);
+            pPersistencia.eliminar(ppedido);
         }
     }
 
-    public factura buscar(factura pfactura) throws cDatosException {
-        factura unfactura = new factura();
-        if (pfactura == null) {
+    public pedido buscar(pedido ppedido) throws cDatosException {
+        pedido unpedido = new pedido();
+        if (ppedido == null) {
             pGenerico persistencia = new pGenerico();
-            unfactura = (factura) persistencia.TraerEspecifico(pfactura);
+            unpedido = (pedido) persistencia.TraerEspecifico(ppedido);
         }
-        if (unfactura != null) {
-            return unfactura;
+        if (unpedido != null) {
+            return unpedido;
         } else {
             return null;
         }
@@ -52,10 +48,10 @@ public class dFactura {
 
     public ArrayList BuscarTodosSinEliminados() throws cDatosException {
         ArrayList coleccion = new ArrayList();
-        factura pfactura = new factura();
+        pedido ppedido = new pedido();
  
         pGenerico persistencia = new pGenerico();
-        coleccion = (ArrayList) persistencia.TraerTodosSinEliminados(pfactura);
+        coleccion = (ArrayList) persistencia.TraerTodosSinEliminados(ppedido);
         if (coleccion != null) {
             return coleccion;
         } else {
@@ -65,10 +61,10 @@ public class dFactura {
          
         public ArrayList BuscarTodos() throws cDatosException {
         ArrayList coleccion = new ArrayList();
-        factura pfactura = new factura();
+        pedido ppedido = new pedido();
  
         pGenerico persistencia = new pGenerico();
-        coleccion = (ArrayList) persistencia.TraerTodosSinEliminados(pfactura);
+        coleccion = (ArrayList) persistencia.TraerTodosSinEliminados(ppedido);
         if (coleccion != null) {
             return coleccion;
         } else {

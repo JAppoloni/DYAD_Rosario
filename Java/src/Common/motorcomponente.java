@@ -21,6 +21,9 @@ public class motorcomponente {
         this.cantidadMotorComponente = cantidadMotorComponente;
     }
 
+    public motorcomponente() {
+    }
+    
     public int getIdMotorMotorComponente() {
         return idMotorMotorComponente;
     }

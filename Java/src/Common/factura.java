@@ -26,6 +26,10 @@ public class factura {
         this.idDeletedFactura = idDeletedFactura;
     }
 
+    public factura() {
+    }
+
+    
     public boolean isIdDeletedFactura() {
         return idDeletedFactura;
     }

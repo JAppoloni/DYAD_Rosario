@@ -207,7 +207,7 @@
                                   <Component id="txtCantStockComp1" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtDescComp1" alignment="1" max="32767" attributes="0"/>
                                   <Component id="txtCantMinStockComp1" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="txtIdComp" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtIdComp1" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -231,7 +231,7 @@
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtIdComp" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtIdComp1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -376,9 +376,9 @@
                 <Property name="text" type="java.lang.String" value="Id:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtIdComp">
+            <Component class="javax.swing.JTextField" name="txtIdComp1">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdCompActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdComp1ActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
