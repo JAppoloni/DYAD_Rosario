@@ -54,4 +54,7 @@ public proveedor(int idProvedor, String nombreProveedor, String descProveedor, b
         this.descProveedor = descProveedor;
         this.IsDeletedProveedor = IsDeletedProveedor;
     }
+
+    public proveedor() {
+    }
 }

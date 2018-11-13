@@ -5,7 +5,7 @@
 package Dominio;
 
 import Common.*;
-import Persistencia.pCliente;
+import Persistencia.pGenerico;
 import java.util.ArrayList;
 
 /**
@@ -14,23 +14,23 @@ import java.util.ArrayList;
  */
 public class dCliente {
 
-    public void guardar(cliente pCliente) throws cDatosException {
-        if (pCliente.getIdClie() != 0) {
-            pCliente pPersistencia = new pCliente();
+    public void Alta(cliente pCliente) throws cDatosException {
+        if (pCliente == null) {
+            pGenerico pPersistencia = new pGenerico();
             pPersistencia.agregar(pCliente);
         }
     }
 
     public void modificar(cliente pCliente) throws cDatosException {
-        if (pCliente.getIdClie() != 0) {
-            pCliente pPersistencia = new pCliente();
+        if (pCliente == null) {
+            pGenerico pPersistencia = new pGenerico();
             pPersistencia.modificar(pCliente);
         }
     }
 
     public void eliminar(cliente pCliente) throws cDatosException {
-        if (pCliente.getIdClie() != 0) {
-            pCliente pPersistencia = new pCliente();
+        if (pCliente == null) {
+            pGenerico pPersistencia = new pGenerico();
             pPersistencia.eliminar(pCliente);
         }
     }
@@ -38,8 +38,8 @@ public class dCliente {
     public cliente buscar(cliente pCliente) throws cDatosException {
         cliente unCliente = new cliente();
         if (pCliente.getIdClie() != 0) {
-            pCliente persistencia = new pCliente();
-            unCliente = persistencia.buscarCliente(pCliente);
+            pGenerico persistencia = new pGenerico();
+            unCliente = (cliente) persistencia.TraerEspecifico(pCliente);
         }
         if (unCliente != null) {
             return unCliente;
@@ -48,11 +48,25 @@ public class dCliente {
         }
     }
 
-    public ArrayList buscarTodos() throws cDatosException {
-        ArrayList coleccion;
-        coleccion = new ArrayList();
-        pCliente persistencia = new pCliente();
-        coleccion = persistencia.buscarTodos();
+    public ArrayList BuscarTodosSinEliminados() throws cDatosException {
+        ArrayList coleccion = new ArrayList();
+        cliente pCliente = new cliente();
+ 
+        pGenerico persistencia = new pGenerico();
+        coleccion = (ArrayList) persistencia.TraerTodosSinEliminados(pCliente);
+        if (coleccion != null) {
+            return coleccion;
+        } else {
+            return null;
+        }
+    }
+         
+        public ArrayList BuscarTodos() throws cDatosException {
+        ArrayList coleccion = new ArrayList();
+        cliente pCliente = new cliente();
+ 
+        pGenerico persistencia = new pGenerico();
+        coleccion = (ArrayList) persistencia.TraerTodosSinEliminados(pCliente);
         if (coleccion != null) {
             return coleccion;
         } else {
@@ -60,6 +74,4 @@ public class dCliente {
         }
     }
 
-     
-    
 }

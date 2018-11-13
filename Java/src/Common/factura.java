@@ -27,9 +27,9 @@ public class factura {
     }
 
     public factura() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    
     public boolean isIdDeletedFactura() {
         return idDeletedFactura;
     }

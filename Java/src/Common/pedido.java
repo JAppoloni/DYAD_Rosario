@@ -66,4 +66,9 @@ private motores idMotorPedido;
         this.isDeletedPedido = isDeletedPedido;
         this.idMotorPedido = idMotorPedido;
     }
+
+    public pedido() {
+    }
+    
+    
 }

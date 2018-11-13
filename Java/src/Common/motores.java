@@ -44,4 +44,8 @@ public class motores {
         this.nombreMotor = nombreMotor;
         this.idDeleted = idDeleted;
     }
+
+    public motores() {
+    }
+          
 }

@@ -103,7 +103,7 @@ public class pGenerico extends pPersistencia {
                             if (IsPK(Instance.getClass().getSimpleName(), info.getName())) {
                                 info.setAccessible(true);
                                 info.set(Instance, caprutatValor);
-                                Instance = TraerEspecifico_Eliminado(Instance);
+                                Instance = TraerEspecifico(Instance);
                                 valorRetorno = Instance;
                                 break;
                             }
@@ -137,67 +137,6 @@ public class pGenerico extends pPersistencia {
         return false;
     }
 
-    /*
-            super.abrirConexion();
-            // Creo una nueva sentecia para ser ejecutada
-            Statement st= super.getDistribuidora().createStatement();//igual al command
-            // arma la sentencia sql
-               String insertSql="INSERT INTO Cliente(Ci,Nombre,IdTipo)" +
-               "VALUES(´" + cli.getCi() + "´ ,´" + cli.getNombre()  + "´, " + cli.getIdtipo().getId() + " )";
-                // esto es solo para mostrar el sql que se va a ejecutar
-               System.out.println(insertSql);
-               // ejecuta la sentencia
-               st.executeUpdate(insertSql);//execute nonquery
-               super.cerrarConexion();
-    
-     */
-
- /*
-    
-    
-    
-            super.abrirConexion();
-            // Creo una nueva sentecia para ser ejecutada
-            Statement st= super.getDistribuidora().createStatement();
-            // arma la sentencia sql
-            String selectSql="SELECT * FROM CLiente ";
-            if (!"".equals(cli.getCi())){
-                // si pasaron el registro busco solo por eso
-                selectSql=selectSql + " WHERE Ci = ´" + cli.getCi()+"´ ";
-            }
-            // esto es solo para mostrar el sql que se va a ejecutar
-            System.out.println(selectSql);
-            // ejecuta la sentencia
-            ResultSet rs=st.executeQuery(selectSql);
-            
-            cli = null;
-            
-            while(rs.next()){
-                cli = new cCliente();
-                int num;
-                pTipo pt = new pTipo();
-                // recorre el Resultset y crea un objeto con los datos de
-                // cada linea.
-                num = rs.getInt("tid");
-                cli.setCi(rs.getString("Ci"));
-                cli.setNombre(rs.getString("Nombre"));
-                cTipo untipo = new cTipo();
-                untipo.setId(rs.getInt("IdTipo"));
-                untipo = pt.buscarTipo(untipo);
-                cli.setIdtipo(untipo);
-            }
-            super.cerrarConexion();
-            // devuelve el objeto encontrado
-            if (cli != null){
-                return cli;
-            }else{
-                return null;
-            }
-        }catch(SQLException e){throw new cDatosException("Error al buscar accion:" + e.getMessage());}
-    }
-    
-    
-     */
     public Boolean IsPK(String TablaSQL, String Campo) throws cDatosException {
         ArrayList<String> PKs = new ArrayList();
         try {
@@ -472,44 +411,7 @@ public class pGenerico extends pPersistencia {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc=" Consultas">      
-    public Object TraerEspecifico(Object pObject) throws cDatosException {
-        Object retorno = null;
-
-        try {
-
-            super.abrirConexion();
-            Statement st = super.getDistribuidora().createStatement();
-            String SecuenciaSQL = "select * from " + pObject.getClass().getSimpleName() + " where ";
-
-            for (Field property : pObject.getClass().getDeclaredFields()) {
-                if (IsPK(pObject.getClass().getName(), property.getName())) {
-                    Object Valor = DevolverValor(pObject, property, true);
-
-                    if (Valor == null) {
-                        continue;
-                    }
-                    SecuenciaSQL += " " + property.getName() + "=" + PasarAString(Valor) + " AND";
-                }
-            }
-
-            SecuenciaSQL += " isDeleted= 'false'";
-
-            System.out.println(SecuenciaSQL);
-
-            ResultSet rs = st.executeQuery(SecuenciaSQL);
-            while (rs.next()) {
-                retorno = SetValorObjeto(pObject, rs);
-            }
-            cerrarConexion();
-
-            return retorno;
-
-        } catch (Exception e) {
-            throw new cDatosException("ERROR: " + e.getMessage());
-        }
-    }
-
-    public Object TraerTodos(Object pObject) throws  cDatosException{
+    public Object TraerTodosSinEliminados(Object pObject) throws  cDatosException{
         // Creacion del string que contiene la sentencia a ejecutar
         String SecuenciaSQL = "select  *  from " + pObject.getClass().getSimpleName() + " WHERE isDeleted=´false´";
 
@@ -534,7 +436,7 @@ public class pGenerico extends pPersistencia {
         }
     }
 
-      public Object TraerEspecifico_Eliminado(Object pObject) throws cDatosException {
+      public Object TraerEspecifico(Object pObject) throws cDatosException {
         Object retorno = null;
 
         try {
@@ -571,7 +473,7 @@ public class pGenerico extends pPersistencia {
         }
     }
 
-    public Object TraerTodos_Eliminado(Object pObject) throws  cDatosException{
+    public Object TraerTodos(Object pObject) throws  cDatosException{
         // Creacion del string que contiene la sentencia a ejecutar
         String SecuenciaSQL = "select  *  from " + pObject.getClass().getSimpleName();
 

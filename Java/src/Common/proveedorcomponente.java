@@ -45,4 +45,6 @@ private boolean isDeletedProveedorComponente;
         this.isDeletedProveedorComponente = isDeletedProveedorComponente;
     }
 
+    public proveedorcomponente() {
+    }
 }
