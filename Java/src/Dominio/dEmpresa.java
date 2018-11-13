@@ -52,7 +52,7 @@ public class dEmpresa {
         ArrayList coleccion;
         coleccion = new ArrayList();
         try {
-            coleccion = unCliente.buscarTodos();
+            coleccion = unCliente.BuscarTodos();
         } catch (cDatosException ex) {
             throw new cDatosException("Error al buscar todos los clientes:" + ex.getMessage());
         }
@@ -68,7 +68,7 @@ public class dEmpresa {
     public boolean agregarCliente(cliente clien) throws cDatosException {
         if (clien != null) {
             try {
-                empresaCliente.guardar(clien);
+                empresaCliente.Alta(clien);
                 return true;
             } catch (cDatosException ex) {
                 throw new cDatosException("Error al ingresar el cliente:" + ex.getMessage());
@@ -133,7 +133,7 @@ public class dEmpresa {
         ArrayList coleccion;
         coleccion = new ArrayList();
         try {
-            coleccion = unComponente.buscarTodos();
+            coleccion = unComponente.BuscarTodos();
         } catch (cDatosException ex) {
             throw new cDatosException("Error al buscar todos los componentes:" + ex.getMessage());
         }
@@ -149,7 +149,7 @@ public class dEmpresa {
     public boolean agregarComponente(componente compo) throws cDatosException {
         if (compo != null) {
             try {
-                empresaComponente.guardar(compo);
+                empresaComponente.Alta(compo);
                 return true;
             } catch (cDatosException ex) {
                 throw new cDatosException("Error al ingresar el componente:" + ex.getMessage());
@@ -213,7 +213,7 @@ public class dEmpresa {
         ArrayList coleccion;
         coleccion = new ArrayList();
         try {
-            coleccion = unaFactura.buscarTodos();
+            coleccion = unaFactura.BuscarTodos();
         } catch (cDatosException ex) {
             throw new cDatosException("Error al buscar todas las facturas:" + ex.getMessage());
         }
@@ -229,7 +229,7 @@ public class dEmpresa {
     public boolean agregarFactura(factura factu) throws cDatosException {
         if (factu != null) {
             try {
-                empresaFactura.guardar(factu);
+                empresaFactura.Alta(factu);
                 return true;
             } catch (cDatosException ex) {
                 throw new cDatosException("Error al ingresar la factura:" + ex.getMessage());
@@ -275,7 +275,7 @@ public class dEmpresa {
         if (pMotorComponente != null) {
             if (pMotorComponente.getIdMotorMotorComponente()!= 0) {
                 try {
-                    unMotorComponente = empresaComponente.buscar(pMotorComponente);
+                    unMotorComponente = empresaMotorComponente.Buscar(pMotorComponente);
                 } catch (cDatosException ex) {
                     throw new cDatosException("Error al buscar motor-componente:" + ex.getMessage());
                 }
@@ -293,7 +293,7 @@ public class dEmpresa {
         ArrayList coleccion;
         coleccion = new ArrayList();
         try {
-            coleccion = unMotorComponente.buscarTodos();
+            coleccion = unMotorComponente.BuscarTodos();
         } catch (cDatosException ex) {
             throw new cDatosException("Error al buscar todos los componentes:" + ex.getMessage());
         }
@@ -306,10 +306,10 @@ public class dEmpresa {
 
     
 
-    public boolean agregarComponente(componente compo) throws cDatosException {
-        if (compo != null) {
+    public boolean agregarMotorComponente(motorcomponente motcompo) throws cDatosException {
+        if (motcompo != null) {
             try {
-                empresaMotorComponente.guardar(compo);
+                empresaMotorComponente.agregar(motcompo);
                 return true;
             } catch (cDatosException ex) {
                 throw new cDatosException("Error al ingresar el motor-componente:" + ex.getMessage());
@@ -361,7 +361,7 @@ public class dEmpresa {
         ArrayList coleccion;
         coleccion = new ArrayList();
         try {
-            coleccion = unProveedor.buscarTodos();
+            coleccion = unProveedor.BuscarTodos();
         } catch (cDatosException ex) {
             throw new cDatosException("Error al buscar todos los proveedores:" + ex.getMessage());
         }
@@ -377,7 +377,7 @@ public class dEmpresa {
     public boolean agregarProveedor(proveedor prov) throws cDatosException {
         if (prov != null) {
             try {
-                empresaProveedor.guardar(prov);
+                empresaProveedor.Alta(prov);
                 return true;
             } catch (cDatosException ex) {
                 throw new cDatosException("Error al ingresar el proveedor:" + ex.getMessage());
@@ -416,14 +416,14 @@ public class dEmpresa {
     }
 // </editor-fold>
     
-     private dMotor empresaMotor = new dMotor();
+     private dMotores empresaMotor = new dMotores();
     // <editor-fold defaultstate="collapsed" desc=" Motor ">
     public motores buscarMotor(motores pMotor) throws cDatosException {
         motores unMotor = new motores();
         if (pMotor != null) {
             if (pMotor.getIdMotor() != 0) {
                 try {
-                    unMotor = empresaMotor.buscar(pMotor);
+                    unMotor = empresaMotor.Buscar(pMotor);
                 } catch (cDatosException ex) {
                     throw new cDatosException("Error al buscar motor:" + ex.getMessage());
                 }
@@ -437,11 +437,11 @@ public class dEmpresa {
     }
 
     public ArrayList buscarTodosMotores() throws cDatosException {
-        dMotor unMotor = new dMotor();
+        dMotores unMotor = new dMotores();
         ArrayList coleccion;
         coleccion = new ArrayList();
         try {
-            coleccion = unMotor.buscarTodos();
+            coleccion = unMotor.BuscarTodos();
         } catch (cDatosException ex) {
             throw new cDatosException("Error al buscar todos los motor:" + ex.getMessage());
         }
@@ -454,10 +454,10 @@ public class dEmpresa {
 
     
 
-    public boolean agregarComponente(motores moto) throws cDatosException {
+    public boolean agregarMotor(motores moto) throws cDatosException {
         if (moto != null) {
             try {
-                empresaMotor.guardar(moto);
+                empresaMotor.agregar(moto);
                 return true;
             } catch (cDatosException ex) {
                 throw new cDatosException("Error al ingresar el motor:" + ex.getMessage());
@@ -517,11 +517,11 @@ public class dEmpresa {
     }
 
     public ArrayList buscarTodosPedidos() throws cDatosException {
-        dPedido unPedido = new dComponente();
+        dPedido unPedido = new dPedido();
         ArrayList coleccion;
         coleccion = new ArrayList();
         try {
-            coleccion = unPedido.buscarTodos();
+            coleccion = unPedido.BuscarTodos();
         } catch (cDatosException ex) {
             throw new cDatosException("Error al buscar todos los pedidos:" + ex.getMessage());
         }
@@ -537,7 +537,7 @@ public class dEmpresa {
     public boolean agregarPedido(pedido pedid) throws cDatosException {
         if (pedid != null) {
             try {
-                empresaPedido.guardar(pedid);
+                empresaPedido.Alta(pedid);
                 return true;
             } catch (cDatosException ex) {
                 throw new cDatosException("Error al ingresar el pedid:" + ex.getMessage());
@@ -579,9 +579,9 @@ public class dEmpresa {
     private dProveedorComponente empresaProveedorComponente = new dProveedorComponente();
     // <editor-fold defaultstate="collapsed" desc=" Proveedor-Componente ">
     public proveedorcomponente buscarProveedorComponente(proveedorcomponente pProveedorComponente) throws cDatosException {
-        proveedorcomponente unProvedorComponente = new proveedorcomponente();
+        proveedorcomponente unProveedorComponente = new proveedorcomponente();
         if (pProveedorComponente != null) {
-            if (pProveedorComponente.getIdProveedorProveedorComponente() != 0 && pProveedorComponente.getIdComponenteProveedorComponente() != 0 ) {
+            if (pProveedorComponente.getIdProveedorProveedorComponente().getIdProvedor() != 0 && pProveedorComponente.getIdComponenteProveedorComponente().getIdComp() != 0 ) {
                 try {
                     unProveedorComponente= empresaProveedorComponente.buscar(pProveedorComponente);
                 } catch (cDatosException ex) {
@@ -601,7 +601,7 @@ public class dEmpresa {
         ArrayList coleccion;
         coleccion = new ArrayList();
         try {
-            coleccion = unProveedorComponente.buscarTodos();
+            coleccion = unProveedorComponente.BuscarTodos();
         } catch (cDatosException ex) {
             throw new cDatosException("Error al buscar todos los proveedores-componentes:" + ex.getMessage());
         }
@@ -614,10 +614,10 @@ public class dEmpresa {
 
     
 
-    public boolean agregarProveedorComponente(proveedor provcompo) throws cDatosException {
+    public boolean agregarProveedorComponente(proveedorcomponente provcompo) throws cDatosException {
         if (provcompo!= null) {
             try {
-                empresaProveedorComponente.guardar(provcompo);
+                empresaProveedorComponente.Alta(provcompo);
                 return true;
             } catch (cDatosException ex) {
                 throw new cDatosException("Error al ingresar el proveedor-componente:" + ex.getMessage());
