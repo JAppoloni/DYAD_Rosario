@@ -5,19 +5,34 @@
  */
 package Interfase;
 
+import Common.Utilidades;
+import Dominio.dEmpresa;
+import Common.factura;
+import Common.pedido;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Felipe
  */
 public class vFactura extends javax.swing.JFrame {
+private ArrayList<pedido> ListaPedido = new ArrayList<pedido>();
+private ArrayList<factura> ListaFactura = new ArrayList<factura>();
+    
 
-    /**
-     * Creates new form vFactura
-     */
     public vFactura() {
         initComponents();
     }
-
+    private dEmpresa dEmpresa;
+    
+    public vFactura(dEmpresa pEmp) {
+        initComponents();
+        dEmpresa = pEmp;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,13 +45,13 @@ public class vFactura extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        txtFechaPagoFact = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblIngPed = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtIdPedido = new javax.swing.JTextField();
+        jdcFechaPago = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEliFact = new javax.swing.JTable();
@@ -83,9 +98,9 @@ public class vFactura extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAgregar))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -94,20 +109,19 @@ public class vFactura extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5)))
                         .addGap(74, 74, 74)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFechaPagoFact, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jdcFechaPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtIdPedido))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(37, 37, 37))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(txtFechaPagoFact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jdcFechaPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
@@ -118,7 +132,7 @@ public class vFactura extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAgregar)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Agregar", jPanel1);
@@ -213,7 +227,7 @@ public class vFactura extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEliminar)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Eliminar", jPanel3);
@@ -239,35 +253,29 @@ public class vFactura extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        cTipo unTipo;
+        factura unaFactura;
+        pedido unPedido=new pedido();
         int num;
 
         try {
             //Verifica el ingreso de los datos requeridos
-            if (this.txtFechaPagoFact.getText().length() > 0 && this.txtDesc.getText().length() > 0) {
-                String ID = this.txtFechaPagoFact.getText().toString();
+            if (this.txtIdPedido.getText().length() > 0) {
+                String ID = this.txtIdPedido.getText().toString();
                 //Verifico que hayan ingresado un número
                 if (Utilidades.isNumeric(ID) == true) {
                     //Busco si el tipo ya no ha sido ingresado
-                    unTipo = new cTipo();
-                    num = Integer.parseInt(this.txtFechaPagoFact.getText());
-                    unTipo.setId(num);
-                    unTipo = empresa.buscarTipo(unTipo);
-                    ////////////////////////////////////////////////////////////////////////////////////
+                    unaFactura = new factura();
+                    num = Integer.parseInt(this.txtIdPedido.getText());
+                     unPedido.setIdPedido(num);
+                    unaFactura.setIdPedidoFactura(dEmpresa.buscarPedido(unPedido));
+                    unaFactura.setFechaPagoFactura(this.jdcFechaPago.getDate());
+                   
+                    dEmpresa.agregarFactura(unaFactura);
+                    JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Tipo", JOptionPane.INFORMATION_MESSAGE);
 
-                    if (unTipo == null) {
-                        //Si el tipo no ha sido ingresado lo crea y le pasa los datos para ingresarlo
-                        unTipo = new cTipo();
-                        unTipo.setId(num);
-                        unTipo.setDesc(this.txtDesc.getText());
-                        empresa.agregarTipo(unTipo);
-                        JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Tipo", JOptionPane.INFORMATION_MESSAGE);
+                    ReiniciarControles();
 
-                        ReiniciarControles();
-
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Id tipo ya existe", "Accion", JOptionPane.INFORMATION_MESSAGE);
-                    }
+                  
                 } else {
                     JOptionPane.showMessageDialog(this, "El número del código del tipo debe ser un número", "Tipo", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -289,10 +297,10 @@ public class vFactura extends javax.swing.JFrame {
 
                 // tomo los datos de los tipos existentes
                 String id = String.valueOf(tm.getValueAt(fila, 0));
-                String desc = (String) tm.getValueAt(fila, 1);
+                
 
                 this.txtIdEliminar.setText(id);
-                this.txtDescEliminar.setText(desc);
+                
 
             }
         }
@@ -315,21 +323,21 @@ public class vFactura extends javax.swing.JFrame {
     }//GEN-LAST:event_tblEliFactPropertyChange
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        cTipo unTipo = new cTipo();
+        factura unaFactura = new factura();
         int num;
         try {
             if (!this.txtIdEliminar.getText().equals("")) {
                 num = Integer.parseInt(this.txtIdEliminar.getText());
-                unTipo.setId(num);
-                empresa.eliminarTipo(unTipo);
-                JOptionPane.showMessageDialog(this, "Se dado eliminado correctamente", "Tipo", JOptionPane.INFORMATION_MESSAGE);
+                unaFactura.setIdFactura(num);
+                dEmpresa.eliminarFactura(unaFactura);
+                JOptionPane.showMessageDialog(this, "Se dado eliminado correctamente", "Factura", JOptionPane.INFORMATION_MESSAGE);
                 ReiniciarControles();
             } else {
-                JOptionPane.showMessageDialog(this, "Debe seleccionar un registro", "Tipo", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Debe seleccionar un registro", "Factura", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (Common.cDatosException e) {
-            JOptionPane.showMessageDialog(this, e.toString(), "Tipo", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.toString(), "Factura", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -371,7 +379,65 @@ public class vFactura extends javax.swing.JFrame {
             }
         });
     }
+  private void ReiniciarControles() {
+        this.LimpiarCampos();
+        this.LimpiarList();
+        this.CargarDatosListPedido();
+        this.CargarDatosListFactura();
+    }
+   public void LimpiarList() {
+        DefaultTableModel dm = (DefaultTableModel) this.tblIngPed.getModel();
+        dm.setRowCount(0);
+        this.tblIngPed.setModel(dm);//limpia el jtable
+    }
 
+    public void CargarDatosListPedido() {
+        ArrayList<pedido> coleccion = new ArrayList<pedido>();
+        
+        try {
+            coleccion = dEmpresa.buscarTodosPedidosSinEliminados();
+            ListaPedido = coleccion;
+            Iterator<pedido> it = coleccion.iterator();
+            while (it.hasNext()) {
+                pedido unPedido = it.next();
+                DefaultTableModel tm = (DefaultTableModel) tblIngPed.getModel();
+                tm.addRow(new Object[]{new Integer(unPedido.getIdPedido()),
+                new Integer(unPedido.getIdCliente().getIdClie()),
+                new String(Utilidades.convertirDateUtilAString(unPedido.getFechaDeEntregaPedido())),
+                new Integer(unPedido.getIdMotorPedido().getIdMotor())});
+                
+                tblIngPed.setModel(tm);
+            }
+        } catch (Common.cDatosException e) {
+            JOptionPane.showMessageDialog(this, e.toString(), "Pedido", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void CargarDatosListFactura() {
+        ArrayList<factura> coleccion = new ArrayList<factura>();
+        
+        try {
+            coleccion = dEmpresa.buscarTodosFacturasSinEliminados();
+            ListaFactura = coleccion;
+            Iterator<factura> it = coleccion.iterator();
+            while (it.hasNext()) {
+                factura unaFactura = it.next();
+                DefaultTableModel tm = (DefaultTableModel) tblEliFact.getModel();
+                tm.addRow(new Object[]{new Integer(unaFactura.getIdFactura()),
+                new String(Utilidades.convertirDateUtilAString(unaFactura.getFechaPagoFactura())),
+                new Integer(unaFactura.getIdPedidoFactura().getIdPedido())});
+                
+                tblIngPed.setModel(tm);
+            }
+        } catch (Common.cDatosException e) {
+            JOptionPane.showMessageDialog(this, e.toString(), "Factura", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void LimpiarCampos() {
+        this.txtIdPedido.setText("");       
+        this.txtIdEliminar.setText("");       
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
@@ -384,9 +450,9 @@ public class vFactura extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private com.toedter.calendar.JDateChooser jdcFechaPago;
     private javax.swing.JTable tblEliFact;
     private javax.swing.JTable tblIngPed;
-    private javax.swing.JTextField txtFechaPagoFact;
     private javax.swing.JTextField txtIdEliminar;
     private javax.swing.JTextField txtIdPedido;
     // End of variables declaration//GEN-END:variables

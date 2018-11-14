@@ -24,10 +24,18 @@ public class vCliente extends javax.swing.JFrame {
     /**
      * Creates new form vCliente
      */
-    public vCliente() {
+     private dEmpresa dEmpresa;
+
+    public vCliente(dEmpresa pEmp) {
         initComponents();
+        dEmpresa = pEmp;
     }
 
+    private vCliente() {
+        initComponents();
+    }
+   
+   
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

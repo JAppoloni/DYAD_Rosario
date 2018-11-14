@@ -7,6 +7,7 @@ package Interfase;
 
 import Common.componente;
 import Common.Utilidades;
+import Common.cDatosException;
 import Common.cliente;
 import Dominio.dEmpresa;
 import java.util.ArrayList;
@@ -19,14 +20,19 @@ import javax.swing.table.DefaultTableModel;
  * @author Felipe
  */
 public class vComponente extends javax.swing.JFrame {
-private ArrayList<cliente> ListaComponentes = new ArrayList<cliente>();
+private ArrayList<componente> ListaComponentes = new ArrayList<componente>();
     /**
      * Creates new form vComponente
      */
     public vComponente() {
         initComponents();
     }
+    private dEmpresa dEmpresa;
 
+    public vComponente(dEmpresa pEmp) {
+        initComponents();
+        dEmpresa = pEmp;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

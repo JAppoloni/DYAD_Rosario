@@ -62,7 +62,22 @@ public class dEmpresa {
             return null;
         }
     }
-
+    
+    public ArrayList buscarTodosClientesSinEliminados() throws cDatosException {
+        dCliente unCliente = new dCliente();
+        ArrayList coleccion;
+        coleccion = new ArrayList();
+        try {
+            coleccion = unCliente.BuscarTodosSinEliminados();
+        } catch (cDatosException ex) {
+            throw new cDatosException("Error al buscar todos los clientes:" + ex.getMessage());
+        }
+        if (coleccion != null) {
+            return coleccion;
+        } else {
+            return null;
+        }
+    }
     
 
     public boolean agregarCliente(cliente clien) throws cDatosException {
@@ -143,7 +158,21 @@ public class dEmpresa {
             return null;
         }
     }
-
+public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
+        dComponente unComponente = new dComponente();
+        ArrayList coleccion;
+        coleccion = new ArrayList();
+        try {
+            coleccion = unComponente.BuscarTodosSinEliminados();
+        } catch (cDatosException ex) {
+            throw new cDatosException("Error al buscar todos los componentes:" + ex.getMessage());
+        }
+        if (coleccion != null) {
+            return coleccion;
+        } else {
+            return null;
+        }
+    }
     
 
     public boolean agregarComponente(componente compo) throws cDatosException {
@@ -224,6 +253,21 @@ public class dEmpresa {
         }
     }
 
+    public ArrayList buscarTodosFacturasSinEliminados() throws cDatosException {
+        dFactura unaFactura = new dFactura();
+        ArrayList coleccion;
+        coleccion = new ArrayList();
+        try {
+            coleccion = unaFactura.BuscarTodosSinEliminados();
+        } catch (cDatosException ex) {
+            throw new cDatosException("Error al buscar todas las facturas:" + ex.getMessage());
+        }
+        if (coleccion != null) {
+            return coleccion;
+        } else {
+            return null;
+        }
+    }
     
 
     public boolean agregarFactura(factura factu) throws cDatosException {
@@ -304,7 +348,21 @@ public class dEmpresa {
         }
     }
 
-    
+    public ArrayList buscarTodosMotoresComponentesSinEliminados() throws cDatosException {
+        dMotorComponente unMotorComponente = new dMotorComponente();
+        ArrayList coleccion;
+        coleccion = new ArrayList();
+        try {
+            coleccion = unMotorComponente.BuscarTodosSinELiminados();
+        } catch (cDatosException ex) {
+            throw new cDatosException("Error al buscar todos los componentes:" + ex.getMessage());
+        }
+        if (coleccion != null) {
+            return coleccion;
+        } else {
+            return null;
+        }
+    }
 
     public boolean agregarMotorComponente(motorcomponente motcompo) throws cDatosException {
         if (motcompo != null) {
@@ -362,6 +420,22 @@ public class dEmpresa {
         coleccion = new ArrayList();
         try {
             coleccion = unProveedor.BuscarTodos();
+        } catch (cDatosException ex) {
+            throw new cDatosException("Error al buscar todos los proveedores:" + ex.getMessage());
+        }
+        if (coleccion != null) {
+            return coleccion;
+        } else {
+            return null;
+        }
+    }
+    
+    public ArrayList buscarTodosProveedorSinEliminados() throws cDatosException {
+        dProveedor unProveedor = new dProveedor();
+        ArrayList coleccion;
+        coleccion = new ArrayList();
+        try {
+            coleccion = unProveedor.BuscarTodosSinEliminados();
         } catch (cDatosException ex) {
             throw new cDatosException("Error al buscar todos los proveedores:" + ex.getMessage());
         }
@@ -451,6 +525,22 @@ public class dEmpresa {
             return null;
         }
     }
+    
+     public ArrayList buscarTodosMotoresSinEliminados() throws cDatosException {
+        dMotores unMotor = new dMotores();
+        ArrayList coleccion;
+        coleccion = new ArrayList();
+        try {
+            coleccion = unMotor.BuscarTodosSinELiminados();
+        } catch (cDatosException ex) {
+            throw new cDatosException("Error al buscar todos los motor:" + ex.getMessage());
+        }
+        if (coleccion != null) {
+            return coleccion;
+        } else {
+            return null;
+        }
+    }
 
     
 
@@ -531,6 +621,22 @@ public class dEmpresa {
             return null;
         }
     }
+    
+    public ArrayList buscarTodosPedidosSinEliminados() throws cDatosException {
+        dPedido unPedido = new dPedido();
+        ArrayList coleccion;
+        coleccion = new ArrayList();
+        try {
+            coleccion = unPedido.BuscarTodosSinEliminados();
+        } catch (cDatosException ex) {
+            throw new cDatosException("Error al buscar todos los pedidos:" + ex.getMessage());
+        }
+        if (coleccion != null) {
+            return coleccion;
+        } else {
+            return null;
+        }
+    }
 
     
 
@@ -602,6 +708,22 @@ public class dEmpresa {
         coleccion = new ArrayList();
         try {
             coleccion = unProveedorComponente.BuscarTodos();
+        } catch (cDatosException ex) {
+            throw new cDatosException("Error al buscar todos los proveedores-componentes:" + ex.getMessage());
+        }
+        if (coleccion != null) {
+            return coleccion;
+        } else {
+            return null;
+        }
+    }
+    
+    public ArrayList buscarTodosProveedoresComponentesSinEliminados() throws cDatosException {
+        dProveedorComponente unProveedorComponente = new dProveedorComponente();
+        ArrayList coleccion;
+        coleccion = new ArrayList();
+        try {
+            coleccion = unProveedorComponente.BuscarTodosSinEliminados();
         } catch (cDatosException ex) {
             throw new cDatosException("Error al buscar todos los proveedores-componentes:" + ex.getMessage());
         }

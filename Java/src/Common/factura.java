@@ -16,10 +16,10 @@ public class factura {
     
     private int idFactura;
     private Date fechaPagoFactura;
-    private int idPedidoFactura;
+    private pedido idPedidoFactura;
     private boolean idDeletedFactura;
 
-    public factura(int idFactura, Date fechaPagoFactura, int idPedidoFactura, boolean idDeletedFactura) {
+    public factura(int idFactura, Date fechaPagoFactura, pedido idPedidoFactura, boolean idDeletedFactura) {
         this.idFactura = idFactura;
         this.fechaPagoFactura = fechaPagoFactura;
         this.idPedidoFactura = idPedidoFactura;
@@ -55,11 +55,11 @@ public class factura {
         this.fechaPagoFactura = fechaPagoFactura;
     }
 
-    public int getIdPedidoFactura() {
+    public pedido getIdPedidoFactura() {
         return idPedidoFactura;
     }
 
-    public void setIdPedidoFactura(int idPedidoFactura) {
+    public void setIdPedidoFactura(pedido idPedidoFactura) {
         this.idPedidoFactura = idPedidoFactura;
     }
     
