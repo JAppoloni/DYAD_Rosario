@@ -18,7 +18,7 @@ private String nombreFantasiaClie;
 private  String paisClie;
 private String direccionClie;
 private  String contactoClie;
-private boolean idDeleted;
+private boolean isDeleted;
 
     public cliente() {
 
@@ -73,11 +73,11 @@ private boolean idDeleted;
     }
 
     public boolean isIdDeleted() {
-        return idDeleted;
+        return isDeleted;
     }
 
     public void setIdDeleted(boolean idDeleted) {
-        this.idDeleted = idDeleted;
+        this.isDeleted = idDeleted;
     }
 
   public cliente(int idClie, String nombreEmpresaClie, String nombreFantasiaClie, String paisClie, String direccionClie, String contactoClie, boolean idDeleted) {
@@ -87,6 +87,6 @@ private boolean idDeleted;
         this.paisClie = paisClie;
         this.direccionClie = direccionClie;
         this.contactoClie = contactoClie;
-        this.idDeleted = idDeleted;
+        this.isDeleted = idDeleted;
     }
 }

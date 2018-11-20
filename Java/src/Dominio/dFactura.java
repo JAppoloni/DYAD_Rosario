@@ -17,23 +17,23 @@ import java.util.ArrayList;
 public class dFactura {
 
     public void Alta(factura pfactura) throws cDatosException {
-        if (pfactura == null) {
+        if (pfactura != null) {
             pGenerico pPersistencia = new pGenerico();
             pPersistencia.agregar(pfactura);
         }
     }
 
     public void modificar(factura pfactura) throws cDatosException {
-        if (pfactura == null) {
+        if (pfactura != null) {
             pGenerico pPersistencia = new pGenerico();
             pPersistencia.modificar(pfactura);
         }
     }
 
     public void eliminar(factura pfactura) throws cDatosException {
-        if (pfactura == null) {
+        if (pfactura != null) {
             pGenerico pPersistencia = new pGenerico();
-            pPersistencia.eliminar(pfactura);
+            pPersistencia.eliminar_Logico(pfactura);
         }
     }
 

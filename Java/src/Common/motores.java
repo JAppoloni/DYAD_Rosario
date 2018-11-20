@@ -12,6 +12,8 @@ package Common;
  */
 public class motores {
     private int idMotor;
+    private String nombreMotor;
+    private boolean idDeleted;
 
     public int getIdMotor() {
         return idMotor;
@@ -36,8 +38,6 @@ public class motores {
     public void setIdDeleted(boolean idDeleted) {
         this.idDeleted = idDeleted;
     }
-    private String nombreMotor;
-    private boolean idDeleted;
 
     public motores(int idMotor, String nombreMotor, boolean idDeleted) {
         this.idMotor = idMotor;

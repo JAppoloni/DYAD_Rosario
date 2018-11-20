@@ -11,18 +11,21 @@ import Dominio.dEmpresa;
  * @author ezio
  */
 public class vPrincipal extends javax.swing.JFrame {
+
     private dEmpresa empresa;
+
     /**
      * Creates new form vPrincipal
      */
     public vPrincipal() {
         initComponents();
     }
-   
-     public vPrincipal(dEmpresa pEmp) {
+
+    public vPrincipal(dEmpresa pEmp) {
         empresa = pEmp;
         initComponents();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,11 +40,15 @@ public class vPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        exitMenuItem = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -53,19 +60,54 @@ public class vPrincipal extends javax.swing.JFrame {
         jMenu3.setText("Edit");
         jMenuBar1.add(jMenu3);
 
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("ABM");
 
         openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Tipos");
+        openMenuItem.setText("Cliente");
         openMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openMenuItemActionPerformed(evt);
             }
         });
         fileMenu.add(openMenuItem);
+
+        jMenuItem2.setText("Componente");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem2);
+
+        jMenuItem4.setText("Factura");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem4);
+
+        jMenuItem5.setText("Motor");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem5);
+
+        jMenuItem6.setText("MotorComponente");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem6);
 
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Salir");
@@ -75,9 +117,6 @@ public class vPrincipal extends javax.swing.JFrame {
             }
         });
         fileMenu.add(exitMenuItem);
-
-        jMenuItem2.setText("jMenuItem2");
-        fileMenu.add(jMenuItem2);
 
         menuBar.add(fileMenu);
 
@@ -102,11 +141,39 @@ public class vPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
-        vTipo ventanaPrincipal = new vTipo(empresa);
+        vCliente ventanaCliente = new vCliente(empresa);
         //centra la ventana en la pantalla
-        ventanaPrincipal.setLocationRelativeTo(null);
-        ventanaPrincipal.setVisible(true);
+        ventanaCliente.setLocationRelativeTo(null);
+        ventanaCliente.setVisible(true);
     }//GEN-LAST:event_openMenuItemActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+//        vComponente ventanaComponente = new vComponente(empresa);
+//        //centra la ventana en la pantalla
+//        ventanaComponente.setLocationRelativeTo(null);
+//        ventanaComponente.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        vFactura ventanaFactura = new vFactura(empresa);
+        //centra la ventana en la pantalla
+        ventanaFactura.setLocationRelativeTo(null);
+        ventanaFactura.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+//         vMotor ventanaMotor = new vMotor(empresa);
+//        //centra la ventana en la pantalla
+//        ventanaMotor.setLocationRelativeTo(null);
+//        ventanaMotor.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+//       vMotorComponente ventanaMotorComponente = new vMotorComponente(empresa);
+//        //centra la ventana en la pantalla
+//        ventanaMotorComponente.setLocationRelativeTo(null);
+//        ventanaMotorComponente.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,12 +212,16 @@ public class vPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     // End of variables declaration//GEN-END:variables

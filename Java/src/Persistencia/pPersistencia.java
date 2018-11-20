@@ -28,8 +28,8 @@ public class pPersistencia {
 
     public void abrirConexion() throws cDatosException {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            distribuidora = DriverManager.getConnection("jdbc:mysql://localhost/admin?user=root&password=root&useSSL=false");//localhost=ubicacion//Puerto 3603//---admin=nombre de bd---user y passwod--seguridad
+            Class.forName("com.mysql.jdbc.Driver");
+            distribuidora = DriverManager.getConnection("jdbc:mysql://localhost/bd_fabricam?user=root&password=root&useSSL=false");//localhost=ubicacion//Puerto 3603//---admin=nombre de bd---user y passwod--seguridad
             distribuidora.setAutoCommit(true);
         } catch (ClassNotFoundException e) {
             throw new cDatosException("Problemas con el driver:" + e.getMessage());
@@ -56,14 +56,5 @@ public class pPersistencia {
 
     public void setDistribuidora(Connection val) {
         this.distribuidora = val;
-    }
-
-    public void agregar(Object o) throws cDatosException {
-    }
-
-    public void modificar(Object o) throws cDatosException {
-    }
-
-    public void eliminar(Object o) throws cDatosException {
     }
 }

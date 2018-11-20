@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Persistencia;
 
 import Common.cDatosException;
@@ -14,10 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-/**
- *
- * @author jmanu
- */
+
 public class pGenerico extends pPersistencia {
 
     public pGenerico() {
@@ -26,16 +18,17 @@ public class pGenerico extends pPersistencia {
 
     // <editor-fold defaultstate="collapsed" desc=" Propiedades_Informacion_Objetos">     
     public static boolean IsPrimitio(Field propiedades) {
-        if (propiedades.getClass().isAssignableFrom(java.lang.String.class)) {
+       Class aux = propiedades.getType(); 
+        if ( aux.equals(java.lang.String.class)) {
             return true;
         }
-        if (propiedades.getClass().isAssignableFrom(java.lang.Integer.class) || propiedades.getClass().isAssignableFrom(java.lang.Double.class)) {
+            if (aux.equals(java.lang.Integer.class) || aux.equals(int.class) || aux.equals(java.lang.Double.class)) {
             return true;
         }
-        if (propiedades.getClass().isAssignableFrom(java.lang.Boolean.class)) {
+        if (aux.equals(java.util.Date.class)) {
             return true;
         }
-        if (propiedades.getClass().isAssignableFrom(java.util.Date.class)) {
+        if (aux.equals(java.lang.Boolean.class) || aux.equals(boolean.class)) {
             return true;
         }
         return false;
@@ -55,11 +48,11 @@ public class pGenerico extends pPersistencia {
     public static Object CreateInstance(Object pObject) {
         Object myObject = new Object();
         try {
-            Constructor constructor = pObject.getClass().getConstructor(String.class);
+            Constructor constructor = pObject.getClass().getConstructor();
             myObject = (Object) constructor.newInstance();
             return myObject;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error en Crear Instance el error es :"+e.getMessage());
         }
         return null;
     }
@@ -70,26 +63,28 @@ public class pGenerico extends pPersistencia {
 
         for (java.lang.reflect.Field property : MyFields) // retorno.Identificador = int.Parse(oReader["Identificador"].ToString());
         {
-            if (property.getClass().isAssignableFrom(java.util.ArrayList.class)) {
+             Class tipo = property.getType(); 
+        
+             if (tipo.equals(java.util.ArrayList.class)) {
                 continue;
             }
             String valorLector = property.getName();
             Object caprutatValor = (reader.getObject(valorLector));
             Object valorRetorno = null;
 
-            if (property.getType().isAssignableFrom(java.lang.String.class)) {
+            if (tipo.equals(java.lang.String.class)) {
                 valorRetorno = caprutatValor.toString();
             }
-            if (property.getType().isAssignableFrom(java.util.Date.class)) {
+            if (tipo.equals(java.util.Date.class)) {
                 // valorRetorno = DateTime.Parse(caprutatValor.toString());Metodo de fechasss
             }
-            if (property.getType().isAssignableFrom(java.lang.Integer.class)) {
+            if (tipo.equals(java.lang.Integer.class) ||  tipo.equals(int.class)) {
                 valorRetorno = Integer.parseInt(caprutatValor.toString());
             }
-            if (property.getType().isAssignableFrom(java.lang.Double.class)) {
+            if (tipo.equals(java.lang.Double.class)) {
                 valorRetorno = Double.parseDouble(caprutatValor.toString());
             }
-            if (property.getType().isAssignableFrom(java.lang.Boolean.class)) {
+            if (tipo.equals(java.lang.Boolean.class)) {
                 {
                     caprutatValor = Boolean.parseBoolean(caprutatValor.toString());
                 }
@@ -109,7 +104,7 @@ public class pGenerico extends pPersistencia {
                             }
                         }
                     } catch (Exception e) {
-                        System.out.println(e.getMessage());
+                        System.out.println("Error en ser valor obj el error es: "+e.getMessage());
                     }
                 }
             }
@@ -125,13 +120,10 @@ public class pGenerico extends pPersistencia {
     }
 
     public static Boolean EsString(Object pObject) {
-        if (pObject.getClass().isAssignableFrom(java.lang.String.class)) {
+        if (pObject  instanceof java.lang.String) {
             return true;
         }
-        if (pObject.getClass().isAssignableFrom(java.util.Date.class)) {
-            return true;
-        }
-        if (pObject.getClass().isAssignableFrom(java.lang.Boolean.class)) {
+        if (pObject instanceof java.util.Date) {
             return true;
         }
         return false;
@@ -144,15 +136,13 @@ public class pGenerico extends pPersistencia {
             // Creo una nueva sentecia para ser ejecutada
             Statement st = super.getDistribuidora().createStatement();
 
-            String selectSql = "SELECT COLUMN_NAME FROM Taller_Integrador_Prog.INFORMATION_SCHEMA.KEY_COLUMN_USAGE"
-                    + " WHERE TABLE_NAME LIKE ´" + TablaSQL + "´ AND CONSTRAINT_NAME LIKE ´PK%´";
-            // https://stackoverflow.com/questions/3930338/sql-server-get-table-primary-key-using-sql-query
+            String selectSql = "SHOW KEYS FROM " + TablaSQL.replace("common", "") + " WHERE Key_name = 'PRIMARY'";
 
             System.out.println(selectSql);
             // ejecuta la sentencia
             ResultSet rs = st.executeQuery(selectSql);
             while (rs.next()) {
-                String aux = rs.getString("Nombre_Columna");
+                String aux = rs.getString("Column_Name");
                 PKs.add(aux);
             }
 
@@ -175,15 +165,13 @@ public class pGenerico extends pPersistencia {
             // Creo una nueva sentecia para ser ejecutada
             Statement st = super.getDistribuidora().createStatement();
 
-            String selectSql = "SELECT COLUMN_NAME FROM Taller_Integrador_Prog.INFORMATION_SCHEMA.KEY_COLUMN_USAGE"
-                    + " WHERE TABLE_NAME LIKE ´" + TablaSQL + "´ AND CONSTRAINT_NAME LIKE ´PK%´";
-            // https://stackoverflow.com/questions/3930338/sql-server-get-table-primary-key-using-sql-query
+            String selectSql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='"+TablaSQL+"' AND EXTRA='auto_increment'";
 
             System.out.println(selectSql);
             // ejecuta la sentencia
             ResultSet rs = st.executeQuery(selectSql);
             while (rs.next()) {
-                String aux = rs.getString("Nombre_Columna");
+                String aux = rs.getString("TABLE_NAME");
                 PKs.add(aux);
             }
 
@@ -200,7 +188,7 @@ public class pGenerico extends pPersistencia {
     }
 
     public static String PasarAString(Object pObject) {//Cambiar por fecha
-        return EsString(pObject) ? "´" + pObject.toString() + "´" : pObject.toString();
+        return EsString(pObject) ? "'" + pObject.toString() + "'" : pObject.toString();
     }
 
     public Object DevolverValor(Object pObject, Field property, Boolean IsRecursivo) throws cDatosException {
@@ -211,8 +199,7 @@ public class pGenerico extends pPersistencia {
                         return null;
                     } else {
                         property.setAccessible(true);
-                        property.get(pObject);
-                        return property;
+                        return property.get(pObject);
                     }
                 } else {
                     Object reflejado;
@@ -232,8 +219,8 @@ public class pGenerico extends pPersistencia {
                     String a = pObject.getClass().getSimpleName().toString();
                     if (IsPK(a, property.getName())) {
                         property.setAccessible(true);
-                        property.get(pObject);
-                        return property;
+                        Object o = property.get(pObject);
+                        return o;
                     }
                 } else {
                     Object reflejado;
@@ -256,7 +243,7 @@ public class pGenerico extends pPersistencia {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc=" ABM (ALTAS, BAJAS, MODIF.)">      
-    public boolean Agregar(Object pObject) throws cDatosException {
+    public boolean agregar(Object pObject) throws cDatosException {
         boolean retorno = true;
         try {
 
@@ -269,7 +256,7 @@ public class pGenerico extends pPersistencia {
             String value = " VALUES (";
 
             for (Field property : pObject.getClass().getDeclaredFields()) {
-                if (property.getClass().isAssignableFrom(java.util.List.class)) {
+                if (property.getType().equals(java.util.List.class)) {
                     continue;
                 }
                 Object Valor = DevolverValor(pObject, property, false);
@@ -297,7 +284,7 @@ public class pGenerico extends pPersistencia {
         return retorno;
     }
 
-    public boolean Modificar(Object pObject) throws cDatosException {
+    public boolean modificar(Object pObject) throws cDatosException {
         boolean retorno = true;
         try {
 
@@ -322,10 +309,10 @@ public class pGenerico extends pPersistencia {
                     Tipe += property.getName() + "=" + PasarAString(Valor) + " ,";
                 }
             }
-            Tipe = Tipe.substring(0, Tipe.length() - 1) + ")";
-            Condicion = Condicion.substring(0, Condicion.length() - 1) + ")";
-            Insert_In_Table += Condicion;
+            Tipe = Tipe.substring(0, Tipe.length() - 1) + " ";
+            Condicion = Condicion.substring(0, Condicion.length() - 4) + " ";
             Insert_In_Table += Tipe;
+            Insert_In_Table += Condicion;
 
             System.out.println(Insert_In_Table);
 
@@ -333,24 +320,24 @@ public class pGenerico extends pPersistencia {
 
             cerrarConexion();
         } catch (Exception e) {
-            throw new cDatosException("ERROR: " + e.getMessage());
+            throw new cDatosException("ERROR en Modificar : " + e.getMessage());
         }
 
         return retorno;
     }
 
-    public boolean Eliminar_Logico(Object pObject) throws cDatosException {
+    public boolean eliminar_Logico(Object pObject) throws cDatosException {
         boolean retorno = true;
         try {
             super.abrirConexion();
 
             Statement st = super.getDistribuidora().createStatement();
-            String Condicion = "UPDATE  " + pObject.getClass().getSimpleName() + " SET isDeleted=´true´ WHERE ";
+            String Condicion = "UPDATE  " + pObject.getClass().getSimpleName() + " SET isDeleted=true WHERE ";
 
             //  Creacion de una variable del tipo 
             for (Field property : pObject.getClass().getDeclaredFields()) {
                 // pObject.GetType().GetProperties()  -------- Lista de Campos
-                if (IsPK(pObject.getClass().getName(), property.getName())) {
+                if (IsPK(pObject.getClass().getSimpleName(), property.getName())) {
                     Object Valor = DevolverValor(pObject, property, true);
                     if ((Valor == null)) {
                         continue;
@@ -368,13 +355,13 @@ public class pGenerico extends pPersistencia {
 
             cerrarConexion();
         } catch (Exception e) {
-            throw new cDatosException("ERROR: " + e.getMessage());
+            throw new cDatosException("ERROR en ELiminar Logico: " + e.getMessage());
         }
 
         return retorno;
     }
 
-    public boolean Eliminar(Object pObject) throws cDatosException {
+    public boolean eliminar(Object pObject) throws cDatosException {
         boolean retorno = true;
         try {
             super.abrirConexion();
@@ -385,7 +372,7 @@ public class pGenerico extends pPersistencia {
             //  Creacion de una variable del tipo 
             for (Field property : pObject.getClass().getDeclaredFields()) {
                 // pObject.GetType().GetProperties()  -------- Lista de Campos
-                if (IsPK(pObject.getClass().getName(), property.getName())) {
+                if (IsPK(pObject.getClass().getSimpleName(), property.getName())) {
                     Object Valor = DevolverValor(pObject, property, true);
                     if ((Valor == null)) {
                         continue;
@@ -403,7 +390,7 @@ public class pGenerico extends pPersistencia {
 
             cerrarConexion();
         } catch (Exception e) {
-            throw new cDatosException("ERROR: " + e.getMessage());
+            throw new cDatosException("ERROR en ELiminar : " + e.getMessage());
         }
 
         return retorno;
@@ -413,7 +400,7 @@ public class pGenerico extends pPersistencia {
     // <editor-fold defaultstate="collapsed" desc=" Consultas">      
     public Object TraerTodosSinEliminados(Object pObject) throws  cDatosException{
         // Creacion del string que contiene la sentencia a ejecutar
-        String SecuenciaSQL = "select  *  from " + pObject.getClass().getSimpleName() + " WHERE isDeleted=´false´";
+        String SecuenciaSQL = "select  *  from " + pObject.getClass().getSimpleName() + " WHERE isDeleted=false";
 
         ArrayList<Object> retornoLista = new ArrayList<Object>();
 
@@ -444,14 +431,15 @@ public class pGenerico extends pPersistencia {
             super.abrirConexion();
             Statement st = super.getDistribuidora().createStatement();
             String SecuenciaSQL = "select * from " + pObject.getClass().getSimpleName() + " where ";
-
+            System.out.println("SQL:    "+SecuenciaSQL);
             for (Field property : pObject.getClass().getDeclaredFields()) {
-                if (IsPK(pObject.getClass().getName(), property.getName())) {
+                if (IsPK(pObject.getClass().getSimpleName(), property.getName())) {
                     Object Valor = DevolverValor(pObject, property, true);
 
                     if (Valor == null) {
                         continue;
                     }
+                    
                     SecuenciaSQL += " " + property.getName() + "=" + PasarAString(Valor) + " AND";
                 }
             }

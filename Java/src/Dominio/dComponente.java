@@ -13,23 +13,23 @@ import java.util.ArrayList;
 public class dComponente {
      
     public void Alta(componente pcomponente) throws cDatosException {
-        if (pcomponente == null) {
+        if (pcomponente != null) {
             pGenerico pPersistencia = new pGenerico();
             pPersistencia.agregar(pcomponente);
         }
     }
 
     public void modificar(componente pcomponente) throws cDatosException {
-        if (pcomponente == null) {
+        if (pcomponente != null) {
             pGenerico pPersistencia = new pGenerico();
             pPersistencia.modificar(pcomponente);
         }
     }
 
     public void eliminar(componente pcomponente) throws cDatosException {
-        if (pcomponente == null) {
+        if (pcomponente != null) {
             pGenerico pPersistencia = new pGenerico();
-            pPersistencia.eliminar(pcomponente);
+            pPersistencia.eliminar_Logico(pcomponente);
         }
     }
 

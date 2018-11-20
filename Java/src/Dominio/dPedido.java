@@ -13,23 +13,23 @@ import java.util.ArrayList;
 public class dPedido {
  
         public void Alta(pedido ppedido) throws cDatosException {
-        if (ppedido == null) {
+        if (ppedido != null) {
             pGenerico pPersistencia = new pGenerico();
             pPersistencia.agregar(ppedido);
         }
     }
 
     public void modificar(pedido ppedido) throws cDatosException {
-        if (ppedido == null) {
+        if (ppedido != null) {
             pGenerico pPersistencia = new pGenerico();
             pPersistencia.modificar(ppedido);
         }
     }
 
     public void eliminar(pedido ppedido) throws cDatosException {
-        if (ppedido == null) {
+        if (ppedido != null) {
             pGenerico pPersistencia = new pGenerico();
-            pPersistencia.eliminar(ppedido);
+            pPersistencia.eliminar_Logico(ppedido);
         }
     }
 
