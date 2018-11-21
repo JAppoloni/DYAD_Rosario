@@ -26,9 +26,7 @@ import javax.swing.table.DefaultTableModel;
 public class vPedido extends javax.swing.JFrame {
 
     private ArrayList<pedido> ListaPedidos = new ArrayList<pedido>();
-    final JComboBox<Integer> ClientesCombo = new JComboBox<Integer>();
-    final JComboBox<Integer> MotoresCombo = new JComboBox<Integer>();
-    private JComboBox comboCliente;
+    
     /**
      * Creates new form vPedido
      */
@@ -561,12 +559,14 @@ public class vPedido extends javax.swing.JFrame {
         }
     }
     public void CargarComboMotor() {
+        DefaultComboBoxModel modelo =new DefaultComboBoxModel();
+        jcbMotPed.setModel(modelo);
         this.jcbMotPed.removeAllItems();
         ArrayList<motores> coleccion = new ArrayList<motores>();
         try {
             coleccion = dEmpresa.buscarTodosMotoresSinEliminados();
             for (motores mot : coleccion) {
-                this.jcbMotPed.addItem(String.valueOf(mot.getIdMotor()));
+                modelo.addElement(String.valueOf(mot.getIdMotor()));
             }
         } catch (Common.cDatosException e) {
             JOptionPane.showMessageDialog(this, e.toString(), "Motor", JOptionPane.ERROR_MESSAGE);
