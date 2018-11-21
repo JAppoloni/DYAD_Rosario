@@ -11,9 +11,6 @@ package Common;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class motores {
-    private int idMotor;
-    private String nombreMotor;
-    private boolean idDeleted;
 
     public int getIdMotor() {
         return idMotor;
@@ -31,18 +28,23 @@ public class motores {
         this.nombreMotor = nombreMotor;
     }
 
-    public boolean isIdDeleted() {
-        return idDeleted;
+    public boolean isIsDeleted() {
+        return isDeleted;
     }
 
-    public void setIdDeleted(boolean idDeleted) {
-        this.idDeleted = idDeleted;
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
+    private int idMotor;
+    private String nombreMotor;
+    private boolean isDeleted;
 
-    public motores(int idMotor, String nombreMotor, boolean idDeleted) {
+    
+
+    public motores(int idMotor, String nombreMotor, boolean isDeleted) {
         this.idMotor = idMotor;
         this.nombreMotor = nombreMotor;
-        this.idDeleted = idDeleted;
+        this.isDeleted = isDeleted;
     }
 
     public motores() {

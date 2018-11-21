@@ -59,7 +59,12 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
         jLabel2 = new javax.swing.JLabel();
         txtIdEliminar = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel3.setText("Fecha Pago:");
 
@@ -97,9 +102,7 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAgregar))
+                    .addComponent(btnAgregar)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,6 +347,11 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
     private void txtIdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdEliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdEliminarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.txtIdEliminar.setEditable(false);
+        ReiniciarControles();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

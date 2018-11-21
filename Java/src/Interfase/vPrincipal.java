@@ -43,11 +43,14 @@ public class vPrincipal extends javax.swing.JFrame {
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        Cliente = new javax.swing.JMenuItem();
+        jmComponente = new javax.swing.JMenuItem();
+        jmMotor = new javax.swing.JMenuItem();
+        jmMotorComponente = new javax.swing.JMenuItem();
+        jmProveedor = new javax.swing.JMenuItem();
+        jmFactura = new javax.swing.JMenuItem();
+        jmPedido = new javax.swing.JMenuItem();
+        jmProveedorCompnente = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
@@ -68,46 +71,69 @@ public class vPrincipal extends javax.swing.JFrame {
         fileMenu.setMnemonic('f');
         fileMenu.setText("ABM");
 
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Cliente");
-        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        Cliente.setText("Cliente");
+        Cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                openMenuItemActionPerformed(evt);
+                ClienteActionPerformed(evt);
             }
         });
-        fileMenu.add(openMenuItem);
+        fileMenu.add(Cliente);
 
-        jMenuItem2.setText("Componente");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jmComponente.setText("Componente");
+        jmComponente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jmComponenteActionPerformed(evt);
             }
         });
-        fileMenu.add(jMenuItem2);
+        fileMenu.add(jmComponente);
 
-        jMenuItem4.setText("Factura");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jmMotor.setText("Motor");
+        jmMotor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jmMotorActionPerformed(evt);
             }
         });
-        fileMenu.add(jMenuItem4);
+        fileMenu.add(jmMotor);
 
-        jMenuItem5.setText("Motor");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        jmMotorComponente.setText("MotorComponente");
+        jmMotorComponente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                jmMotorComponenteActionPerformed(evt);
             }
         });
-        fileMenu.add(jMenuItem5);
+        fileMenu.add(jmMotorComponente);
 
-        jMenuItem6.setText("MotorComponente");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        jmProveedor.setText("Proveedor");
+        jmProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                jmProveedorActionPerformed(evt);
             }
         });
-        fileMenu.add(jMenuItem6);
+        fileMenu.add(jmProveedor);
+
+        jmFactura.setText("Factura");
+        jmFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmFacturaActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jmFactura);
+
+        jmPedido.setText("Pedido");
+        jmPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmPedidoActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jmPedido);
+
+        jmProveedorCompnente.setText("Proveedor Componente");
+        jmProveedorCompnente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmProveedorCompnenteActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jmProveedorCompnente);
 
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Salir");
@@ -140,40 +166,60 @@ public class vPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
-    private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
-        vCliente ventanaCliente = new vCliente(empresa);
+    private void jmComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmComponenteActionPerformed
+        vComponente ventanaComponente = new vComponente(empresa);
         //centra la ventana en la pantalla
-        ventanaCliente.setLocationRelativeTo(null);
-        ventanaCliente.setVisible(true);
-    }//GEN-LAST:event_openMenuItemActionPerformed
+        ventanaComponente.setLocationRelativeTo(null);
+        ventanaComponente.setVisible(true);
+    }//GEN-LAST:event_jmComponenteActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-//        vComponente ventanaComponente = new vComponente(empresa);
-//        //centra la ventana en la pantalla
-//        ventanaComponente.setLocationRelativeTo(null);
-//        ventanaComponente.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void jmFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFacturaActionPerformed
         vFactura ventanaFactura = new vFactura(empresa);
         //centra la ventana en la pantalla
         ventanaFactura.setLocationRelativeTo(null);
         ventanaFactura.setVisible(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_jmFacturaActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-//         vMotor ventanaMotor = new vMotor(empresa);
-//        //centra la ventana en la pantalla
-//        ventanaMotor.setLocationRelativeTo(null);
-//        ventanaMotor.setVisible(true);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    private void jmMotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmMotorActionPerformed
+         vMotor ventanaMotor = new vMotor(empresa);
+        //centra la ventana en la pantalla
+        ventanaMotor.setLocationRelativeTo(null);
+        ventanaMotor.setVisible(true);
+    }//GEN-LAST:event_jmMotorActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-//       vMotorComponente ventanaMotorComponente = new vMotorComponente(empresa);
-//        //centra la ventana en la pantalla
-//        ventanaMotorComponente.setLocationRelativeTo(null);
-//        ventanaMotorComponente.setVisible(true);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    private void jmMotorComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmMotorComponenteActionPerformed
+       vMotorComponente ventanaMotorComponente = new vMotorComponente(empresa);
+        //centra la ventana en la pantalla
+        ventanaMotorComponente.setLocationRelativeTo(null);
+        ventanaMotorComponente.setVisible(true);
+    }//GEN-LAST:event_jmMotorComponenteActionPerformed
+
+    private void jmPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPedidoActionPerformed
+        vPedido ventnaPedido = new vPedido(empresa);
+        //centra la ventana en la pantalla
+        ventnaPedido.setLocationRelativeTo(null);
+        ventnaPedido.setVisible(true);
+    }//GEN-LAST:event_jmPedidoActionPerformed
+
+    private void jmProveedorCompnenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmProveedorCompnenteActionPerformed
+        vProveedorComponente ventnaProveedorComponente = new vProveedorComponente(empresa);
+        //centra la ventana en la pantalla
+        ventnaProveedorComponente.setLocationRelativeTo(null);
+        ventnaProveedorComponente.setVisible(true); 
+    }//GEN-LAST:event_jmProveedorCompnenteActionPerformed
+
+    private void ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClienteActionPerformed
+        vCliente ventanaCliente = new vCliente(empresa);
+        //centra la ventana en la pantalla
+        ventanaCliente.setLocationRelativeTo(null);
+        ventanaCliente.setVisible(true);    }//GEN-LAST:event_ClienteActionPerformed
+
+    private void jmProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmProveedorActionPerformed
+        vProveedor ventnaProveedor = new vProveedor(empresa);
+        //centra la ventana en la pantalla
+        ventnaProveedor.setLocationRelativeTo(null);
+        ventnaProveedor.setVisible(true);
+    }//GEN-LAST:event_jmProveedorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,6 +256,7 @@ public class vPrincipal extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Cliente;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
@@ -218,11 +265,13 @@ public class vPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jmComponente;
+    private javax.swing.JMenuItem jmFactura;
+    private javax.swing.JMenuItem jmMotor;
+    private javax.swing.JMenuItem jmMotorComponente;
+    private javax.swing.JMenuItem jmPedido;
+    private javax.swing.JMenuItem jmProveedor;
+    private javax.swing.JMenuItem jmProveedorCompnente;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem openMenuItem;
     // End of variables declaration//GEN-END:variables
 }

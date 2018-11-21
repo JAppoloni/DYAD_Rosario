@@ -16,19 +16,19 @@ private String descripcionComp;
 private int costoComp;
 private int cantStockComp;
 private int cantMinStockComp;
-private boolean isDeletedComp;
+private boolean isDeleted;
 
-    public componente(int idComp, String descripcionComp, int costoComp, int cantStockComp, int cantMinStockComp, boolean isDeletedComp) {
+    public componente(int idComp, String descripcionComp, int costoComp, int cantStockComp, int cantMinStockComp, boolean isDeleted) {
         this.idComp = idComp;
         this.descripcionComp = descripcionComp;
         this.costoComp = costoComp;
         this.cantStockComp = cantStockComp;
         this.cantMinStockComp = cantMinStockComp;
-        this.isDeletedComp = isDeletedComp;
+        this.isDeleted = isDeleted;
     }
 
     public componente() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
      public int getIdComp() {
         return idComp;
@@ -70,12 +70,12 @@ private boolean isDeletedComp;
         this.cantMinStockComp = cantMinStockComp;
     }
 
-    public boolean isIsDeletedComp() {
-        return isDeletedComp;
+    public boolean isIsDeleted() {
+        return isDeleted;
     }
 
-    public void setIsDeletedComp(boolean isDeletedComp) {
-        this.isDeletedComp = isDeletedComp;
+    public void setIsDeleted(boolean isDeletedComp) {
+        this.isDeleted = isDeleted;
     }
     
 }

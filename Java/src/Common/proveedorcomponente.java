@@ -13,7 +13,7 @@ package Common;
 public class proveedorcomponente {
 private proveedor idProveedorProveedorComponente;
 private componente idComponenteProveedorComponente;
-private boolean isDeletedProveedorComponente;
+private boolean isDeleted;
 
     public proveedor getIdProveedorProveedorComponente() {
         return idProveedorProveedorComponente;
@@ -32,17 +32,17 @@ private boolean isDeletedProveedorComponente;
     }
 
     public boolean isIsDeletedProveedorComponente() {
-        return isDeletedProveedorComponente;
+        return isDeleted;
     }
 
     public void setIsDeletedProveedorComponente(boolean isDeletedProveedorComponente) {
-        this.isDeletedProveedorComponente = isDeletedProveedorComponente;
+        this.isDeleted = isDeleted;
     }
 
     public proveedorcomponente(proveedor idProveedorProveedorComponente, componente idComponenteProveedorComponente, boolean isDeletedProveedorComponente) {
         this.idProveedorProveedorComponente = idProveedorProveedorComponente;
         this.idComponenteProveedorComponente = idComponenteProveedorComponente;
-        this.isDeletedProveedorComponente = isDeletedProveedorComponente;
+        this.isDeleted = isDeleted;
     }
 
     public proveedorcomponente() {

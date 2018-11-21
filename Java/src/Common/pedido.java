@@ -16,7 +16,7 @@ public class pedido {
 private int idPedido;
 private cliente idCliente;
 private Date fechaDeEntregaPedido;
-private boolean isDeletedPedido;
+private boolean isDeleted;
 private motores idMotorPedido;
 
     public int getIdPedido() {
@@ -44,11 +44,11 @@ private motores idMotorPedido;
     }
 
     public boolean isIsDeletedPedido() {
-        return isDeletedPedido;
+        return isDeleted;
     }
 
-    public void setIsDeletedPedido(boolean isDeletedPedido) {
-        this.isDeletedPedido = isDeletedPedido;
+    public void setIsDeletedPedido(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public motores getIdMotorPedido() {
@@ -63,7 +63,7 @@ private motores idMotorPedido;
         this.idPedido = idPedido;
         this.idCliente = idCliente;
         this.fechaDeEntregaPedido = fechaDeEntregaPedido;
-        this.isDeletedPedido = isDeletedPedido;
+        this.isDeleted = isDeleted;
         this.idMotorPedido = idMotorPedido;
     }
 

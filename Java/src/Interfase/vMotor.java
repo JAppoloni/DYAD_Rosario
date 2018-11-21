@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Interfase;
+
 import Common.cDatosException;
 import Common.motores;
 import Dominio.dEmpresa;
@@ -17,13 +18,16 @@ import javax.swing.table.DefaultTableModel;
  * @author Felipe
  */
 public class vMotor extends javax.swing.JFrame {
-private ArrayList<motores> ListaMotores = new ArrayList<motores>();
+
+    private ArrayList<motores> ListaMotores = new ArrayList<motores>();
+
     /**
      * Creates new form vMotor
      */
     public vMotor() {
         initComponents();
     }
+
     public vMotor(dEmpresa pEmp) {
         initComponents();
         dEmpresa = pEmp;
@@ -54,7 +58,12 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblEliMot = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel3.setText("Nombre:");
 
@@ -75,7 +84,7 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(74, 74, 74)
-                        .addComponent(txtNomMot, javax.swing.GroupLayout.DEFAULT_SIZE, 1146, Short.MAX_VALUE))
+                        .addComponent(txtNomMot, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnAgregar)))
@@ -90,7 +99,7 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
                     .addComponent(txtNomMot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnAgregar)
-                .addContainerGap(460, Short.MAX_VALUE))
+                .addContainerGap(488, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Agregar", jPanel1);
@@ -135,6 +144,11 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
                 return types [columnIndex];
             }
         });
+        tblEliMot.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEliMotMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblEliMot);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -142,23 +156,25 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4))
-                        .addGap(462, 462, 462)
+                        .addContainerGap(501, Short.MAX_VALUE)
+                        .addComponent(btnModificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnModificar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEliminar))
-                            .addComponent(txtNomEli)
-                            .addComponent(txtIdEli))))
-                .addGap(620, 620, 620))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4))
+                                .addGap(22, 22, 22)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNomEli)
+                                    .addComponent(txtIdEli)))
+                            .addComponent(jScrollPane2))))
+                .addGap(42, 42, 42))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,13 +187,13 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtNomEli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEliminar)
                     .addComponent(btnModificar))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68))
         );
 
         jTabbedPane1.addTab("Modificar/Eliminar", jPanel3);
@@ -205,35 +221,21 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
         motores unMotor;
-        int num;
-
+        
         try {
             //Verifica el ingreso de los datos requeridos
             if (this.txtNomMot.getText().length() > 0) {
 
                 //Verifico que hayan ingresado un número
-               
-                    //Busco si el tipo ya no ha sido ingresado
-                    unMotor = new motores();
-                    num = Integer.parseInt(this.txtNomMot.getText());
-                    unMotor.setIdMotor(num);
-                    unMotor = dEmpresa.buscarMotor(unMotor);
-                    ////////////////////////////////////////////////////////////////////////////////////
+                //Busco si el tipo ya no ha sido ingresado
+                unMotor = new motores();
 
-                    if (unMotor == null) {
-                        //Si el tipo no ha sido ingresado lo crea y le pasa los datos para ingresarlo
-                        unMotor = new motores();
-                        unMotor.setIdMotor(num);
-                        unMotor.setNombreMotor(this.txtNomMot.getText());
-                        dEmpresa.agregarMotor(unMotor);
-                        JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Motor", JOptionPane.INFORMATION_MESSAGE);
+                unMotor.setNombreMotor(this.txtNomMot.getText());
+                dEmpresa.agregarMotor(unMotor);
+                JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Motor", JOptionPane.INFORMATION_MESSAGE);
 
-                        ReiniciarControles();
+                ReiniciarControles();
 
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Id motor ya existe", "Accion", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                
             } else {
                 JOptionPane.showMessageDialog(this, "Datos ingresados incorrectamente", "Accion", JOptionPane.ERROR_MESSAGE);
             }
@@ -268,7 +270,7 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         if (!this.txtNomEli.getText().equals("")
-            && !this.txtIdEli.getText().equals("")) {
+                && !this.txtIdEli.getText().equals("")) {
 
             try {
 
@@ -292,6 +294,31 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
             JOptionPane.showMessageDialog(this, "Datos ingresados incorrectamente", "Accion", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.txtIdEli.setEditable(false);
+        ReiniciarControles();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void tblEliMotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEliMotMouseClicked
+        int fila = this.tblEliMot.getSelectedRow();
+
+        if (fila >= 0) {
+            DefaultTableModel tm = (DefaultTableModel) this.tblEliMot.getModel();
+            int numFilas = tm.getRowCount();
+            if ((fila < numFilas) && (fila >= 0)) {
+
+                // tomo los datos de los componentes existentes
+                String id = String.valueOf(tm.getValueAt(fila, 0));
+                String nom = (String) tm.getValueAt(fila, 1);
+               
+                this.txtIdEli.setText(id);
+                this.txtNomEli.setText(nom);
+                
+
+            }
+        }
+    }//GEN-LAST:event_tblEliMotMouseClicked
 
     /**
      * @param args the command line arguments
@@ -327,12 +354,13 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
             }
         });
     }
+
     private void ReiniciarControles() {
         this.LimpiarCampos();
         this.LimpiarList();
         this.CargarDatosList();
     }
-    
+
     public void LimpiarList() {
         DefaultTableModel dm = (DefaultTableModel) this.tblEliMot.getModel();
         dm.setRowCount(0);
@@ -342,22 +370,22 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
     public void CargarDatosList() {
         ArrayList<motores> coleccion = new ArrayList<motores>();
         try {
-            coleccion = dEmpresa.buscarTodosComponentesSinEliminados();
+            coleccion = dEmpresa.buscarTodosMotoresSinEliminados();
             ListaMotores = coleccion;
-            
+
             Iterator<motores> it = coleccion.iterator();
             while (it.hasNext()) {
                 motores unMotor = it.next();
                 DefaultTableModel tm = (DefaultTableModel) tblEliMot.getModel();
                 tm.addRow(new Object[]{new Integer(unMotor.getIdMotor()),
-                new String(unMotor.getNombreMotor())});
+                    new String(unMotor.getNombreMotor())});
                 tblEliMot.setModel(tm);
             }
         } catch (Common.cDatosException e) {
             JOptionPane.showMessageDialog(this, e.toString(), "Motor", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void LimpiarCampos() {
         this.txtNomMot.setText("");
         this.txtIdEli.setText("");

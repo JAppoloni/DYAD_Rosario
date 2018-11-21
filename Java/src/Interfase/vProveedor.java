@@ -58,7 +58,7 @@ private ArrayList<proveedor> ListaProveedores = new ArrayList<proveedor>();
         jLabel6 = new javax.swing.JLabel();
         txtDesEli = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {

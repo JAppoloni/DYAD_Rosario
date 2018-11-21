@@ -14,7 +14,7 @@ public class proveedor {
 private int idProvedor;
 private String nombreProveedor;
 private String descProveedor;
-private boolean IsDeletedProveedor;
+private boolean IsDeleted;
 
     public int getIdProvedor() {
         return idProvedor;
@@ -41,18 +41,18 @@ private boolean IsDeletedProveedor;
     }
 
     public boolean isIsDeletedProveedor() {
-        return IsDeletedProveedor;
+        return IsDeleted;
     }
 
     public void setIsDeletedProveedor(boolean IsDeletedProveedor) {
-        this.IsDeletedProveedor = IsDeletedProveedor;
+        this.IsDeleted = IsDeleted;
     }
 
-public proveedor(int idProvedor, String nombreProveedor, String descProveedor, boolean IsDeletedProveedor) {
+public proveedor(int idProvedor, String nombreProveedor, String descProveedor, boolean IsDeleted) {
         this.idProvedor = idProvedor;
         this.nombreProveedor = nombreProveedor;
         this.descProveedor = descProveedor;
-        this.IsDeletedProveedor = IsDeletedProveedor;
+        this.IsDeleted = IsDeleted;
     }
 
     public proveedor() {

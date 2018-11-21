@@ -5,6 +5,8 @@
  */
 package Interfase;
 
+import Dominio.dEmpresa;
+
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
@@ -18,6 +20,10 @@ public class vProveedorComponente extends javax.swing.JFrame {
         initComponents();
     }
 
+    vProveedorComponente(dEmpresa empresa) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,7 +33,7 @@ public class vProveedorComponente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

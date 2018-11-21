@@ -20,7 +20,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Felipe
  */
 public class vComponente extends javax.swing.JFrame {
-private ArrayList<componente> ListaComponentes = new ArrayList<componente>();
+
+    private ArrayList<componente> ListaComponentes = new ArrayList<componente>();
+
     /**
      * Creates new form vComponente
      */
@@ -33,6 +35,7 @@ private ArrayList<componente> ListaComponentes = new ArrayList<componente>();
         initComponents();
         dEmpresa = pEmp;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,7 +73,12 @@ private ArrayList<componente> ListaComponentes = new ArrayList<componente>();
         jLabel13 = new javax.swing.JLabel();
         txtIdComp1 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Costo:");
 
@@ -236,11 +244,14 @@ private ArrayList<componente> ListaComponentes = new ArrayList<componente>();
                                         .addComponent(jLabel10)
                                         .addComponent(jLabel11))
                                     .addGap(31, 31, 31))
-                                .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addComponent(jLabel13))
-                        .addGap(1, 1, 1)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel12)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addGap(81, 81, 81)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCostoComp1, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
+                            .addComponent(txtCostoComp1, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
                             .addComponent(txtCantStockComp1)
                             .addComponent(txtDescComp1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtCantMinStockComp1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -313,38 +324,24 @@ private ArrayList<componente> ListaComponentes = new ArrayList<componente>();
         // TODO add your handling code here:
         componente unComponente;
         int num;
-        
 
         try {
             //Verifica el ingreso de los datos requeridos
             if (this.txtDescComp.getText().length() > 0 && this.txtCostoComp.getText().length() > 0 && this.txtCantStockComp.getText().length() > 0 && this.txtCantMinStockComp.getText().length() > 0) {
-                
-                    //Busco si el componente ya no ha sido ingresado
-                    unComponente = new componente();
-                    num = Integer.parseInt(this.txtDescComp.getText());
-                    this.txtCostoComp.getText();
-                    unComponente.setIdComp(num);
-                    unComponente = dEmpresa.buscarComponente(unComponente);
-                    ////////////////////////////////////////////////////////////////////////////////////
 
-                    if (unComponente == null) {
-                        //Si el componente no ha sido ingresado lo crea y le pasa los datos para ingresarlo
-                        unComponente = new componente();
-                        unComponente.setIdComp(num);
-                        unComponente.setDescripcionComp(this.txtDescComp.getText());
-                        unComponente.setCostoComp(Integer.parseInt(this.txtCostoComp.getText()));
-                        unComponente.setCantStockComp(Integer.parseInt(this.txtCantStockComp.getText()));
-                        unComponente.setCantMinStockComp(Integer.parseInt(this.txtCantMinStockComp.getText()));
-                        dEmpresa.agregarComponente(unComponente);
-                        JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Componente", JOptionPane.INFORMATION_MESSAGE);
+                //Busco si el componente ya no ha sido ingresado
+                unComponente = new componente();
+                unComponente.setDescripcionComp(this.txtDescComp.getText());
+                unComponente.setCostoComp(Integer.parseInt(this.txtCostoComp.getText()));
+                unComponente.setCantStockComp(Integer.parseInt(this.txtCantStockComp.getText()));
+                unComponente.setCantMinStockComp(Integer.parseInt(this.txtCantMinStockComp.getText()));
 
-                        ReiniciarControles();
+                dEmpresa.agregarComponente(unComponente);
+                JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Componente", JOptionPane.INFORMATION_MESSAGE);
 
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Id componente ya existe", "Accion", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                } 
-            else {
+                ReiniciarControles();
+
+            } else {
                 JOptionPane.showMessageDialog(this, "Datos ingresados incorrectamente", "Accion", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Common.cDatosException e) {
@@ -363,9 +360,9 @@ private ArrayList<componente> ListaComponentes = new ArrayList<componente>();
                 // tomo los datos de los componentes existentes
                 String id = String.valueOf(tm.getValueAt(fila, 0));
                 String desc = (String) tm.getValueAt(fila, 1);
-                String cost = (String) tm.getValueAt(fila, 2);
-                String stock = (String) tm.getValueAt(fila, 3);
-                String cantmin = (String) tm.getValueAt(fila, 4);
+                String cost = String.valueOf( tm.getValueAt(fila, 2));
+                String stock = String.valueOf(tm.getValueAt(fila, 3));
+                String cantmin = String.valueOf( tm.getValueAt(fila, 4));
 
                 this.txtIdComp1.setText(id);
                 this.txtDescComp1.setText(desc);
@@ -415,37 +412,25 @@ private ArrayList<componente> ListaComponentes = new ArrayList<componente>();
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         if (!this.txtIdComp1.getText().equals("")
-            && !this.txtDescComp1.getText().equals("")
+                && !this.txtDescComp1.getText().equals("")
                 && !this.txtCostoComp1.getText().equals("")
                 && !this.txtCantStockComp1.getText().equals("")
-                && !this.txtCantMinStockComp.getText().equals("")) {
+                && !this.txtCantMinStockComp1.getText().equals("")) {
 
             try {
-
-                Integer num;
-                String desc;
-                Integer costo;
-                Integer cants;
-                Integer cantsm;
                 componente unComponente = new componente();
-
-                num = Integer.parseInt(this.txtIdComp1.getText());
-                desc = this.txtDescComp1.getText();
-                costo = Integer.parseInt(this.txtIdComp1.getText());
-                cants = Integer.parseInt(this.txtIdComp1.getText());
-                cantsm = Integer.parseInt(this.txtIdComp1.getText());
-               
+                Integer num = Integer.parseInt(this.txtIdComp1.getText());
                 unComponente.setIdComp(num);
-                unComponente.setDescripcionComp(this.txtDescComp.getText());
-                unComponente.setCostoComp(Integer.parseInt(this.txtCostoComp.getText()));
-                unComponente.setCantStockComp(Integer.parseInt(this.txtCantStockComp.getText()));
-                unComponente.setCantMinStockComp(Integer.parseInt(this.txtCantMinStockComp.getText()));
+                unComponente.setDescripcionComp(this.txtDescComp1.getText());
+                unComponente.setCostoComp(Integer.parseInt(this.txtCostoComp1.getText()));
+                unComponente.setCantStockComp(Integer.parseInt(this.txtCantStockComp1.getText()));
+                unComponente.setCantMinStockComp(Integer.parseInt(this.txtCantMinStockComp1.getText()));
                 dEmpresa.modificarComponente(unComponente);
                 ReiniciarControles();
-                JOptionPane.showMessageDialog(this, "Se ha modificado correctamente", "Tipo", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Se ha modificado correctamente", "Componente", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (cDatosException e) {
-                JOptionPane.showMessageDialog(this, e.toString(), "Tipo", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, e.toString(), "Componente", JOptionPane.ERROR_MESSAGE);
             }
 
         } else {
@@ -456,6 +441,11 @@ private ArrayList<componente> ListaComponentes = new ArrayList<componente>();
     private void txtIdComp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdComp1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdComp1ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.txtIdComp1.setEditable(false);
+        ReiniciarControles();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -471,16 +461,24 @@ private ArrayList<componente> ListaComponentes = new ArrayList<componente>();
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(vComponente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vComponente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(vComponente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vComponente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(vComponente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vComponente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(vComponente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vComponente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -491,13 +489,13 @@ private ArrayList<componente> ListaComponentes = new ArrayList<componente>();
             }
         });
     }
-    
+
     private void ReiniciarControles() {
         this.LimpiarCampos();
         this.LimpiarList();
         this.CargarDatosList();
     }
-    
+
     public void LimpiarList() {
         DefaultTableModel dm = (DefaultTableModel) this.tblEliComp.getModel();
         dm.setRowCount(0);
@@ -509,23 +507,23 @@ private ArrayList<componente> ListaComponentes = new ArrayList<componente>();
         try {
             coleccion = dEmpresa.buscarTodosComponentesSinEliminados();
             ListaComponentes = coleccion;
-            
+
             Iterator<componente> it = coleccion.iterator();
             while (it.hasNext()) {
                 componente unComponente = it.next();
                 DefaultTableModel tm = (DefaultTableModel) tblEliComp.getModel();
                 tm.addRow(new Object[]{new Integer(unComponente.getIdComp()),
-                new String(unComponente.getDescripcionComp()),
-                new Integer(unComponente.getCostoComp()),
-                new Integer(unComponente.getCantStockComp()),
-                new Integer(unComponente.getCantMinStockComp())});
+                    new String(unComponente.getDescripcionComp()),
+                    new Integer(unComponente.getCostoComp()),
+                    new Integer(unComponente.getCantStockComp()),
+                    new Integer(unComponente.getCantMinStockComp())});
                 tblEliComp.setModel(tm);
             }
         } catch (Common.cDatosException e) {
             JOptionPane.showMessageDialog(this, e.toString(), "Componente", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void LimpiarCampos() {
         this.txtIdComp1.setText("");
         this.txtDescComp.setText("");

@@ -14,6 +14,7 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Common.cDatosException;
+import Dominio.dEmpresa;
 
 /**
  *
@@ -35,6 +36,13 @@ public class vMotorComponente extends javax.swing.JFrame {
     public vMotorComponente() {
         initComponents();
     }
+    private dEmpresa dEmpresa;
+
+    public vMotorComponente(dEmpresa pEmp) {
+        initComponents();
+        dEmpresa = pEmp;
+    }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,7 +62,7 @@ public class vMotorComponente extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);

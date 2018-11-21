@@ -17,13 +17,13 @@ public class factura {
     private int idFactura;
     private Date fechaPagoFactura;
     private pedido idPedidoFactura;
-    private boolean idDeletedFactura;
+    private boolean idDeleted;
 
-    public factura(int idFactura, Date fechaPagoFactura, pedido idPedidoFactura, boolean idDeletedFactura) {
+    public factura(int idFactura, Date fechaPagoFactura, pedido idPedidoFactura, boolean idDeleted) {
         this.idFactura = idFactura;
         this.fechaPagoFactura = fechaPagoFactura;
         this.idPedidoFactura = idPedidoFactura;
-        this.idDeletedFactura = idDeletedFactura;
+        this.idDeleted = idDeleted;
     }
 
     public factura() {
@@ -31,11 +31,11 @@ public class factura {
 
     
     public boolean isIdDeletedFactura() {
-        return idDeletedFactura;
+        return idDeleted;
     }
 
     public void setIdDeletedFactura(boolean idDeletedFactura) {
-        this.idDeletedFactura = idDeletedFactura;
+        this.idDeleted = idDeletedFactura;
     }
 
    
