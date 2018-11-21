@@ -476,7 +476,7 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
         }
     }
 
-    public boolean eliminarComponente(proveedor prov) throws cDatosException {
+    public boolean eliminarProveedor(proveedor prov) throws cDatosException {
         if (prov != null) {
             try {
                 empresaProveedor.eliminar(prov);
@@ -668,7 +668,7 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
         }
     }
 
-    public boolean eliminarComponente(pedido pedid) throws cDatosException {
+    public boolean eliminarPedido(pedido pedid) throws cDatosException {
         if (pedid != null) {
             try {
                 empresaPedido.eliminar(pedid);
@@ -681,7 +681,8 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
         }
     }
 // </editor-fold>
-   
+    
+    
     private dProveedorComponente empresaProveedorComponente = new dProveedorComponente();
     // <editor-fold defaultstate="collapsed" desc=" Proveedor-Componente ">
     public proveedorcomponente buscarProveedorComponente(proveedorcomponente pProveedorComponente) throws cDatosException {

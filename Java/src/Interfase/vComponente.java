@@ -236,14 +236,11 @@ private ArrayList<componente> ListaComponentes = new ArrayList<componente>();
                                         .addComponent(jLabel10)
                                         .addComponent(jLabel11))
                                     .addGap(31, 31, 31))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel12)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addGap(81, 81, 81)))
+                                .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel13))
+                        .addGap(1, 1, 1)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCostoComp1, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+                            .addComponent(txtCostoComp1, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
                             .addComponent(txtCantStockComp1)
                             .addComponent(txtDescComp1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtCantMinStockComp1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -508,24 +505,24 @@ private ArrayList<componente> ListaComponentes = new ArrayList<componente>();
     }
 
     public void CargarDatosList() {
-        ArrayList<cliente> coleccion = new ArrayList<cliente>();
+        ArrayList<componente> coleccion = new ArrayList<componente>();
         try {
-            coleccion = dEmpresa.buscarTodosComponentes();
+            coleccion = dEmpresa.buscarTodosComponentesSinEliminados();
             ListaComponentes = coleccion;
-            Iterator<cliente> it = coleccion.iterator();
+            
+            Iterator<componente> it = coleccion.iterator();
             while (it.hasNext()) {
-                cliente unCliente = it.next();
+                componente unComponente = it.next();
                 DefaultTableModel tm = (DefaultTableModel) tblEliComp.getModel();
-                tm.addRow(new Object[]{new Integer(unCliente.getIdClie()),
-                new String(unCliente.getNombreEmpresaClie()),
-                new String(unCliente.getNombreFantasiaClie()),
-                new String(unCliente.getPaisClie()),
-                new String(unCliente.getDireccionClie()),
-                new String(unCliente.getContactoClie()),});
+                tm.addRow(new Object[]{new Integer(unComponente.getIdComp()),
+                new String(unComponente.getDescripcionComp()),
+                new Integer(unComponente.getCostoComp()),
+                new Integer(unComponente.getCantStockComp()),
+                new Integer(unComponente.getCantMinStockComp())});
                 tblEliComp.setModel(tm);
             }
         } catch (Common.cDatosException e) {
-            JOptionPane.showMessageDialog(this, e.toString(), "Tipo", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.toString(), "Componente", JOptionPane.ERROR_MESSAGE);
         }
     }
     

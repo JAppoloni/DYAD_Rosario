@@ -13,6 +13,11 @@ package Common;
 public class cliente {
 
 private int idClie;
+
+    @Override
+    public String toString() {
+        return "cliente{" + "idClie=" + idClie + ", nombreEmpresaClie=" + nombreEmpresaClie + '}';
+    }
 private String nombreEmpresaClie;
 private String nombreFantasiaClie;
 private  String paisClie;

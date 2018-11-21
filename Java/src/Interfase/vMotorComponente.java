@@ -328,7 +328,7 @@ public class vMotorComponente extends javax.swing.JFrame {
     public void CargarDatosComponente() {
         ArrayList<componente> coleccion = new ArrayList<componente>();
         try {
-            coleccion = empresa.buscarTodosComponente();
+            coleccion = empresa.buscarTodosComponentes();
             ListaComponente = coleccion;
             Iterator<componente> it = coleccion.iterator();
             while (it.hasNext()) {

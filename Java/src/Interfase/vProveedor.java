@@ -6,30 +6,30 @@
 package Interfase;
 import Common.cDatosException;
 import Common.motores;
+import Common.proveedor;
 import Dominio.dEmpresa;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
- * @author Felipe
+ * @author pc18lab
  */
-public class vMotor extends javax.swing.JFrame {
-private ArrayList<motores> ListaMotores = new ArrayList<motores>();
+public class vProveedor extends javax.swing.JFrame {
+private ArrayList<proveedor> ListaProveedores = new ArrayList<proveedor>();
     /**
-     * Creates new form vMotor
+     * Creates new form vProveedor
      */
-    public vMotor() {
+    public vProveedor() {
         initComponents();
     }
-    public vMotor(dEmpresa pEmp) {
+    
+    public vProveedor(dEmpresa pEmp) {
         initComponents();
         dEmpresa = pEmp;
     }
     private dEmpresa dEmpresa;
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,9 +41,11 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        txtNomMot = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtNomProv = new javax.swing.JTextField();
+        txtDescProv = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         btnEliminar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -53,10 +55,10 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
         btnModificar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblEliMot = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        txtDesEli = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel3.setText("Nombre:");
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -65,32 +67,48 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
             }
         });
 
+        jLabel1.setText("Nombre:");
+
+        jLabel5.setText("Descripcion:");
+
+        txtNomProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomProvActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(74, 74, 74)
-                        .addComponent(txtNomMot, javax.swing.GroupLayout.DEFAULT_SIZE, 1146, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel5))
+                .addGap(57, 57, 57)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAgregar)))
+                        .addComponent(btnAgregar))
+                    .addComponent(txtDescProv, javax.swing.GroupLayout.DEFAULT_SIZE, 1146, Short.MAX_VALUE)
+                    .addComponent(txtNomProv))
                 .addGap(37, 37, 37))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(62, 62, 62)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtNomMot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1)
+                    .addComponent(txtNomProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtDescProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnAgregar)
-                .addContainerGap(460, Short.MAX_VALUE))
+                .addContainerGap(408, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Agregar", jPanel1);
@@ -124,11 +142,11 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
 
             },
             new String [] {
-                "Id", "Nombre"
+                "Id", "Nombre", "Descripcion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -137,28 +155,38 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
         });
         jScrollPane2.setViewportView(tblEliMot);
 
+        jLabel6.setText("Descripcion:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(538, 538, 538)
+                .addComponent(btnModificar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEliminar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4))
-                        .addGap(462, 462, 462)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDesEli)
+                        .addGap(617, 617, 617))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnModificar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEliminar))
-                            .addComponent(txtNomEli)
-                            .addComponent(txtIdEli))))
-                .addGap(620, 620, 620))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtIdEli)
+                                    .addComponent(txtNomEli))))
+                        .addGap(620, 620, 620))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,13 +199,17 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtNomEli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnModificar))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                    .addComponent(jLabel6)
+                    .addComponent(txtDesEli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnModificar)
+                    .addComponent(btnEliminar))
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Modificar/Eliminar", jPanel3);
@@ -193,10 +225,10 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -204,60 +236,43 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        motores unMotor;
+        proveedor unProveedor;
         int num;
 
         try {
-            //Verifica el ingreso de los datos requeridos
-            if (this.txtNomMot.getText().length() > 0) {
+                    //Si el tipo no ha sido ingresado lo crea y le pasa los datos para ingresarlo
+                    unProveedor = new proveedor();
+                    unProveedor.setNombreProveedor(this.txtNomProv.getText());
+                    unProveedor.setDescProveedor(this.txtDescProv.getText());
+                    dEmpresa.agregarProveedor(unProveedor);
+                    JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Proveedor", JOptionPane.INFORMATION_MESSAGE);
 
-                //Verifico que hayan ingresado un número
-               
-                    //Busco si el tipo ya no ha sido ingresado
-                    unMotor = new motores();
-                    num = Integer.parseInt(this.txtNomMot.getText());
-                    unMotor.setIdMotor(num);
-                    unMotor = dEmpresa.buscarMotor(unMotor);
-                    ////////////////////////////////////////////////////////////////////////////////////
+                    ReiniciarControles();
 
-                    if (unMotor == null) {
-                        //Si el tipo no ha sido ingresado lo crea y le pasa los datos para ingresarlo
-                        unMotor = new motores();
-                        unMotor.setIdMotor(num);
-                        unMotor.setNombreMotor(this.txtNomMot.getText());
-                        dEmpresa.agregarMotor(unMotor);
-                        JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Motor", JOptionPane.INFORMATION_MESSAGE);
-
-                        ReiniciarControles();
-
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Id motor ya existe", "Accion", JOptionPane.INFORMATION_MESSAGE);
-                    }
                 
-            } else {
-                JOptionPane.showMessageDialog(this, "Datos ingresados incorrectamente", "Accion", JOptionPane.ERROR_MESSAGE);
-            }
+
+            
         } catch (Common.cDatosException e) {
-            JOptionPane.showMessageDialog(this, e.toString(), "Motor", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.toString(), "Proveedor", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        motores unMotor = new motores();
+        proveedor unProveedor = new proveedor();
         int num;
         try {
             if (!this.txtIdEli.getText().equals("")) {
                 num = Integer.parseInt(this.txtIdEli.getText());
-                unMotor.setIdMotor(num);
-                dEmpresa.eliminarMotor(unMotor);
-                JOptionPane.showMessageDialog(this, "Se dado eliminado correctamente", "Motor", JOptionPane.INFORMATION_MESSAGE);
+                unProveedor.setIdProvedor(num);
+                dEmpresa.eliminarProveedor(unProveedor);
+                JOptionPane.showMessageDialog(this, "Se dado eliminado correctamente", "Proveedor", JOptionPane.INFORMATION_MESSAGE);
                 ReiniciarControles();
             } else {
-                JOptionPane.showMessageDialog(this, "Debe seleccionar un registro", "Motor", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Debe seleccionar un registro", "Proveedor", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (Common.cDatosException e) {
-            JOptionPane.showMessageDialog(this, e.toString(), "Motor", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.toString(), "Proveedor", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -268,30 +283,38 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         if (!this.txtNomEli.getText().equals("")
-            && !this.txtIdEli.getText().equals("")) {
+            && !this.txtIdEli.getText().equals("")
+                && !this.txtDesEli.equals("")) {
 
             try {
 
                 Integer num;
                 String nom;
-                motores unMotor = new motores();
+                String desc;
+                proveedor unProveedor = new proveedor();
 
                 num = Integer.parseInt(this.txtIdEli.getText());
                 nom = this.txtNomEli.getText();
-                unMotor.setIdMotor(num);
-                unMotor.setNombreMotor(nom);
-                dEmpresa.modificarMotor(unMotor);
+                desc = this.txtDesEli.getText();
+                unProveedor.setIdProvedor(num);
+                unProveedor.setNombreProveedor(nom);
+                unProveedor.setDescProveedor(desc);
+                dEmpresa.modificarProveedor(unProveedor);
                 ReiniciarControles();
-                JOptionPane.showMessageDialog(this, "Se ha modificado correctamente", "Mootor", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Se ha modificado correctamente", "Proveedor", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (cDatosException e) {
-                JOptionPane.showMessageDialog(this, e.toString(), "Motor", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, e.toString(), "Proveedor", JOptionPane.ERROR_MESSAGE);
             }
 
         } else {
             JOptionPane.showMessageDialog(this, "Datos ingresados incorrectamente", "Accion", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void txtNomProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomProvActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomProvActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,20 +333,20 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(vMotor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(vMotor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(vMotor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(vMotor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new vMotor().setVisible(true);
+                new vProveedor().setVisible(true);
             }
         });
     }
@@ -340,17 +363,18 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
     }
 
     public void CargarDatosList() {
-        ArrayList<motores> coleccion = new ArrayList<motores>();
+        ArrayList<proveedor> coleccion = new ArrayList<proveedor>();
         try {
-            coleccion = dEmpresa.buscarTodosComponentesSinEliminados();
-            ListaMotores = coleccion;
+            coleccion = dEmpresa.buscarTodosProveedorSinEliminados();
+            ListaProveedores = coleccion;
             
-            Iterator<motores> it = coleccion.iterator();
+            Iterator<proveedor> it = coleccion.iterator();
             while (it.hasNext()) {
-                motores unMotor = it.next();
+                proveedor unProveedor = it.next();
                 DefaultTableModel tm = (DefaultTableModel) tblEliMot.getModel();
-                tm.addRow(new Object[]{new Integer(unMotor.getIdMotor()),
-                new String(unMotor.getNombreMotor())});
+                tm.addRow(new Object[]{new Integer(unProveedor.getIdProvedor()),
+                new String(unProveedor.getNombreProveedor()),
+                new String(unProveedor.getDescProveedor())});
                 tblEliMot.setModel(tm);
             }
         } catch (Common.cDatosException e) {
@@ -359,24 +383,33 @@ private ArrayList<motores> ListaMotores = new ArrayList<motores>();
     }
     
     public void LimpiarCampos() {
-        this.txtNomMot.setText("");
+        
+        this.txtNomProv.setText("");
+        this.txtDescProv.setText("");
+        
         this.txtIdEli.setText("");
         this.txtNomEli.setText("");
+        this.txtDesEli.setText("");
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tblEliMot;
+    private javax.swing.JTextField txtDesEli;
+    private javax.swing.JTextField txtDescProv;
     private javax.swing.JTextField txtIdEli;
     private javax.swing.JTextField txtNomEli;
-    private javax.swing.JTextField txtNomMot;
+    private javax.swing.JTextField txtNomProv;
     // End of variables declaration//GEN-END:variables
 }
