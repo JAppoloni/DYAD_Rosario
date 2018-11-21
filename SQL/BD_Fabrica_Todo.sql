@@ -56,7 +56,7 @@ CREATE TABLE `componente` (
   `costoComp` int(11) NOT NULL,
   `cantStockComp` int(11) NOT NULL,
   `cantMinStockComp` int(11) NOT NULL,
-  `isDeletedComp` tinyint(1) NOT NULL,
+  `isDeleted` tinyint(1) NOT NULL,
   PRIMARY KEY (`idComp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -81,7 +81,7 @@ CREATE TABLE `factura` (
   `idFactura` int(11) NOT NULL AUTO_INCREMENT,
   `fechaPagoFactura` date NOT NULL,
   `idPedidoFactura` int(11) NOT NULL,
-  `isDeletedFactura` tinyint(1) NOT NULL,
+  `isDeleted` tinyint(1) NOT NULL,
   PRIMARY KEY (`idFactura`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -129,7 +129,7 @@ DROP TABLE IF EXISTS `motores`;
 CREATE TABLE `motores` (
   `idMotor` int(11) NOT NULL,
   `nombreMotor` varchar(50) NOT NULL,
-  `isDeletedMotor` tinyint(1) NOT NULL,
+  `isDeleted` tinyint(1) NOT NULL,
   PRIMARY KEY (`idMotor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -154,7 +154,7 @@ CREATE TABLE `pedido` (
   `idPedido` int(11) NOT NULL AUTO_INCREMENT,
   `idClientePedido` int(11) NOT NULL,
   `fechaDeEntregaPedido` date NOT NULL,
-  `isDeletedPedido` tinyint(1) NOT NULL,
+  `isDeleted` tinyint(1) NOT NULL,
   `idMotorPedido` int(11) NOT NULL,
   PRIMARY KEY (`idPedido`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -180,7 +180,7 @@ CREATE TABLE `proveedor` (
   `idProveedor` int(11) NOT NULL AUTO_INCREMENT,
   `nombreProveedor` varchar(50) NOT NULL,
   `descProveedor` varchar(60) NOT NULL,
-  `IsDeletedProveedor` tinyint(1) NOT NULL,
+  `IsDeleted` tinyint(1) NOT NULL,
   PRIMARY KEY (`idProveedor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -204,7 +204,7 @@ DROP TABLE IF EXISTS `proveedorcomponente`;
 CREATE TABLE `proveedorcomponente` (
   `idProveedorProveedorComponente` int(11) NOT NULL,
   `idComponenteProveedorComponentecol` int(11) NOT NULL,
-  `isDeletedProveedorComponentecol` tinyint(1) NOT NULL,
+  `isDeleted` tinyint(1) NOT NULL,
   PRIMARY KEY (`idProveedorProveedorComponente`,`idComponenteProveedorComponentecol`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
