@@ -23,11 +23,11 @@ DROP TABLE IF EXISTS `motores`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `motores` (
-  `idMotor` int(11) NOT NULL,
+  `idMotor` int(11) NOT NULL AUTO_INCREMENT,
   `nombreMotor` varchar(50) NOT NULL,
-  `isDeletedMotor` tinyint(1) NOT NULL,
+  `isDeleted` tinyint(1) NOT NULL,
   PRIMARY KEY (`idMotor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=100000 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,6 +36,7 @@ CREATE TABLE `motores` (
 
 LOCK TABLES `motores` WRITE;
 /*!40000 ALTER TABLE `motores` DISABLE KEYS */;
+INSERT INTO `motores` VALUES (1000,'aaaaa',0),(1001,'cxcvxcsdfgh',0),(1002,'aaabvc',0),(1003,'asdfghjkl',0);
 /*!40000 ALTER TABLE `motores` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-10 21:44:14
+-- Dump completed on 2018-11-21 19:51:06
