@@ -17,23 +17,23 @@ import java.util.ArrayList;
 public class dProveedor {
     
         public void Alta(proveedor pproveedor) throws cDatosException {
-        if (pproveedor == null) {
+        if (pproveedor != null) {
             pGenerico pPersistencia = new pGenerico();
             pPersistencia.agregar(pproveedor);
         }
     }
 
     public void modificar(proveedor pproveedor) throws cDatosException {
-        if (pproveedor == null) {
+        if (pproveedor != null) {
             pGenerico pPersistencia = new pGenerico();
             pPersistencia.modificar(pproveedor);
         }
     }
 
     public void eliminar(proveedor pproveedor) throws cDatosException {
-        if (pproveedor == null) {
+        if (pproveedor != null) {
             pGenerico pPersistencia = new pGenerico();
-            pPersistencia.eliminar(pproveedor);
+            pPersistencia.eliminar_Logico(pproveedor);
         }
     }
 

@@ -17,21 +17,21 @@ import java.util.ArrayList;
 public class dProveedorComponente {
     
         public void Alta(proveedorcomponente pproveedorcomponente) throws cDatosException {
-        if (pproveedorcomponente == null) {
+        if (pproveedorcomponente != null) {
             pGenerico pPersistencia = new pGenerico();
             pPersistencia.agregar(pproveedorcomponente);
         }
     }
 
     public void modificar(proveedorcomponente pproveedorcomponente) throws cDatosException {
-        if (pproveedorcomponente == null) {
+        if (pproveedorcomponente != null) {
             pGenerico pPersistencia = new pGenerico();
             pPersistencia.modificar(pproveedorcomponente);
         }
     }
 
     public void eliminar(proveedorcomponente pproveedorcomponente) throws cDatosException {
-        if (pproveedorcomponente == null) {
+        if (pproveedorcomponente != null) {
             pGenerico pPersistencia = new pGenerico();
             pPersistencia.eliminar(pproveedorcomponente);
         }

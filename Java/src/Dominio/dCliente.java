@@ -15,23 +15,23 @@ import java.util.ArrayList;
 public class dCliente {
 
     public void Alta(cliente pCliente) throws cDatosException {
-        if (pCliente == null) {
+        if (pCliente != null) {
             pGenerico pPersistencia = new pGenerico();
             pPersistencia.agregar(pCliente);
         }
     }
 
     public void modificar(cliente pCliente) throws cDatosException {
-        if (pCliente == null) {
+        if (pCliente != null) {
             pGenerico pPersistencia = new pGenerico();
             pPersistencia.modificar(pCliente);
         }
     }
 
     public void eliminar(cliente pCliente) throws cDatosException {
-        if (pCliente == null) {
+        if (pCliente != null) {
             pGenerico pPersistencia = new pGenerico();
-            pPersistencia.eliminar(pCliente);
+            pPersistencia.eliminar_Logico(pCliente);
         }
     }
 
