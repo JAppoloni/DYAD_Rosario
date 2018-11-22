@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class pGenerico extends pPersistencia {
@@ -75,7 +76,7 @@ public class pGenerico extends pPersistencia {
                 valorRetorno = caprutatValor.toString();
             }
             if (tipo.equals(java.util.Date.class)) {
-                // valorRetorno = DateTime.Parse(caprutatValor.toString());Metodo de fechasss
+                valorRetorno = pasar_Fecha_JAVA(caprutatValor.toString());
             }
             if (tipo.equals(java.lang.Integer.class) || tipo.equals(int.class)) {
                 valorRetorno = Integer.parseInt(caprutatValor.toString());
@@ -83,13 +84,13 @@ public class pGenerico extends pPersistencia {
             if (tipo.equals(java.lang.Double.class)) {
                 valorRetorno = Double.parseDouble(caprutatValor.toString());
             }
-            if (tipo.equals(java.lang.Boolean.class)) {
+            if (tipo.equals(java.lang.Boolean.class) || tipo.equals(boolean.class)) {
 
                 caprutatValor = Boolean.parseBoolean(caprutatValor.toString());
             }
             if (!IsPrimitio(property)) {
 
-                Object Instance = CreateInstance(property);
+                Object Instance = CreateInstance(property.getType());
 
                 java.lang.reflect.Field[] MyFields2 = getPropertiesFields(Instance);
                 try {
@@ -118,7 +119,7 @@ public class pGenerico extends pPersistencia {
         return retorno;
     }
 
-public static Boolean EsString(Object pObject) {
+    public static Boolean EsString(Object pObject) {
         if (pObject instanceof java.lang.String) {
             return true;
         }
@@ -186,7 +187,20 @@ public static Boolean EsString(Object pObject) {
         return false;
     }
 
+    public static java.util.Date pasar_Fecha_JAVA(String uDate) {
+        java.util.Date sDate = new java.util.Date(uDate);
+        return sDate;
+    }
+
+    public static String pasar_SQL_Fecha(String utilDate) {
+        SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd");
+        return df.format(utilDate);
+    }
+
     public static String PasarAString(Object pObject) {//Cambiar por fecha
+        if (pObject.getClass().equals(java.util.Date.class)) {
+            pasar_SQL_Fecha(pObject.toString());
+        }
         return EsString(pObject) ? "'" + pObject.toString() + "'" : pObject.toString();
     }
 
@@ -254,11 +268,9 @@ public static Boolean EsString(Object pObject) {
             String parametro = " ";
             String value = " VALUES (";
 
-            
-
-for (Field property : pObject.getClass().getDeclaredFields()) {
+            for (Field property : pObject.getClass().getDeclaredFields()) {
                 if (property.getType().equals(java.util.List.class
-)) {
+                )) {
                     continue;
                 }
                 Object Valor = DevolverValor(pObject, property, false);
