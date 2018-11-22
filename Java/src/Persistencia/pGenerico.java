@@ -56,6 +56,18 @@ public class pGenerico extends pPersistencia {
         }
         return null;
     }
+    
+    public static Object CreateInstanceConGET(Field pObject) {
+        Object myObject = new Object();
+        try {
+            Constructor constructor = pObject.getType().getConstructor();
+            myObject = (Object) constructor.newInstance();
+            return myObject;
+        } catch (Exception e) {
+            System.out.println("Error en Crear Instance el error es :" + e.getMessage());
+        }
+        return null;
+    }
 
     public Object SetValorObjeto(Object pObject, ResultSet reader) throws SQLException {
         Object retorno = CreateInstance(pObject);
@@ -86,11 +98,11 @@ public class pGenerico extends pPersistencia {
             }
             if (tipo.equals(java.lang.Boolean.class) || tipo.equals(boolean.class)) {
 
-                caprutatValor = Boolean.parseBoolean(caprutatValor.toString());
+                valorRetorno = Boolean.parseBoolean(caprutatValor.toString());
             }
             if (!IsPrimitio(property)) {
 
-                Object Instance = CreateInstance(property.getType());
+                Object Instance = CreateInstanceConGET(property);
 
                 java.lang.reflect.Field[] MyFields2 = getPropertiesFields(Instance);
                 try {

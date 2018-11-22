@@ -421,12 +421,13 @@ public class vMotorComponente extends javax.swing.JFrame {
         this.tblMotores.setModel(dm);//limpia el jtable
     }
     private void ReiniciarControles() {
-        CargarDatosMotor();
-        CargarDatosComponente();
-        CargarDatosMotorComponente();
         LimpiarListComponente();
         LimpiarListMotor();
         LimpiarListMotorComponente();
+        CargarDatosMotor();
+        CargarDatosComponente();
+        CargarDatosMotorComponente();
+        
     }
 
 }
