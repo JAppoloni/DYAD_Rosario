@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
 public class pGenerico extends pPersistencia {
 
     public pGenerico() {
@@ -18,11 +17,11 @@ public class pGenerico extends pPersistencia {
 
     // <editor-fold defaultstate="collapsed" desc=" Propiedades_Informacion_Objetos">     
     public static boolean IsPrimitio(Field propiedades) {
-       Class aux = propiedades.getType(); 
-        if ( aux.equals(java.lang.String.class)) {
+        Class aux = propiedades.getType();
+        if (aux.equals(java.lang.String.class)) {
             return true;
         }
-            if (aux.equals(java.lang.Integer.class) || aux.equals(int.class) || aux.equals(java.lang.Double.class)) {
+        if (aux.equals(java.lang.Integer.class) || aux.equals(int.class) || aux.equals(java.lang.Double.class)) {
             return true;
         }
         if (aux.equals(java.util.Date.class)) {
@@ -52,7 +51,7 @@ public class pGenerico extends pPersistencia {
             myObject = (Object) constructor.newInstance();
             return myObject;
         } catch (Exception e) {
-            System.out.println("Error en Crear Instance el error es :"+e.getMessage());
+            System.out.println("Error en Crear Instance el error es :" + e.getMessage());
         }
         return null;
     }
@@ -63,9 +62,9 @@ public class pGenerico extends pPersistencia {
 
         for (java.lang.reflect.Field property : MyFields) // retorno.Identificador = int.Parse(oReader["Identificador"].ToString());
         {
-             Class tipo = property.getType(); 
-        
-             if (tipo.equals(java.util.ArrayList.class)) {
+            Class tipo = property.getType();
+
+            if (tipo.equals(java.util.ArrayList.class)) {
                 continue;
             }
             String valorLector = property.getName();
@@ -78,36 +77,36 @@ public class pGenerico extends pPersistencia {
             if (tipo.equals(java.util.Date.class)) {
                 // valorRetorno = DateTime.Parse(caprutatValor.toString());Metodo de fechasss
             }
-            if (tipo.equals(java.lang.Integer.class) ||  tipo.equals(int.class)) {
+            if (tipo.equals(java.lang.Integer.class) || tipo.equals(int.class)) {
                 valorRetorno = Integer.parseInt(caprutatValor.toString());
             }
             if (tipo.equals(java.lang.Double.class)) {
                 valorRetorno = Double.parseDouble(caprutatValor.toString());
             }
             if (tipo.equals(java.lang.Boolean.class)) {
-                {
-                    caprutatValor = Boolean.parseBoolean(caprutatValor.toString());
-                }
-                if (!IsPrimitio(property)) {
 
-                    Object Instance = CreateInstance(property);
+                caprutatValor = Boolean.parseBoolean(caprutatValor.toString());
+            }
+            if (!IsPrimitio(property)) {
 
-                    java.lang.reflect.Field[] MyFields2 = getPropertiesFields(Instance);
-                    try {
-                        for (java.lang.reflect.Field info : MyFields2) {
-                            if (IsPK(Instance.getClass().getSimpleName(), info.getName())) {
-                                info.setAccessible(true);
-                                info.set(Instance, caprutatValor);
-                                Instance = TraerEspecifico(Instance);
-                                valorRetorno = Instance;
-                                break;
-                            }
+                Object Instance = CreateInstance(property);
+
+                java.lang.reflect.Field[] MyFields2 = getPropertiesFields(Instance);
+                try {
+                    for (java.lang.reflect.Field info : MyFields2) {
+                        if (IsPK(Instance.getClass().getSimpleName(), info.getName())) {
+                            info.setAccessible(true);
+                            info.set(Instance, caprutatValor);
+                            Instance = TraerEspecifico(Instance);
+                            valorRetorno = Instance;
+                            break;
                         }
-                    } catch (Exception e) {
-                        System.out.println("Error en ser valor obj el error es: "+e.getMessage());
                     }
+                } catch (Exception e) {
+                    System.out.println("Error en ser valor obj el error es: " + e.getMessage());
                 }
             }
+
             try {
                 property.setAccessible(true);
                 property.set(retorno, valorRetorno);
@@ -119,8 +118,8 @@ public class pGenerico extends pPersistencia {
         return retorno;
     }
 
-    public static Boolean EsString(Object pObject) {
-        if (pObject  instanceof java.lang.String) {
+public static Boolean EsString(Object pObject) {
+        if (pObject instanceof java.lang.String) {
             return true;
         }
         if (pObject instanceof java.util.Date) {
@@ -165,7 +164,7 @@ public class pGenerico extends pPersistencia {
             // Creo una nueva sentecia para ser ejecutada
             Statement st = super.getDistribuidora().createStatement();
 
-            String selectSql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='"+TablaSQL+"' AND EXTRA='auto_increment'";
+            String selectSql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='" + TablaSQL + "' AND EXTRA='auto_increment'";
 
             System.out.println(selectSql);
             // ejecuta la sentencia
@@ -255,8 +254,11 @@ public class pGenerico extends pPersistencia {
             String parametro = " ";
             String value = " VALUES (";
 
-            for (Field property : pObject.getClass().getDeclaredFields()) {
-                if (property.getType().equals(java.util.List.class)) {
+            
+
+for (Field property : pObject.getClass().getDeclaredFields()) {
+                if (property.getType().equals(java.util.List.class
+)) {
                     continue;
                 }
                 Object Valor = DevolverValor(pObject, property, false);
@@ -398,7 +400,7 @@ public class pGenerico extends pPersistencia {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc=" Consultas">      
-    public Object TraerTodosSinEliminados(Object pObject) throws  cDatosException{
+    public Object TraerTodosSinEliminados(Object pObject) throws cDatosException {
         // Creacion del string que contiene la sentencia a ejecutar
         String SecuenciaSQL = "select  *  from " + pObject.getClass().getSimpleName() + " WHERE isDeleted=false";
 
@@ -411,8 +413,8 @@ public class pGenerico extends pPersistencia {
 
             ResultSet rs = st.executeQuery(SecuenciaSQL);
             while (rs.next()) {
-              Object  retorno = SetValorObjeto(pObject, rs);
-            retornoLista.add(retorno);
+                Object retorno = SetValorObjeto(pObject, rs);
+                retornoLista.add(retorno);
             }
             cerrarConexion();
 
@@ -423,7 +425,7 @@ public class pGenerico extends pPersistencia {
         }
     }
 
-      public Object TraerEspecifico(Object pObject) throws cDatosException {
+    public Object TraerEspecifico(Object pObject) throws cDatosException {
         Object retorno = null;
 
         try {
@@ -431,7 +433,7 @@ public class pGenerico extends pPersistencia {
             super.abrirConexion();
             Statement st = super.getDistribuidora().createStatement();
             String SecuenciaSQL = "select * from " + pObject.getClass().getSimpleName() + " where ";
-            System.out.println("SQL:    "+SecuenciaSQL);
+            System.out.println("SQL:    " + SecuenciaSQL);
             for (Field property : pObject.getClass().getDeclaredFields()) {
                 if (IsPK(pObject.getClass().getSimpleName(), property.getName())) {
                     Object Valor = DevolverValor(pObject, property, true);
@@ -439,12 +441,12 @@ public class pGenerico extends pPersistencia {
                     if (Valor == null) {
                         continue;
                     }
-                    
+
                     SecuenciaSQL += " " + property.getName() + "=" + PasarAString(Valor) + " AND";
                 }
             }
 
-            SecuenciaSQL = SecuenciaSQL.substring(0,SecuenciaSQL.length()-3);
+            SecuenciaSQL = SecuenciaSQL.substring(0, SecuenciaSQL.length() - 3);
 
             System.out.println(SecuenciaSQL);
 
@@ -461,7 +463,7 @@ public class pGenerico extends pPersistencia {
         }
     }
 
-    public Object TraerTodos(Object pObject) throws  cDatosException{
+    public Object TraerTodos(Object pObject) throws cDatosException {
         // Creacion del string que contiene la sentencia a ejecutar
         String SecuenciaSQL = "select  *  from " + pObject.getClass().getSimpleName();
 
@@ -474,8 +476,8 @@ public class pGenerico extends pPersistencia {
 
             ResultSet rs = st.executeQuery(SecuenciaSQL);
             while (rs.next()) {
-              Object  retorno = SetValorObjeto(pObject, rs);
-            retornoLista.add(retorno);
+                Object retorno = SetValorObjeto(pObject, rs);
+                retornoLista.add(retorno);
             }
             cerrarConexion();
 
@@ -486,20 +488,19 @@ public class pGenerico extends pPersistencia {
         }
     }
 
-
-    public  ArrayList<Object> TraerTodos_PorFKs(Object pObject, String SecuenciaSQL) throws  cDatosException{
+    public ArrayList<Object> TraerTodos_PorFKs(Object pObject, String SecuenciaSQL) throws cDatosException {
 
         ArrayList<Object> retornoLista = new ArrayList<Object>();
 
         try {
-           super.abrirConexion();
+            super.abrirConexion();
             Statement st = super.getDistribuidora().createStatement();
             System.out.println(SecuenciaSQL);
 
             ResultSet rs = st.executeQuery(SecuenciaSQL);
             while (rs.next()) {
-              Object  retorno = SetValorObjeto(pObject, rs);
-            retornoLista.add(retorno);
+                Object retorno = SetValorObjeto(pObject, rs);
+                retornoLista.add(retorno);
             }
             cerrarConexion();
 

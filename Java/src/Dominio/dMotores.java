@@ -33,7 +33,7 @@ public class dMotores {
     public void eliminar(motores pmotores) throws cDatosException {
         if (pmotores != null) {
             pGenerico pPersistencia = new pGenerico();
-            pPersistencia.eliminar(pmotores);
+            pPersistencia.eliminar_Logico(pmotores);
         }
     }
 
@@ -70,7 +70,7 @@ public class dMotores {
         motores auxMotores = new motores();
 
         pGenerico persistencia = new pGenerico();
-        coleccion = (ArrayList) persistencia.TraerTodos(auxMotores);
+        coleccion = (ArrayList) persistencia.TraerTodosSinEliminados(auxMotores);
         if (coleccion != null) {
             return coleccion;
         } else {

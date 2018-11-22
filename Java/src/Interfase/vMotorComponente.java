@@ -22,10 +22,10 @@ import Dominio.dEmpresa;
  */
 public class vMotorComponente extends javax.swing.JFrame {
 
-    private int idMot=-1;
-    private int idComp=-1;
-    private int idMotMC=-1;
-    private int idCompMC=-1;
+    private int idMot = -1;
+    private int idComp = -1;
+    private int idMotMC = -1;
+    private int idCompMC = -1;
     private ArrayList<motores> ListaMotores = new ArrayList<motores>();
     private ArrayList<componente> ListaComponente = new ArrayList<componente>();
     private ArrayList<motorcomponente> ListaMotorComponente = new ArrayList<motorcomponente>();
@@ -42,7 +42,6 @@ public class vMotorComponente extends javax.swing.JFrame {
         initComponents();
         dEmpresa = pEmp;
     }
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,6 +60,8 @@ public class vMotorComponente extends javax.swing.JFrame {
         tblMotores = new javax.swing.JTable();
         btnEliminar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtCantidad = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -173,24 +174,33 @@ public class vMotorComponente extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Cantidad");
+
+        txtCantidad.setText("1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(btnAgregar)
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
             .addGroup(layout.createSequentialGroup()
                 .addGap(213, 213, 213)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEliminar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(btnAgregar)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,7 +211,11 @@ public class vMotorComponente extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAgregar)
@@ -217,6 +231,31 @@ public class vMotorComponente extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
+        motorcomponente unMotorComponente;
+        motores unMotor;
+        componente unComponente;
+
+        try {
+            //Verifica el ingreso de los datos requeridos
+
+            unMotorComponente = new motorcomponente();
+            unMotor = new motores();
+            unComponente = new componente();
+
+            unMotor.setIdMotor(idMot);
+            unComponente.setIdComp(idComp);
+            unMotorComponente.setIdMotorMotorComponente(unMotor);
+            unMotorComponente.setIdComponenteMotorComponente(unComponente);
+            unMotorComponente.setCantidadMotorComponente(Integer.parseInt(this.txtCantidad.getText()));
+
+            dEmpresa.agregarMotorComponente(unMotorComponente);
+            JOptionPane.showMessageDialog(this, "Se ha dado de alta correctamente", "Cliente", JOptionPane.INFORMATION_MESSAGE);
+
+            ReiniciarControles();
+
+        } catch (Common.cDatosException e) {
+            JOptionPane.showMessageDialog(this, e.toString(), "Cliente", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -224,9 +263,7 @@ public class vMotorComponente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        this.CargarDatosComponente();
-        this.CargarDatosMotor();
-        this.CargarDatosMotorComponente();
+        ReiniciarControles();
     }//GEN-LAST:event_formWindowOpened
 
     private void tblMotoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMotoresMouseClicked
@@ -257,7 +294,7 @@ public class vMotorComponente extends javax.swing.JFrame {
     }//GEN-LAST:event_tblComponenteMouseClicked
 
     private void tblMotorComponenteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMotorComponenteMouseClicked
- int fila = this.tblMotorComponente.getSelectedRow();
+        int fila = this.tblMotorComponente.getSelectedRow();
 
         if (fila >= 0) {
             DefaultTableModel tm = (DefaultTableModel) this.tblMotorComponente.getModel();
@@ -308,18 +345,20 @@ public class vMotorComponente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblComponente;
     private javax.swing.JTable tblMotorComponente;
     private javax.swing.JTable tblMotores;
+    private javax.swing.JTextField txtCantidad;
     // End of variables declaration//GEN-END:variables
 
     public void CargarDatosMotor() {
         ArrayList<motores> coleccion = new ArrayList<motores>();
         try {
-            coleccion = empresa.buscarTodosMotores();
+            coleccion = dEmpresa.buscarTodosMotoresSinEliminados();
             ListaMotores = coleccion;
             Iterator<motores> it = coleccion.iterator();
             while (it.hasNext()) {
@@ -336,14 +375,14 @@ public class vMotorComponente extends javax.swing.JFrame {
     public void CargarDatosComponente() {
         ArrayList<componente> coleccion = new ArrayList<componente>();
         try {
-            coleccion = empresa.buscarTodosComponentes();
+            coleccion = dEmpresa.buscarTodosComponentesSinEliminados();
             ListaComponente = coleccion;
             Iterator<componente> it = coleccion.iterator();
             while (it.hasNext()) {
                 componente unComponente = it.next();
                 DefaultTableModel tm = (DefaultTableModel) tblComponente.getModel();
                 tm.addRow(new Object[]{new Integer(unComponente.getIdComp()), new String(unComponente.getDescripcionComp()), new Integer(unComponente.getCantStockComp())});
-                tblMotores.setModel(tm);
+                tblComponente.setModel(tm);
             }
         } catch (Common.cDatosException e) {
             JOptionPane.showMessageDialog(this, e.toString(), "Motor Componente", JOptionPane.ERROR_MESSAGE);
@@ -353,18 +392,41 @@ public class vMotorComponente extends javax.swing.JFrame {
     public void CargarDatosMotorComponente() {
         ArrayList<motorcomponente> coleccion = new ArrayList<motorcomponente>();
         try {
-            coleccion = empresa.buscarTodosMotoresComponentes();
+            coleccion = dEmpresa.buscarTodosMotoresComponentes();
             ListaMotorComponente = coleccion;
             Iterator<motorcomponente> it = coleccion.iterator();
             while (it.hasNext()) {
                 motorcomponente unMotorComponente = it.next();
-                DefaultTableModel tm = (DefaultTableModel) tblComponente.getModel();
-                tm.addRow(new Object[]{new Integer(unMotorComponente.getIdMotorMotorComponente()), new Integer(unMotorComponente.getIdComponenteMotorComponente())});
-                tblMotores.setModel(tm);
+                DefaultTableModel tm = (DefaultTableModel) tblMotorComponente.getModel();
+                tm.addRow(new Object[]{new Integer(unMotorComponente.getIdMotorMotorComponente().getIdMotor()), new Integer(unMotorComponente.getIdComponenteMotorComponente().getIdComp())});
+                tblMotorComponente.setModel(tm);
             }
         } catch (Common.cDatosException e) {
             JOptionPane.showMessageDialog(this, e.toString(), "Motor Componente", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    public void LimpiarListMotorComponente() {
+        DefaultTableModel dm = (DefaultTableModel) this.tblMotorComponente.getModel();
+        dm.setRowCount(0);
+        this.tblMotorComponente.setModel(dm);//limpia el jtable
+    }
+    public void LimpiarListComponente() {
+        DefaultTableModel dm = (DefaultTableModel) this.tblComponente.getModel();
+        dm.setRowCount(0);
+        this.tblComponente.setModel(dm);//limpia el jtable
+    }
+    public void LimpiarListMotor() {
+        DefaultTableModel dm = (DefaultTableModel) this.tblMotores.getModel();
+        dm.setRowCount(0);
+        this.tblMotores.setModel(dm);//limpia el jtable
+    }
+    private void ReiniciarControles() {
+        CargarDatosMotor();
+        CargarDatosComponente();
+        CargarDatosMotorComponente();
+        LimpiarListComponente();
+        LimpiarListMotor();
+        LimpiarListMotorComponente();
     }
 
 }

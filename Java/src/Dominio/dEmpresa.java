@@ -317,7 +317,7 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
     public motorcomponente buscarMotorComponente(motorcomponente pMotorComponente) throws cDatosException {
         motorcomponente unMotorComponente = new motorcomponente();
         if (pMotorComponente != null) {
-            if (pMotorComponente.getIdMotorMotorComponente()!= 0) {
+            if (pMotorComponente.getIdMotorMotorComponente().getIdMotor()!= 0) {
                 try {
                     unMotorComponente = empresaMotorComponente.Buscar(pMotorComponente);
                 } catch (cDatosException ex) {

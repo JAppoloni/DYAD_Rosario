@@ -284,7 +284,7 @@ public class vMotor extends javax.swing.JFrame {
                 unMotor.setNombreMotor(nom);
                 dEmpresa.modificarMotor(unMotor);
                 ReiniciarControles();
-                JOptionPane.showMessageDialog(this, "Se ha modificado correctamente", "Mootor", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Se ha modificado correctamente", "Motor", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (cDatosException e) {
                 JOptionPane.showMessageDialog(this, e.toString(), "Motor", JOptionPane.ERROR_MESSAGE);

@@ -11,32 +11,23 @@ package Common;
  */
 public class motorcomponente {
 
-    private int idMotorMotorComponente;
-    private int idComponenteMotorComponente;
+    private motores idMotorMotorComponente;
+    private componente idComponenteMotorComponente;
     private int cantidadMotorComponente;
 
-    public motorcomponente(int idMotorMotorComponente, int idComponenteMotorComponente, int cantidadMotorComponente) {
-        this.idMotorMotorComponente = idMotorMotorComponente;
-        this.idComponenteMotorComponente = idComponenteMotorComponente;
-        this.cantidadMotorComponente = cantidadMotorComponente;
-    }
-
-    public motorcomponente() {
-    }
-    
-    public int getIdMotorMotorComponente() {
+    public motores getIdMotorMotorComponente() {
         return idMotorMotorComponente;
     }
 
-    public void setIdMotorMotorComponente(int idMotorMotorComponente) {
+    public void setIdMotorMotorComponente(motores idMotorMotorComponente) {
         this.idMotorMotorComponente = idMotorMotorComponente;
     }
 
-    public int getIdComponenteMotorComponente() {
+    public componente getIdComponenteMotorComponente() {
         return idComponenteMotorComponente;
     }
 
-    public void setIdComponenteMotorComponente(int idComponenteMotorComponente) {
+    public void setIdComponenteMotorComponente(componente idComponenteMotorComponente) {
         this.idComponenteMotorComponente = idComponenteMotorComponente;
     }
 
@@ -47,5 +38,16 @@ public class motorcomponente {
     public void setCantidadMotorComponente(int cantidadMotorComponente) {
         this.cantidadMotorComponente = cantidadMotorComponente;
     }
+
+    public motorcomponente(motores idMotorMotorComponente, componente idComponenteMotorComponente, int cantidadMotorComponente) {
+        this.idMotorMotorComponente = idMotorMotorComponente;
+        this.idComponenteMotorComponente = idComponenteMotorComponente;
+        this.cantidadMotorComponente = cantidadMotorComponente;
+    }
+    public motorcomponente() {
+    }
+    
+
+ 
     
 }
