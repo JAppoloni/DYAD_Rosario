@@ -7,8 +7,10 @@ import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class pGenerico extends pPersistencia {
 
@@ -56,7 +58,7 @@ public class pGenerico extends pPersistencia {
         }
         return null;
     }
-    
+
     public static Object CreateInstanceConGET(Field pObject) {
         Object myObject = new Object();
         try {
@@ -200,18 +202,28 @@ public class pGenerico extends pPersistencia {
     }
 
     public static java.util.Date pasar_Fecha_JAVA(String uDate) {
-        java.util.Date sDate = new java.util.Date(uDate);
-        return sDate;
+        try {
+
+            DateFormat srcDf = new SimpleDateFormat("yyyy-MM-dd");
+
+            Date date = srcDf.parse(uDate);
+
+            return date;
+
+        } catch (Exception e) {
+            System.out.println("ERORR:        " + e);
+        }
+        return null;
     }
 
-    public static String pasar_SQL_Fecha(String utilDate) {
+    public static String pasar_SQL_Fecha(java.util.Date utilDate) {
         SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd");
         return df.format(utilDate);
     }
 
     public static String PasarAString(Object pObject) {//Cambiar por fecha
         if (pObject.getClass().equals(java.util.Date.class)) {
-            pasar_SQL_Fecha(pObject.toString());
+            pObject = pasar_SQL_Fecha((Date) pObject);
         }
         return EsString(pObject) ? "'" + pObject.toString() + "'" : pObject.toString();
     }
@@ -281,12 +293,11 @@ public class pGenerico extends pPersistencia {
             String value = " VALUES (";
 
             for (Field property : pObject.getClass().getDeclaredFields()) {
-                if (property.getType().equals(java.util.List.class
-                )) {
+                if (property.getType().equals(java.util.List.class)) {
                     continue;
                 }
                 Object Valor = DevolverValor(pObject, property, false);
-                if (Valor == null) {
+                if (Valor == null || Valor.equals(0)) {
                     continue;
                 }
 
