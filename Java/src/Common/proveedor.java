@@ -11,17 +11,17 @@ package Common;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class proveedor {
-private int idProvedor;
+private int idProveedor;
 private String nombreProveedor;
 private String descProveedor;
 private boolean IsDeleted;
 
-    public int getIdProvedor() {
-        return idProvedor;
+    public int getIdProveedor() {
+        return idProveedor;
     }
 
-    public void setIdProvedor(int idProvedor) {
-        this.idProvedor = idProvedor;
+    public void setIdProveedor(int idProveedor) {
+        this.idProveedor = idProveedor;
     }
 
     public String getNombreProveedor() {
@@ -40,20 +40,22 @@ private boolean IsDeleted;
         this.descProveedor = descProveedor;
     }
 
-    public boolean isIsDeletedProveedor() {
+    public boolean isIsDeleted() {
         return IsDeleted;
     }
 
-    public void setIsDeletedProveedor(boolean IsDeletedProveedor) {
+    public void setIsDeleted(boolean IsDeleted) {
         this.IsDeleted = IsDeleted;
     }
 
-public proveedor(int idProvedor, String nombreProveedor, String descProveedor, boolean IsDeleted) {
-        this.idProvedor = idProvedor;
+    public proveedor(int idProveedor, String nombreProveedor, String descProveedor, boolean IsDeleted) {
+        this.idProveedor = idProveedor;
         this.nombreProveedor = nombreProveedor;
         this.descProveedor = descProveedor;
         this.IsDeleted = IsDeleted;
     }
+
+    
 
     public proveedor() {
     }

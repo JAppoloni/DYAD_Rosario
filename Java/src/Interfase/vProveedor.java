@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package Interfase;
+
+import Common.Utilidades;
 import Common.cDatosException;
 import Common.motores;
 import Common.proveedor;
@@ -12,24 +14,28 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author pc18lab
  */
 public class vProveedor extends javax.swing.JFrame {
-private ArrayList<proveedor> ListaProveedores = new ArrayList<proveedor>();
+
+    private ArrayList<proveedor> ListaProveedores = new ArrayList<proveedor>();
+
     /**
      * Creates new form vProveedor
      */
     public vProveedor() {
         initComponents();
     }
-    
+
     public vProveedor(dEmpresa pEmp) {
         initComponents();
         dEmpresa = pEmp;
     }
     private dEmpresa dEmpresa;
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,11 +60,16 @@ private ArrayList<proveedor> ListaProveedores = new ArrayList<proveedor>();
         txtNomEli = new javax.swing.JTextField();
         btnModificar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblEliMot = new javax.swing.JTable();
+        tblEliProv = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         txtDesEli = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +148,7 @@ private ArrayList<proveedor> ListaProveedores = new ArrayList<proveedor>();
             }
         });
 
-        tblEliMot.setModel(new javax.swing.table.DefaultTableModel(
+        tblEliProv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -153,7 +164,12 @@ private ArrayList<proveedor> ListaProveedores = new ArrayList<proveedor>();
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblEliMot);
+        tblEliProv.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEliProvMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblEliProv);
 
         jLabel6.setText("Descripcion:");
 
@@ -240,18 +256,18 @@ private ArrayList<proveedor> ListaProveedores = new ArrayList<proveedor>();
         int num;
 
         try {
-                    //Si el tipo no ha sido ingresado lo crea y le pasa los datos para ingresarlo
-                    unProveedor = new proveedor();
-                    unProveedor.setNombreProveedor(this.txtNomProv.getText());
-                    unProveedor.setDescProveedor(this.txtDescProv.getText());
-                    dEmpresa.agregarProveedor(unProveedor);
-                    JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Proveedor", JOptionPane.INFORMATION_MESSAGE);
+            if (this.txtNomProv.getText().length() > 0 && this.txtDescProv.getText().length() > 0 && !Utilidades.isNumeric(this.txtDescProv.getText()) && !Utilidades.isNumeric(this.txtNomProv.getText())) {
+                unProveedor = new proveedor();
+                unProveedor.setNombreProveedor(this.txtNomProv.getText());
+                unProveedor.setDescProveedor(this.txtDescProv.getText());
+                dEmpresa.agregarProveedor(unProveedor);
+                JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Proveedor", JOptionPane.INFORMATION_MESSAGE);
 
-                    ReiniciarControles();
+                ReiniciarControles();
+            } else {
+                JOptionPane.showMessageDialog(this, "Datos ingresados incorrectamente", "Proveedor", JOptionPane.INFORMATION_MESSAGE);
+            }
 
-                
-
-            
         } catch (Common.cDatosException e) {
             JOptionPane.showMessageDialog(this, e.toString(), "Proveedor", JOptionPane.ERROR_MESSAGE);
         }
@@ -263,7 +279,7 @@ private ArrayList<proveedor> ListaProveedores = new ArrayList<proveedor>();
         try {
             if (!this.txtIdEli.getText().equals("")) {
                 num = Integer.parseInt(this.txtIdEli.getText());
-                unProveedor.setIdProvedor(num);
+                unProveedor.setIdProveedor(num);
                 dEmpresa.eliminarProveedor(unProveedor);
                 JOptionPane.showMessageDialog(this, "Se dado eliminado correctamente", "Proveedor", JOptionPane.INFORMATION_MESSAGE);
                 ReiniciarControles();
@@ -283,8 +299,9 @@ private ArrayList<proveedor> ListaProveedores = new ArrayList<proveedor>();
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         if (!this.txtNomEli.getText().equals("")
-            && !this.txtIdEli.getText().equals("")
-                && !this.txtDesEli.equals("")) {
+                && !this.txtIdEli.getText().equals("")
+                && !this.txtDesEli.equals("")
+                && !Utilidades.isNumeric(this.txtDescProv.getText()) && !Utilidades.isNumeric(this.txtNomProv.getText())) {
 
             try {
 
@@ -296,13 +313,13 @@ private ArrayList<proveedor> ListaProveedores = new ArrayList<proveedor>();
                 num = Integer.parseInt(this.txtIdEli.getText());
                 nom = this.txtNomEli.getText();
                 desc = this.txtDesEli.getText();
-                unProveedor.setIdProvedor(num);
+                unProveedor.setIdProveedor(num);
                 unProveedor.setNombreProveedor(nom);
                 unProveedor.setDescProveedor(desc);
                 dEmpresa.modificarProveedor(unProveedor);
                 ReiniciarControles();
                 JOptionPane.showMessageDialog(this, "Se ha modificado correctamente", "Proveedor", JOptionPane.INFORMATION_MESSAGE);
-
+                
             } catch (cDatosException e) {
                 JOptionPane.showMessageDialog(this, e.toString(), "Proveedor", JOptionPane.ERROR_MESSAGE);
             }
@@ -315,6 +332,34 @@ private ArrayList<proveedor> ListaProveedores = new ArrayList<proveedor>();
     private void txtNomProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomProvActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomProvActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.txtIdEli.setEditable(false);
+        ReiniciarControles();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void tblEliProvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEliProvMouseClicked
+        int fila = this.tblEliProv.getSelectedRow();
+
+        if (fila >= 0) {
+            DefaultTableModel tm = (DefaultTableModel) this.tblEliProv.getModel();
+            int numFilas = tm.getRowCount();
+            if ((fila < numFilas) && (fila >= 0)) {
+
+                // tomo los datos de los clientes existentes
+                String Id = String.valueOf(tm.getValueAt(fila, 0));
+                String NomProv = (String) tm.getValueAt(fila, 1);
+                String DescProv = (String) tm.getValueAt(fila, 2);
+                
+
+                this.txtIdEli.setText(Id);
+                this.txtNomEli.setText(NomProv);
+                this.txtDesEli.setText(DescProv);
+                
+
+            }
+        }
+    }//GEN-LAST:event_tblEliProvMouseClicked
 
     /**
      * @param args the command line arguments
@@ -350,16 +395,17 @@ private ArrayList<proveedor> ListaProveedores = new ArrayList<proveedor>();
             }
         });
     }
+
     private void ReiniciarControles() {
         this.LimpiarCampos();
         this.LimpiarList();
         this.CargarDatosList();
     }
-    
+
     public void LimpiarList() {
-        DefaultTableModel dm = (DefaultTableModel) this.tblEliMot.getModel();
+        DefaultTableModel dm = (DefaultTableModel) this.tblEliProv.getModel();
         dm.setRowCount(0);
-        this.tblEliMot.setModel(dm);//limpia el jtable
+        this.tblEliProv.setModel(dm);//limpia el jtable
     }
 
     public void CargarDatosList() {
@@ -367,26 +413,26 @@ private ArrayList<proveedor> ListaProveedores = new ArrayList<proveedor>();
         try {
             coleccion = dEmpresa.buscarTodosProveedorSinEliminados();
             ListaProveedores = coleccion;
-            
+
             Iterator<proveedor> it = coleccion.iterator();
             while (it.hasNext()) {
                 proveedor unProveedor = it.next();
-                DefaultTableModel tm = (DefaultTableModel) tblEliMot.getModel();
-                tm.addRow(new Object[]{new Integer(unProveedor.getIdProvedor()),
-                new String(unProveedor.getNombreProveedor()),
-                new String(unProveedor.getDescProveedor())});
-                tblEliMot.setModel(tm);
+                DefaultTableModel tm = (DefaultTableModel) tblEliProv.getModel();
+                tm.addRow(new Object[]{new Integer(unProveedor.getIdProveedor()),
+                    new String(unProveedor.getNombreProveedor()),
+                    new String(unProveedor.getDescProveedor())});
+                tblEliProv.setModel(tm);
             }
         } catch (Common.cDatosException e) {
-            JOptionPane.showMessageDialog(this, e.toString(), "Motor", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.toString(), "Proveedor", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void LimpiarCampos() {
-        
+
         this.txtNomProv.setText("");
         this.txtDescProv.setText("");
-        
+
         this.txtIdEli.setText("");
         this.txtNomEli.setText("");
         this.txtDesEli.setText("");
@@ -405,7 +451,7 @@ private ArrayList<proveedor> ListaProveedores = new ArrayList<proveedor>();
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable tblEliMot;
+    private javax.swing.JTable tblEliProv;
     private javax.swing.JTextField txtDesEli;
     private javax.swing.JTextField txtDescProv;
     private javax.swing.JTextField txtIdEli;

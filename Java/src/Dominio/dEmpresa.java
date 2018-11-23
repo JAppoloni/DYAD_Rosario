@@ -399,7 +399,7 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
     public proveedor buscarProveedor(proveedor pProveedor) throws cDatosException {
         proveedor unProveedor = new proveedor();
         if (pProveedor != null) {
-            if (pProveedor.getIdProvedor()!= 0) {
+            if (pProveedor.getIdProveedor()!= 0) {
                 try {
                     unProveedor = empresaProveedor.buscar(pProveedor);
                 } catch (cDatosException ex) {
@@ -688,7 +688,7 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
     public proveedorcomponente buscarProveedorComponente(proveedorcomponente pProveedorComponente) throws cDatosException {
         proveedorcomponente unProveedorComponente = new proveedorcomponente();
         if (pProveedorComponente != null) {
-            if (pProveedorComponente.getIdProveedorProveedorComponente().getIdProvedor() != 0 && pProveedorComponente.getIdComponenteProveedorComponente().getIdComp() != 0 ) {
+            if (pProveedorComponente.getIdProveedorProveedorComponente().getIdProveedor() != 0 && pProveedorComponente.getIdComponenteProveedorComponente().getIdComp() != 0 ) {
                 try {
                     unProveedorComponente= empresaProveedorComponente.buscar(pProveedorComponente);
                 } catch (cDatosException ex) {
