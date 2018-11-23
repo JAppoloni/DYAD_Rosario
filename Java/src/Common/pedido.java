@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class pedido {
 private int idPedido;
-private cliente idCliente;
+private cliente idClientePedido;
 private Date fechaDeEntregaPedido;
 private boolean isDeleted;
 private motores idMotorPedido;
@@ -27,12 +27,12 @@ private motores idMotorPedido;
         this.idPedido = idPedido;
     }
 
-    public cliente getIdCliente() {
-        return idCliente;
+    public cliente getIdClientePedido() {
+        return idClientePedido;
     }
 
-    public void setIdCliente(cliente idCliente) {
-        this.idCliente = idCliente;
+    public void setIdClientePedido(cliente idClientePedido) {
+        this.idClientePedido = idClientePedido;
     }
 
     public Date getFechaDeEntregaPedido() {
@@ -43,11 +43,11 @@ private motores idMotorPedido;
         this.fechaDeEntregaPedido = fechaDeEntregaPedido;
     }
 
-    public boolean isIsDeletedPedido() {
+    public boolean isIsDeleted() {
         return isDeleted;
     }
 
-    public void setIsDeletedPedido(boolean isDeleted) {
+    public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
@@ -59,14 +59,15 @@ private motores idMotorPedido;
         this.idMotorPedido = idMotorPedido;
     }
 
-    public pedido(int idPedido, cliente idCliente, Date fechaDeEntregaPedido, boolean isDeletedPedido, motores idMotorPedido) {
+    public pedido(int idPedido, cliente idClientePedido, Date fechaDeEntregaPedido, boolean isDeleted, motores idMotorPedido) {
         this.idPedido = idPedido;
-        this.idCliente = idCliente;
+        this.idClientePedido = idClientePedido;
         this.fechaDeEntregaPedido = fechaDeEntregaPedido;
         this.isDeleted = isDeleted;
         this.idMotorPedido = idMotorPedido;
     }
 
+    
     public pedido() {
     }
     

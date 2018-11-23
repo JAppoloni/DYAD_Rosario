@@ -402,7 +402,7 @@ public class vPedido extends javax.swing.JFrame {
                 unPedido.setIdPedido(num);
                 unPedido.setFechaDeEntregaPedido(fech);
                 unCliente.setIdClie(cli);
-                unPedido.setIdCliente(dEmpresa.buscarCliente(unCliente));
+                unPedido.setIdClientePedido(dEmpresa.buscarCliente(unCliente));
                 unMotor.setIdMotor(mot);
                 unPedido.setIdMotorPedido(dEmpresa.buscarMotor(unMotor));
                 dEmpresa.modificarPedido(unPedido);
@@ -436,7 +436,7 @@ public class vPedido extends javax.swing.JFrame {
             unCliente = (cliente) this.jcbCliPed.getSelectedItem();
             unMotor = (motores) this.jcbMotPed.getSelectedItem();
 
-            unPedido.setIdCliente(unCliente);
+            unPedido.setIdClientePedido(unCliente);
             unPedido.setIdMotorPedido(unMotor);
             unPedido.setFechaDeEntregaPedido(this.jdcFchPed.getDate());
            
@@ -527,7 +527,7 @@ public class vPedido extends javax.swing.JFrame {
                 pedido unPedido = it.next();
                 DefaultTableModel tm = (DefaultTableModel) tblPed.getModel();
                 tm.addRow(new Object[]{new Integer(unPedido.getIdPedido()),
-                    new Integer(unPedido.getIdCliente().getIdClie()),
+                    new Integer(unPedido.getIdClientePedido().getIdClie()),
                     new Integer(unPedido.getIdMotorPedido().getIdMotor()),
                     new String(Utilidades.convertirDateUtilAString(unPedido.getFechaDeEntregaPedido()))});
                 tblPed.setModel(tm);
@@ -566,7 +566,7 @@ public class vPedido extends javax.swing.JFrame {
         try {
             coleccion = dEmpresa.buscarTodosMotoresSinEliminados();
             for (motores mot : coleccion) {
-                modelo.addElement(String.valueOf(mot.getIdMotor()));
+                modelo.addElement(mot);
             }
         } catch (Common.cDatosException e) {
             JOptionPane.showMessageDialog(this, e.toString(), "Motor", JOptionPane.ERROR_MESSAGE);

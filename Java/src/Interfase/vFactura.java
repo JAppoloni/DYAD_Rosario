@@ -91,6 +91,11 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
                 return types [columnIndex];
             }
         });
+        tblIngPed.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblIngPedMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblIngPed);
 
         jLabel5.setText("Id Pedido:");
@@ -262,14 +267,14 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
 
         try {
             //Verifica el ingreso de los datos requeridos
-            if (this.txtIdPedido.getText().length() > 0) {
+            if (this.txtIdPedido.getText().length() > 0 && this.jdcFechaPago.getDate().after(Utilidades.fechaDeHoy())||this.jdcFechaPago.getDate().equals(Utilidades.fechaDeHoy())) {
                 String ID = this.txtIdPedido.getText().toString();
                 //Verifico que hayan ingresado un número
                 if (Utilidades.isNumeric(ID) == true) {
                     //Busco si el tipo ya no ha sido ingresado
                     unaFactura = new factura();
                     num = Integer.parseInt(this.txtIdPedido.getText());
-                     unPedido.setIdPedido(num);
+                    unPedido.setIdPedido(num);
                     unaFactura.setIdPedidoFactura(dEmpresa.buscarPedido(unPedido));
                     unaFactura.setFechaPagoFactura(this.jdcFechaPago.getDate());
                    
@@ -350,8 +355,28 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.txtIdEliminar.setEditable(false);
+        this.txtIdPedido.setEditable(false);
         ReiniciarControles();
     }//GEN-LAST:event_formWindowOpened
+
+    private void tblIngPedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblIngPedMouseClicked
+        int fila = this.tblIngPed.getSelectedRow();
+
+        if (fila >= 0) {
+            DefaultTableModel tm = (DefaultTableModel) this.tblIngPed.getModel();
+            int numFilas = tm.getRowCount();
+            if ((fila < numFilas) && (fila >= 0)) {
+
+                // tomo los datos de los tipos existentes
+                String id = String.valueOf(tm.getValueAt(fila, 0));
+                
+
+                this.txtIdPedido.setText(id);
+                
+
+            }
+        }
+    }//GEN-LAST:event_tblIngPedMouseClicked
 
     /**
      * @param args the command line arguments
@@ -410,7 +435,7 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
                 pedido unPedido = it.next();
                 DefaultTableModel tm = (DefaultTableModel) tblIngPed.getModel();
                 tm.addRow(new Object[]{new Integer(unPedido.getIdPedido()),
-                new Integer(unPedido.getIdCliente().getIdClie()),
+                new Integer(unPedido.getIdClientePedido().getIdClie()),
                 new String(Utilidades.convertirDateUtilAString(unPedido.getFechaDeEntregaPedido())),
                 new Integer(unPedido.getIdMotorPedido().getIdMotor())});
                 

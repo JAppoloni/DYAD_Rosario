@@ -16,6 +16,11 @@ public class motores {
         return idMotor;
     }
 
+    @Override
+    public String toString() {
+        return idMotor + " - " + nombreMotor ;
+    }
+
     public void setIdMotor(int idMotor) {
         this.idMotor = idMotor;
     }

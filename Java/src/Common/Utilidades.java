@@ -49,5 +49,10 @@ public class Utilidades {
        SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd");
        return df.format(utilDate);
     }
+    
+    public static java.util.Date  fechaDeHoy(){
+        java.util.Date fecha = new Date();
+        return fecha;
+    }
 }
 

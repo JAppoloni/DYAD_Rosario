@@ -8,7 +8,10 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Common.cDatosException;
-
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class vCliente extends javax.swing.JFrame {
 
@@ -365,10 +368,12 @@ public class vCliente extends javax.swing.JFrame {
 
         try {
             //Verifica el ingreso de los datos requeridos
-            if (this.txtIdCli.getText().length() > 0 && this.txtNomEmpCli.getText().length() > 0 && this.txtNomFanCli.getText().length() > 0 && this.txtPaisCli.getText().length() > 0 && this.txtDirCli.getText().length() > 0 && this.txtTelCli.getText().length() > 0) {
+            if (this.txtIdCli.getText().length() > 0 && this.txtNomEmpCli.getText().length() > 0 && this.txtNomFanCli.getText().length() > 0 && this.txtPaisCli.getText().length() > 0 && this.txtDirCli.getText().length() > 0 && this.txtTelCli.getText().length() > 0
+                && !Utilidades.isNumeric(this.txtNomEmpCli.getText()) && !Utilidades.isNumeric(this.txtNomFanCli.getText()) && !Utilidades.isNumeric(this.txtPaisCli.getText())) {
+
                 String ID = this.txtIdCli.getText().toString();
                 //Verifico que hayan ingresado un número
-                if (Utilidades.isNumeric(ID) == true) {
+                if (Utilidades.isNumeric(ID) == true ) {
                     //Busco si el cliente ya no ha sido ingresado
                     unCliente = new cliente();
                     num = Integer.parseInt(this.txtIdCli.getText());
@@ -397,8 +402,9 @@ public class vCliente extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "El número del código del cliente debe ser un número", "Cliente", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Datos ingresados incorrectamente", "Accion", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error al ingresar campos", "Cliente", JOptionPane.INFORMATION_MESSAGE);
             }
+
         } catch (Common.cDatosException e) {
             JOptionPane.showMessageDialog(this, e.toString(), "Cliente", JOptionPane.ERROR_MESSAGE);
         }
@@ -468,12 +474,8 @@ public class vCliente extends javax.swing.JFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
-        if (!this.txtIdCli1.getText().equals("")
-                && !this.txtNomEmpCli1.getText().equals("")
-                && !this.txtNomFanCli1.getText().equals("")
-                && !this.txtPaisCli1.getText().equals("")
-                && !this.txtDirCli1.getText().equals("")
-                && !this.txtTelCli1.getText().equals("")) {
+        if (!this.txtIdCli1.getText().equals("")&& !this.txtNomEmpCli1.getText().equals("")&& !this.txtNomFanCli1.getText().equals("")&& !this.txtPaisCli1.getText().equals("")&& !this.txtDirCli1.getText().equals("") && !this.txtTelCli1.getText().equals("")
+                && !Utilidades.isNumeric(this.txtNomEmpCli1.getText()) && !Utilidades.isNumeric(this.txtNomFanCli1.getText()) && !Utilidades.isNumeric(this.txtPaisCli1.getText())) {
 
             try {
 

@@ -16,7 +16,7 @@ private int idClie;
 
     @Override
     public String toString() {
-        return  "idClie=" + idClie + ", nombreEmpresaClie=" + nombreEmpresaClie ;
+        return  idClie + " - " + nombreEmpresaClie ;
     }
 private String nombreEmpresaClie;
 private String nombreFantasiaClie;

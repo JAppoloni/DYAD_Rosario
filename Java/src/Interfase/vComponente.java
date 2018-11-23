@@ -323,11 +323,12 @@ public class vComponente extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
         componente unComponente;
-        int num;
+        int num; 
 
         try {
             //Verifica el ingreso de los datos requeridos
-            if (this.txtDescComp.getText().length() > 0 && this.txtCostoComp.getText().length() > 0 && this.txtCantStockComp.getText().length() > 0 && this.txtCantMinStockComp.getText().length() > 0) {
+            if (this.txtDescComp.getText().length() > 0 && this.txtCostoComp.getText().length() > 0 && this.txtCantStockComp.getText().length() > 0 && this.txtCantMinStockComp.getText().length() > 0
+                    && !Utilidades.isNumeric(this.txtDescComp.getText()) && Utilidades.isNumeric(this.txtCantMinStockComp.getText())&& Utilidades.isNumeric(this.txtCantStockComp.getText()) && Utilidades.isNumeric(this.txtCostoComp.getText())) {
 
                 //Busco si el componente ya no ha sido ingresado
                 unComponente = new componente();
@@ -411,11 +412,8 @@ public class vComponente extends javax.swing.JFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
-        if (!this.txtIdComp1.getText().equals("")
-                && !this.txtDescComp1.getText().equals("")
-                && !this.txtCostoComp1.getText().equals("")
-                && !this.txtCantStockComp1.getText().equals("")
-                && !this.txtCantMinStockComp1.getText().equals("")) {
+        if (!this.txtIdComp1.getText().equals("") && !this.txtDescComp1.getText().equals("")&& !this.txtCostoComp1.getText().equals("")&& !this.txtCantStockComp1.getText().equals("")&& !this.txtCantMinStockComp1.getText().equals("")
+            &&Utilidades.isNumeric(this.txtIdComp1.getText())&& !Utilidades.isNumeric(this.txtDescComp1.getText()) && Utilidades.isNumeric(this.txtCantMinStockComp1.getText())&& Utilidades.isNumeric(this.txtCantStockComp1.getText()) && Utilidades.isNumeric(this.txtCostoComp1.getText())) {
 
             try {
                 componente unComponente = new componente();
