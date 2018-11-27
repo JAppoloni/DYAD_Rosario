@@ -33,7 +33,7 @@ public class dProveedorComponente {
     public void eliminar(proveedorcomponente pproveedorcomponente) throws cDatosException {
         if (pproveedorcomponente != null) {
             pGenerico pPersistencia = new pGenerico();
-            pPersistencia.eliminar(pproveedorcomponente);
+            pPersistencia.eliminar_Logico(pproveedorcomponente);
         }
     }
 

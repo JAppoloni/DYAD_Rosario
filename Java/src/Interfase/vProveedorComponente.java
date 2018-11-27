@@ -5,13 +5,24 @@
  */
 package Interfase;
 
+import Common.Utilidades;
+import Common.componente;
+import Common.proveedor;
+import Common.proveedorcomponente;
 import Dominio.dEmpresa;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class vProveedorComponente extends javax.swing.JFrame {
+
+    private ArrayList<proveedorcomponente> ListaProvComp = new ArrayList<proveedorcomponente>();
 
     /**
      * Creates new form vProveedorComponente
@@ -20,8 +31,11 @@ public class vProveedorComponente extends javax.swing.JFrame {
         initComponents();
     }
 
-    vProveedorComponente(dEmpresa empresa) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private dEmpresa dEmpresa;
+
+    public vProveedorComponente(dEmpresa pEmp) {
+        initComponents();
+        dEmpresa = pEmp;
     }
 
     /**
@@ -38,8 +52,8 @@ public class vProveedorComponente extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jcbProv = new javax.swing.JComboBox<>();
+        jcbComp = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         btnEliminar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -50,6 +64,11 @@ public class vProveedorComponente extends javax.swing.JFrame {
         tblEliProvCom = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -62,9 +81,9 @@ public class vProveedorComponente extends javax.swing.JFrame {
 
         jLabel5.setText("Id Componente:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbProv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbComp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -76,13 +95,12 @@ public class vProveedorComponente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(70, 70, 70)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(296, Short.MAX_VALUE))
+                        .addComponent(jcbComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(80, 80, 80)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jcbProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAgregar)
@@ -94,11 +112,11 @@ public class vProveedorComponente extends javax.swing.JFrame {
                 .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnAgregar)
                 .addContainerGap(410, Short.MAX_VALUE))
@@ -216,20 +234,26 @@ public class vProveedorComponente extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        proveedor unProveedor;
-        int num;
+        proveedorcomponente unProvComp;
+        componente unCom;
+        proveedor unProv;
 
         try {
-            if (this.txtIdProv.getText().length() > 0 && this.txtIdCom.getText().length() > 0 && !Utilidades.isNumeric(this.txtIdCom.getText()) && !Utilidades.isNumeric(this.txtIdProv.getText())) {
-                unProveedor = new proveedor();
-                unProveedor.setNombreProveedor(this.txtIdProv.getText());
-                unProveedor.setDescProveedor(this.txtIdCom.getText());
-                dEmpresa.agregarProveedor(unProveedor);
-                JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Proveedor", JOptionPane.INFORMATION_MESSAGE);
-
+            unCom= new componente();
+            unProv=new proveedor();
+            unProvComp = new proveedorcomponente();
+            
+            unCom = (componente) this.jcbComp.getSelectedItem();
+            unProv = (proveedor) this.jcbProv.getSelectedItem();
+                        
+            unProvComp.setIdComponenteProveedorComponente(unCom);
+            unProvComp.setIdProveedorProveedorComponente(unProv);
+            if (dEmpresa.buscarProveedorComponente(unProvComp)!=null) {
+                dEmpresa.agregarProveedorComponente(unProvComp);
+                JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Proveedor-Componente", JOptionPane.INFORMATION_MESSAGE);
                 ReiniciarControles();
             } else {
-                JOptionPane.showMessageDialog(this, "Datos ingresados incorrectamente", "Proveedor", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Combinacion existente", "Proveedor-Componente", JOptionPane.INFORMATION_MESSAGE);
             }
 
         } catch (Common.cDatosException e) {
@@ -246,13 +270,11 @@ public class vProveedorComponente extends javax.swing.JFrame {
             if ((fila < numFilas) && (fila >= 0)) {
 
                 // tomo los datos de los clientes existentes
-                String Id = String.valueOf(tm.getValueAt(fila, 0));
-                String NomProv = (String) tm.getValueAt(fila, 1);
-                String DescProv = (String) tm.getValueAt(fila, 2);
+                String prov = String.valueOf(tm.getValueAt(fila, 0));
+                String comp = String.valueOf(tm.getValueAt(fila, 0));
 
-                this.txtIdProvEli.setText(Id);
-                this.txtIdComEli.setText(NomProv);
-                this.txtDesEli.setText(DescProv);
+                this.txtIdProvEli.setText(prov);
+                this.txtIdComEli.setText(comp);
 
             }
         }
@@ -263,23 +285,32 @@ public class vProveedorComponente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIdProvEliActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        proveedor unProveedor = new proveedor();
-        int num;
+        proveedorcomponente unProvComp = new proveedorcomponente();
+        componente unCom = new componente();
+        proveedor unProv = new proveedor();
         try {
-            if (!this.txtIdProvEli.getText().equals("")) {
-                num = Integer.parseInt(this.txtIdProvEli.getText());
-                unProveedor.setIdProveedor(num);
-                dEmpresa.eliminarProveedor(unProveedor);
-                JOptionPane.showMessageDialog(this, "Se dado eliminado correctamente", "Proveedor", JOptionPane.INFORMATION_MESSAGE);
-                ReiniciarControles();
-            } else {
-                JOptionPane.showMessageDialog(this, "Debe seleccionar un registro", "Proveedor", JOptionPane.ERROR_MESSAGE);
-            }
+            unCom.setIdComp(Integer.parseInt(this.txtIdComEli.getText()));
+            dEmpresa.buscarComponente(unCom);
+            unProvComp.setIdComponenteProveedorComponente(unCom);
+            
+            unProv.setIdProveedor(Integer.parseInt(this.txtIdProvEli.getText()));
+            dEmpresa.buscarProveedor(unProv);
+            unProvComp.setIdProveedorProveedorComponente(unProv);
+
+            dEmpresa.eliminarProveedorComponente(unProvComp);
+            JOptionPane.showMessageDialog(this, "Se dado eliminado correctamente", "Proveedor-Componente", JOptionPane.INFORMATION_MESSAGE);
+            ReiniciarControles();
 
         } catch (Common.cDatosException e) {
-            JOptionPane.showMessageDialog(this, e.toString(), "Proveedor", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.toString(), "Proveedor-Componente", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.txtIdComEli.setEditable(false);
+        this.txtIdProvEli.setEditable(false);
+        ReiniciarControles();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -316,11 +347,78 @@ public class vProveedorComponente extends javax.swing.JFrame {
         });
     }
 
+    private void ReiniciarControles() {
+        this.LimpiarCampos();
+        this.LimpiarList();
+        this.CargarDatosList();
+        this.CargarComboProveedor();
+        this.CargarComboComponente();
+    }
+
+    public void LimpiarList() {
+        DefaultTableModel dm = (DefaultTableModel) this.tblEliProvCom.getModel();
+        dm.setRowCount(0);
+        this.tblEliProvCom.setModel(dm);//limpia el jtable
+    }
+
+    public void CargarDatosList() {
+        ArrayList<proveedorcomponente> coleccion = new ArrayList<proveedorcomponente>();
+        try {
+            coleccion = dEmpresa.buscarTodosProveedoresComponentesSinEliminados();
+            ListaProvComp = coleccion;
+
+            Iterator<proveedorcomponente> it = coleccion.iterator();
+            while (it.hasNext()) {
+                proveedorcomponente unProvComp = it.next();
+                DefaultTableModel tm = (DefaultTableModel) tblEliProvCom.getModel();
+                tm.addRow(new Object[]{new Integer(unProvComp.getIdProveedorProveedorComponente().getIdProveedor()),
+                    new Integer(unProvComp.getIdComponenteProveedorComponente().getIdComp())});
+                tblEliProvCom.setModel(tm);
+            }
+        } catch (Common.cDatosException e) {
+            JOptionPane.showMessageDialog(this, e.toString(), "Proveedro Componente", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void LimpiarCampos() {
+        this.txtIdComEli.setText("");
+        this.txtIdProvEli.setText("");
+    }
+
+    public void CargarComboComponente() {
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        jcbComp.setModel(modelo);
+        this.jcbComp.removeAllItems();
+        ArrayList<componente> coleccion = new ArrayList<componente>();
+        try {
+            coleccion = dEmpresa.buscarTodosComponentesSinEliminados();
+            for (componente com : coleccion) {
+                modelo.addElement(com);
+            }
+        } catch (Common.cDatosException e) {
+            JOptionPane.showMessageDialog(this, e.toString(), "Componente", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void CargarComboProveedor() {
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        jcbProv.setModel(modelo);
+        this.jcbProv.removeAllItems();
+        ArrayList<proveedor> coleccion = new ArrayList<proveedor>();
+        try {
+            coleccion = dEmpresa.buscarTodosProveedorSinEliminados();
+            for (proveedor prov : coleccion) {
+                modelo.addElement(prov);
+            }
+        } catch (Common.cDatosException e) {
+            JOptionPane.showMessageDialog(this, e.toString(), "Proveedor", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -329,6 +427,8 @@ public class vProveedorComponente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JComboBox<String> jcbComp;
+    private javax.swing.JComboBox<String> jcbProv;
     private javax.swing.JTable tblEliProvCom;
     private javax.swing.JTextField txtIdComEli;
     private javax.swing.JTextField txtIdProvEli;
