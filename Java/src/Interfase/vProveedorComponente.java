@@ -271,7 +271,7 @@ public class vProveedorComponente extends javax.swing.JFrame {
 
                 // tomo los datos de los clientes existentes
                 String prov = String.valueOf(tm.getValueAt(fila, 0));
-                String comp = String.valueOf(tm.getValueAt(fila, 0));
+                String comp = String.valueOf(tm.getValueAt(fila, 1));
 
                 this.txtIdProvEli.setText(prov);
                 this.txtIdComEli.setText(comp);
@@ -290,11 +290,9 @@ public class vProveedorComponente extends javax.swing.JFrame {
         proveedor unProv = new proveedor();
         try {
             unCom.setIdComp(Integer.parseInt(this.txtIdComEli.getText()));
-            dEmpresa.buscarComponente(unCom);
             unProvComp.setIdComponenteProveedorComponente(unCom);
             
             unProv.setIdProveedor(Integer.parseInt(this.txtIdProvEli.getText()));
-            dEmpresa.buscarProveedor(unProv);
             unProvComp.setIdProveedorProveedorComponente(unProv);
 
             dEmpresa.eliminarProveedorComponente(unProvComp);

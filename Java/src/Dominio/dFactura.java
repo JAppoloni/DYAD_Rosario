@@ -7,7 +7,10 @@ package Dominio;
 
 import Common.cDatosException;
 import Common.factura;
+import Common.pedido;
+import Persistencia.pFactura;
 import Persistencia.pGenerico;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -53,7 +56,7 @@ public class dFactura {
     public ArrayList BuscarTodosSinEliminados() throws cDatosException {
         ArrayList coleccion = new ArrayList();
         factura pfactura = new factura();
- 
+
         pGenerico persistencia = new pGenerico();
         coleccion = (ArrayList) persistencia.TraerTodosSinEliminados(pfactura);
         if (coleccion != null) {
@@ -62,17 +65,30 @@ public class dFactura {
             return null;
         }
     }
-         
-        public ArrayList BuscarTodos() throws cDatosException {
+
+    public ArrayList BuscarTodos() throws cDatosException {
         ArrayList coleccion = new ArrayList();
         factura pfactura = new factura();
- 
+
         pGenerico persistencia = new pGenerico();
         coleccion = (ArrayList) persistencia.TraerTodosSinEliminados(pfactura);
         if (coleccion != null) {
             return coleccion;
         } else {
             return null;
+        }
+    }
+
+    public int calcularCostoXPedido(pedido ppedido) throws cDatosException, SQLException {
+        int num = 0;
+        if (ppedido.getIdPedido() != 0) {
+            pFactura persistencia = new pFactura();
+            num = (int) persistencia.calcularCostoXPedido(ppedido);
+        }
+        if (num != 0) {
+            return num;
+        } else {
+            return 0;
         }
     }
 }

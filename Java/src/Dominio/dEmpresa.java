@@ -5,6 +5,7 @@
 package Dominio;
 
 import Common.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -308,6 +309,18 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
             }
         } else {
             return false;
+        }
+    }
+    
+    public int calcularCostoXPedido(pedido ppedido) throws cDatosException, SQLException {
+        int num = 0;
+        if (ppedido.getIdPedido() != 0) {
+            num=empresaFactura.calcularCostoXPedido(ppedido);
+        }
+        if (num != 0) {
+            return num;
+        } else {
+            return 0;
         }
     }
 // </editor-fold>

@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
 public class vPedido extends javax.swing.JFrame {
 
     private ArrayList<pedido> ListaPedidos = new ArrayList<pedido>();
-    
+
     /**
      * Creates new form vPedido
      */
@@ -193,10 +193,10 @@ public class vPedido extends javax.swing.JFrame {
             }
         });
         tblPed.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 tblPedCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblPed.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -446,7 +446,6 @@ public class vPedido extends javax.swing.JFrame {
             unPedido.setIdClientePedido(unCliente);
             unPedido.setIdMotorPedido(unMotor);
             unPedido.setFechaDeEntregaPedido(this.jdcFchPed.getDate());
-           
 
             dEmpresa.agregarPedido(unPedido);
             JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Pedido", JOptionPane.INFORMATION_MESSAGE);
@@ -471,6 +470,7 @@ public class vPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbCliPedActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+       this.txtIdPed1.setEditable(false);
         this.ReiniciarControles();
     }//GEN-LAST:event_formWindowOpened
 
@@ -535,12 +535,12 @@ public class vPedido extends javax.swing.JFrame {
                 DefaultTableModel tm = (DefaultTableModel) tblPed.getModel();
                 tm.addRow(new Object[]{new Integer(unPedido.getIdPedido()),
                     new Integer(unPedido.getIdClientePedido().getIdClie()),
-                    new Integer(unPedido.getIdMotorPedido().getIdMotor()),
-                    new String(Utilidades.convertirDateUtilAString(unPedido.getFechaDeEntregaPedido()))});
+                    new String(Utilidades.convertirDateUtilAString(unPedido.getFechaDeEntregaPedido())),
+                    new Integer(unPedido.getIdMotorPedido().getIdMotor())});
                 tblPed.setModel(tm);
             }
         } catch (Common.cDatosException e) {
-            JOptionPane.showMessageDialog(this, e.toString(), "Componente", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.toString(), "Pedido", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -552,7 +552,7 @@ public class vPedido extends javax.swing.JFrame {
     }
 
     public void CargarComboCliente() {
-        DefaultComboBoxModel modelo =new DefaultComboBoxModel();
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         jcbCliPed.setModel(modelo);
         this.jcbCliPed.removeAllItems();
         ArrayList<cliente> coleccion = new ArrayList<cliente>();
@@ -565,8 +565,9 @@ public class vPedido extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, e.toString(), "Cliente", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     public void CargarComboMotor() {
-        DefaultComboBoxModel modelo =new DefaultComboBoxModel();
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         jcbMotPed.setModel(modelo);
         this.jcbMotPed.removeAllItems();
         ArrayList<motores> coleccion = new ArrayList<motores>();

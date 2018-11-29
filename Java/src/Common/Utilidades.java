@@ -4,6 +4,8 @@
  */
 package Common;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -49,7 +51,15 @@ public class Utilidades {
        SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd");
        return df.format(utilDate);
     }
-    
+    //convertir una fecha string a un utilDate 
+//    public static Date convertirDeStringAUtilDate(String fecha) throws ParseException {
+//       fecha+=",00:00:00 AM";
+//       DateFormat formatter = new SimpleDateFormat("d-MMM-yyyy,HH:mm:ss aaa");
+//       Date date = formatter.parse(fecha);
+//       return date;
+//       
+//    }
+    //Fecha de hoy
     public static java.util.Date  fechaDeHoy(){
         java.util.Date fecha = new Date();
         return fecha;
