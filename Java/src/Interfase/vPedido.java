@@ -11,9 +11,12 @@ import Common.cliente;
 import Common.motores;
 import Common.pedido;
 import Dominio.dEmpresa;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -350,11 +353,17 @@ public class vPedido extends javax.swing.JFrame {
                 // tomo los datos de los componentes existentes
                 String id = String.valueOf(tm.getValueAt(fila, 0));
                 String cli = String.valueOf(tm.getValueAt(fila, 1));
-                Date fecha = (Date) tm.getValueAt(fila, 2);
+                Date fecha;
+                try {
+                    fecha = (Date) Utilidades.convertirDeStringAUtilDate(String.valueOf(tm.getValueAt(fila, 2)));
+                    this.jdcFchPed1.setDate(fecha);
+                } catch (ParseException ex) {
+                    Logger.getLogger(vPedido.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 String mot = String.valueOf(tm.getValueAt(fila, 3));
 
                 this.txtIdPed1.setText(id);
-                this.jdcFchPed1.setDate(fecha);
+                
                 this.txtCliPed1.setText(cli);
                 this.txtMotPed1.setText(mot);
 

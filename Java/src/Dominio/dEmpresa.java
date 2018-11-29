@@ -405,6 +405,19 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
             return false;
         }
     }
+    
+    public boolean modificarMotorComponente(motorcomponente motcomp) throws cDatosException {
+        if (motcomp != null) {
+            try {
+                empresaMotorComponente.modificar(motcomp);
+                return true;
+            } catch (cDatosException ex) {
+                throw new cDatosException("Error al modificar motor-componente:" + ex.getMessage());
+            }
+        } else {
+            return false;
+        }
+    }
 // </editor-fold>
     
     private dProveedor empresaProveedor = new dProveedor();
