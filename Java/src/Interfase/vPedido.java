@@ -15,6 +15,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -26,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class vPedido extends javax.swing.JFrame {
+public class vPedido extends javax.swing.JFrame implements Observer{
 
     private ArrayList<pedido> ListaPedidos = new ArrayList<pedido>();
 
@@ -37,10 +39,12 @@ public class vPedido extends javax.swing.JFrame {
         initComponents();
     }
     private dEmpresa dEmpresa;
-
-    public vPedido(dEmpresa pEmp) {
+    private observer obser;
+    
+    public vPedido(dEmpresa pEmp, observer pObs) {
         initComponents();
         dEmpresa = pEmp;
+        obser=pObs;
     }
 
     /**
@@ -363,7 +367,7 @@ public class vPedido extends javax.swing.JFrame {
                 String mot = String.valueOf(tm.getValueAt(fila, 3));
 
                 this.txtIdPed1.setText(id);
-                
+
                 this.txtCliPed1.setText(cli);
                 this.txtMotPed1.setText(mot);
 
@@ -389,6 +393,8 @@ public class vPedido extends javax.swing.JFrame {
                 dEmpresa.eliminarPedido(unPedido);
                 JOptionPane.showMessageDialog(this, "Se dado eliminado correctamente", "Componente", JOptionPane.INFORMATION_MESSAGE);
                 ReiniciarControles();
+                observer obs = new observer();
+                obser.notificar(); 
             } else {
                 JOptionPane.showMessageDialog(this, "Debe seleccionar un registro", "Componente", JOptionPane.ERROR_MESSAGE);
             }
@@ -424,7 +430,8 @@ public class vPedido extends javax.swing.JFrame {
                 dEmpresa.modificarPedido(unPedido);
                 ReiniciarControles();
                 JOptionPane.showMessageDialog(this, "Se ha modificado correctamente", "Tipo", JOptionPane.INFORMATION_MESSAGE);
-
+                observer obs = new observer();
+                obser.notificar(); 
             } catch (cDatosException e) {
                 JOptionPane.showMessageDialog(this, e.toString(), "Tipo", JOptionPane.ERROR_MESSAGE);
             }
@@ -460,6 +467,8 @@ public class vPedido extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Pedido", JOptionPane.INFORMATION_MESSAGE);
 
             ReiniciarControles();
+            observer obs = new observer();
+            obser.notificar(); 
 
         } catch (Common.cDatosException e) {
             JOptionPane.showMessageDialog(this, e.toString(), "Pedido", JOptionPane.ERROR_MESSAGE);
@@ -479,7 +488,7 @@ public class vPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbCliPedActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       this.txtIdPed1.setEditable(false);
+        this.txtIdPed1.setEditable(false);
         this.ReiniciarControles();
     }//GEN-LAST:event_formWindowOpened
 
@@ -590,6 +599,10 @@ public class vPedido extends javax.swing.JFrame {
         }
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        CargarDatosList();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
@@ -615,4 +628,5 @@ public class vPedido extends javax.swing.JFrame {
     private javax.swing.JTextField txtIdPed1;
     private javax.swing.JTextField txtMotPed1;
     // End of variables declaration//GEN-END:variables
+
 }

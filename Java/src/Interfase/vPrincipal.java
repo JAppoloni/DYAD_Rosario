@@ -13,16 +13,17 @@ import Dominio.dEmpresa;
 public class vPrincipal extends javax.swing.JFrame {
 
     private dEmpresa empresa;
-
+    private observer obser;
     /**
      * Creates new form vPrincipal
      */
     public vPrincipal() {
         initComponents();
     }
-
-    public vPrincipal(dEmpresa pEmp) {
+   
+     public vPrincipal(dEmpresa pEmp, observer pObs) {
         empresa = pEmp;
+        obser=pObs;
         initComponents();
     }
 
@@ -195,7 +196,7 @@ public class vPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmMotorComponenteActionPerformed
 
     private void jmPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPedidoActionPerformed
-        vPedido ventnaPedido = new vPedido(empresa);
+        vPedido ventnaPedido = new vPedido(empresa, obser);
         //centra la ventana en la pantalla
         ventnaPedido.setLocationRelativeTo(null);
         ventnaPedido.setVisible(true);
