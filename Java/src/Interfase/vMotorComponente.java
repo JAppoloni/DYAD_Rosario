@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Common.cDatosException;
 import Dominio.dEmpresa;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -245,7 +247,7 @@ public class vMotorComponente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+        this.btnAgregar.setEnabled(false);
         motorcomponente unMotorComponente;
         motores unMotor;
         componente unComponente;
@@ -259,8 +261,8 @@ public class vMotorComponente extends javax.swing.JFrame {
 
             unMotor.setIdMotor(idMot);
             unComponente.setIdComp(idComp);
-            unMotor=dEmpresa.buscarMotor(unMotor);
-            unComponente=dEmpresa.buscarComponente(unComponente);
+            unMotor = dEmpresa.buscarMotor(unMotor);
+            unComponente = dEmpresa.buscarComponente(unComponente);
             unMotorComponente.setIdMotorMotorComponente(unMotor);
             unMotorComponente.setIdComponenteMotorComponente(unComponente);
             unMotorComponente.setCantidadMotorComponente(Integer.parseInt(this.txtCantidad.getText()));
@@ -274,10 +276,33 @@ public class vMotorComponente extends javax.swing.JFrame {
         } catch (Common.cDatosException e) {
             JOptionPane.showMessageDialog(this, e.toString(), "Cliente", JOptionPane.ERROR_MESSAGE);
         }
+        this.btnAgregar.setEnabled(true);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        //Devolver componentes eliminados(sumar al stock)
+        this.btnEliminar.setEnabled(false);
+        componente unComp = new componente();
+        unComp.setIdComp(idCompMC);
+        motores unMot = new motores();
+        unMot.setIdMotor(idMotMC);
+
+        try {
+            unComp = dEmpresa.buscarComponente(unComp);
+            unMot = dEmpresa.buscarMotor(unMot);
+
+            motorcomponente unMotComp = new motorcomponente();
+            unMotComp.setIdComponenteMotorComponente(unComp);
+            unMotComp.setIdMotorMotorComponente(unMot);
+            unMotComp = dEmpresa.buscarMotorComponente(unMotComp);
+            dEmpresa.eliminarMotorComponente(unMotComp);
+            DevolverComponente(unMotComp);
+            ReiniciarControles();
+            JOptionPane.showMessageDialog(this, "Se ha dado eliminado correctamente", "Motor-Componente", JOptionPane.INFORMATION_MESSAGE);
+        } catch (cDatosException ex) {
+            JOptionPane.showMessageDialog(this, ex.toString(), "Cliente", JOptionPane.ERROR_MESSAGE);
+        }
+        this.btnEliminar.setEnabled(true);
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -327,6 +352,7 @@ public class vMotorComponente extends javax.swing.JFrame {
         }    }//GEN-LAST:event_tblMotorComponenteMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
+        this.btnModificar.setEnabled(false);
         if (!this.txtCantidad.getText().equals("") && Utilidades.isNumeric(this.txtCantidad.getText()) && Integer.parseInt(this.txtCantidad.getText()) != cantMC) {
 
             motorcomponente unMotComp = new motorcomponente();
@@ -346,9 +372,9 @@ public class vMotorComponente extends javax.swing.JFrame {
                 unComp.setIdComp(comp);
                 unMotComp.setIdComponenteMotorComponente(unComp);
                 unMotComp.setCantidadMotorComponente(cant);
-                if (ConsultarStock(unMotComp)) {
+                if (ConsultarStockModif(unMotComp)) {
+                    RestarDeStockModif(unMotComp);//Va antes del modificar para tener viejo y nuevo
                     dEmpresa.modificarMotorComponente(unMotComp);
-                    RestarDeStock(unMotComp);
                     ReiniciarControles();
                     JOptionPane.showMessageDialog(this, "Se ha modificado correctamente", "Motor-Componente", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -362,6 +388,7 @@ public class vMotorComponente extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Datos ingresados incorrectamente", "Accion", JOptionPane.ERROR_MESSAGE);
         }
+        this.btnModificar.setEnabled(true);
     }//GEN-LAST:event_btnModificarMouseClicked
 
     /**
@@ -524,6 +551,65 @@ public class vMotorComponente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, e.toString(), "Componente", JOptionPane.ERROR_MESSAGE);
         }
 
+    }
+
+    private boolean ConsultarStockModif(motorcomponente unMotComp) throws cDatosException {
+        componente unComp = new componente();
+        unComp.setIdComp(unMotComp.getIdComponenteMotorComponente().getIdComp());
+        unComp = dEmpresa.buscarComponente(unComp);
+
+        motorcomponente unMotCompViejo = new motorcomponente();
+        unMotCompViejo.setIdComponenteMotorComponente(unMotComp.getIdComponenteMotorComponente());
+        unMotCompViejo.setIdMotorMotorComponente(unMotComp.getIdMotorMotorComponente());
+        unMotCompViejo = dEmpresa.buscarMotorComponente(unMotComp);
+
+        //Si restamos el nuevo al viejo se va a saber cuento es lo que en verdad se suma o se resta sin contar lo que ya esta
+        int seResta = unMotComp.getCantidadMotorComponente() - unMotCompViejo.getCantidadMotorComponente();
+        if (seResta <= unComp.getCantStockComp()) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(this, "Stock insuficiente", "Componente", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+
+        }
+    }
+
+    private void RestarDeStockModif(motorcomponente unMotComp) throws cDatosException {
+        componente unComp = new componente();
+        unComp.setIdComp(unMotComp.getIdComponenteMotorComponente().getIdComp());
+        unComp = dEmpresa.buscarComponente(unComp);
+
+        motorcomponente unMotCompViejo = new motorcomponente();
+        unMotCompViejo.setIdComponenteMotorComponente(unMotComp.getIdComponenteMotorComponente());
+        unMotCompViejo.setIdMotorMotorComponente(unMotComp.getIdMotorMotorComponente());
+        unMotCompViejo = dEmpresa.buscarMotorComponente(unMotComp);
+        int resta;//Identifica cuando se descuentan partes
+        int suma;//Identifica cuando se devuelven partes
+        //Si restamos el nuevo al viejo se va a saber cuento es lo que en verdad se suma o se resta sin contar lo que ya esta
+        int diferencia = unMotComp.getCantidadMotorComponente() - unMotCompViejo.getCantidadMotorComponente();//Si la diferencia es negativa es porque estan sacando partes 
+        if (diferencia >= 0) {
+            resta = unComp.getCantStockComp() - diferencia;
+            unComp.setCantStockComp(resta);
+            dEmpresa.modificarComponente(unComp);
+            if (resta < unComp.getCantMinStockComp()) {
+                JOptionPane.showMessageDialog(this, "El stock minimo fue alcanzado", "Componente", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            int aux = diferencia * -1;
+            suma = unComp.getCantStockComp() + aux;
+            unComp.setCantStockComp(suma);
+            dEmpresa.modificarComponente(unComp);
+        }
+    }
+
+    private void DevolverComponente(motorcomponente unMotComp) throws cDatosException {
+        componente unComp = new componente();
+        unComp.setIdComp(unMotComp.getIdComponenteMotorComponente().getIdComp());
+        unComp = dEmpresa.buscarComponente(unComp);
+
+        int suma = unComp.getCantStockComp() + unMotComp.getCantidadMotorComponente();//Devuelve los componentes al stock
+        unComp.setCantStockComp(suma);
+        dEmpresa.modificarComponente(unComp);
     }
 
 }

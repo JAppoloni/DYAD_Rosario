@@ -404,7 +404,7 @@ public class pGenerico extends pPersistencia {
             super.abrirConexion();
 
             Statement st = super.getDistribuidora().createStatement();
-            String Condicion = "DELETE  " + pObject.getClass().getSimpleName() + " WHERE ";
+            String Condicion = "DELETE  FROM " + pObject.getClass().getSimpleName() + " WHERE ";
 
             //  Creacion de una variable del tipo 
             for (Field property : pObject.getClass().getDeclaredFields()) {
