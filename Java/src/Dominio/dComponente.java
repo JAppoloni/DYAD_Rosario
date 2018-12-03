@@ -35,7 +35,7 @@ public class dComponente {
 
     public componente buscar(componente pcomponente) throws cDatosException {
         componente uncomponente = new componente();
-        if (pcomponente == null) {
+        if (pcomponente.getIdComp() != 0) {
             pGenerico persistencia = new pGenerico();
             uncomponente = (componente) persistencia.TraerEspecifico(pcomponente);
         }

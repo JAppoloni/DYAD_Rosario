@@ -5,6 +5,7 @@
 package Dominio;
 
 import Common.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -26,8 +27,9 @@ public class dEmpresa {
     public dEmpresa() {
     }
 // </editor-fold>
-    
+
     private dCliente empresaCliente = new dCliente();
+
     // <editor-fold defaultstate="collapsed" desc=" Cliente ">
     public cliente buscarCliente(cliente pCliente) throws cDatosException {
         cliente unCliente = new cliente();
@@ -62,7 +64,7 @@ public class dEmpresa {
             return null;
         }
     }
-    
+
     public ArrayList buscarTodosClientesSinEliminados() throws cDatosException {
         dCliente unCliente = new dCliente();
         ArrayList coleccion;
@@ -78,7 +80,6 @@ public class dEmpresa {
             return null;
         }
     }
-    
 
     public boolean agregarCliente(cliente clien) throws cDatosException {
         if (clien != null) {
@@ -88,7 +89,6 @@ public class dEmpresa {
             } catch (cDatosException ex) {
                 throw new cDatosException("Error al ingresar el cliente:" + ex.getMessage());
             }
-
 
         } else {
             return false;
@@ -121,9 +121,9 @@ public class dEmpresa {
         }
     }
 // </editor-fold>
-    
-    
+
     private dComponente empresaComponente = new dComponente();
+
     // <editor-fold defaultstate="collapsed" desc=" Componente ">
     public componente buscarComponente(componente pComponente) throws cDatosException {
         componente unComponente = new componente();
@@ -158,7 +158,8 @@ public class dEmpresa {
             return null;
         }
     }
-public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
+
+    public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
         dComponente unComponente = new dComponente();
         ArrayList coleccion;
         coleccion = new ArrayList();
@@ -173,7 +174,6 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
             return null;
         }
     }
-    
 
     public boolean agregarComponente(componente compo) throws cDatosException {
         if (compo != null) {
@@ -183,7 +183,6 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
             } catch (cDatosException ex) {
                 throw new cDatosException("Error al ingresar el componente:" + ex.getMessage());
             }
-
 
         } else {
             return false;
@@ -216,13 +215,14 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
         }
     }
 // </editor-fold>
-    
+
     private dFactura empresaFactura = new dFactura();
+
     // <editor-fold defaultstate="collapsed" desc=" Factura ">
     public factura buscarFactura(factura pFactura) throws cDatosException {
         factura unaFactura = new factura();
         if (pFactura != null) {
-            if (pFactura.getIdFactura()!= 0) {
+            if (pFactura.getIdFactura() != 0) {
                 try {
                     unaFactura = empresaFactura.buscar(pFactura);
                 } catch (cDatosException ex) {
@@ -268,7 +268,6 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
             return null;
         }
     }
-    
 
     public boolean agregarFactura(factura factu) throws cDatosException {
         if (factu != null) {
@@ -278,7 +277,6 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
             } catch (cDatosException ex) {
                 throw new cDatosException("Error al ingresar la factura:" + ex.getMessage());
             }
-
 
         } else {
             return false;
@@ -310,21 +308,34 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
             return false;
         }
     }
+
+    public int calcularCostoXPedido(pedido ppedido) throws cDatosException, SQLException {
+        int num = 0;
+        if (ppedido.getIdPedido() != 0) {
+            num = empresaFactura.calcularCostoXPedido(ppedido);
+        }
+        if (num != 0) {
+            return num;
+        } else {
+            return 0;
+        }
+    }
 // </editor-fold>
-    
+
     private dMotorComponente empresaMotorComponente = new dMotorComponente();
+
     // <editor-fold defaultstate="collapsed" desc=" Motor Componente ">
     public motorcomponente buscarMotorComponente(motorcomponente pMotorComponente) throws cDatosException {
         motorcomponente unMotorComponente = new motorcomponente();
-        if (pMotorComponente != null) {
-            if (pMotorComponente.getIdMotorMotorComponente().getIdMotor()!= 0) {
-                try {
-                    unMotorComponente = empresaMotorComponente.Buscar(pMotorComponente);
-                } catch (cDatosException ex) {
-                    throw new cDatosException("Error al buscar motor-componente:" + ex.getMessage());
-                }
+
+        if (pMotorComponente.getIdMotorMotorComponente().getIdMotor() != 0 && pMotorComponente.getIdComponenteMotorComponente().getIdComp()!= 0) {
+            try {
+                unMotorComponente = empresaMotorComponente.Buscar(pMotorComponente);
+            } catch (cDatosException ex) {
+                throw new cDatosException("Error al buscar motor-componente:" + ex.getMessage());
             }
         }
+
         if (unMotorComponente != null) {
             return unMotorComponente;
         } else {
@@ -373,13 +384,11 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
                 throw new cDatosException("Error al ingresar el motor-componente:" + ex.getMessage());
             }
 
-
         } else {
             return false;
         }
     }
 
-   
     public boolean eliminarMotorComponente(motorcomponente motcompo) throws cDatosException {
         if (motcompo != null) {
             try {
@@ -392,14 +401,28 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
             return false;
         }
     }
+
+    public boolean modificarMotorComponente(motorcomponente motcomp) throws cDatosException {
+        if (motcomp != null) {
+            try {
+                empresaMotorComponente.modificar(motcomp);
+                return true;
+            } catch (cDatosException ex) {
+                throw new cDatosException("Error al modificar motor-componente:" + ex.getMessage());
+            }
+        } else {
+            return false;
+        }
+    }
 // </editor-fold>
-    
+
     private dProveedor empresaProveedor = new dProveedor();
+
     // <editor-fold defaultstate="collapsed" desc=" proveedor ">
     public proveedor buscarProveedor(proveedor pProveedor) throws cDatosException {
         proveedor unProveedor = new proveedor();
         if (pProveedor != null) {
-            if (pProveedor.getIdProveedor()!= 0) {
+            if (pProveedor.getIdProveedor() != 0) {
                 try {
                     unProveedor = empresaProveedor.buscar(pProveedor);
                 } catch (cDatosException ex) {
@@ -429,7 +452,7 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
             return null;
         }
     }
-    
+
     public ArrayList buscarTodosProveedorSinEliminados() throws cDatosException {
         dProveedor unProveedor = new dProveedor();
         ArrayList coleccion;
@@ -446,8 +469,6 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
         }
     }
 
-    
-
     public boolean agregarProveedor(proveedor prov) throws cDatosException {
         if (prov != null) {
             try {
@@ -456,7 +477,6 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
             } catch (cDatosException ex) {
                 throw new cDatosException("Error al ingresar el proveedor:" + ex.getMessage());
             }
-
 
         } else {
             return false;
@@ -489,8 +509,9 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
         }
     }
 // </editor-fold>
-    
-     private dMotores empresaMotor = new dMotores();
+
+    private dMotores empresaMotor = new dMotores();
+
     // <editor-fold defaultstate="collapsed" desc=" Motor ">
     public motores buscarMotor(motores pMotor) throws cDatosException {
         motores unMotor = new motores();
@@ -525,8 +546,8 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
             return null;
         }
     }
-    
-     public ArrayList buscarTodosMotoresSinEliminados() throws cDatosException {
+
+    public ArrayList buscarTodosMotoresSinEliminados() throws cDatosException {
         dMotores unMotor = new dMotores();
         ArrayList coleccion;
         coleccion = new ArrayList();
@@ -542,8 +563,6 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
         }
     }
 
-    
-
     public boolean agregarMotor(motores moto) throws cDatosException {
         if (moto != null) {
             try {
@@ -552,7 +571,6 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
             } catch (cDatosException ex) {
                 throw new cDatosException("Error al ingresar el motor:" + ex.getMessage());
             }
-
 
         } else {
             return false;
@@ -585,8 +603,9 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
         }
     }
 // </editor-fold>
-    
+
     private dPedido empresaPedido = new dPedido();
+
     // <editor-fold defaultstate="collapsed" desc=" Pedido ">
     public pedido buscarPedido(pedido pPedido) throws cDatosException {
         pedido unPedido = new pedido();
@@ -621,7 +640,7 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
             return null;
         }
     }
-    
+
     public ArrayList buscarTodosPedidosSinEliminados() throws cDatosException {
         dPedido unPedido = new dPedido();
         ArrayList coleccion;
@@ -638,8 +657,6 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
         }
     }
 
-    
-
     public boolean agregarPedido(pedido pedid) throws cDatosException {
         if (pedid != null) {
             try {
@@ -648,7 +665,6 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
             } catch (cDatosException ex) {
                 throw new cDatosException("Error al ingresar el pedid:" + ex.getMessage());
             }
-
 
         } else {
             return false;
@@ -681,16 +697,16 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
         }
     }
 // </editor-fold>
-    
-    
+
     private dProveedorComponente empresaProveedorComponente = new dProveedorComponente();
+
     // <editor-fold defaultstate="collapsed" desc=" Proveedor-Componente ">
     public proveedorcomponente buscarProveedorComponente(proveedorcomponente pProveedorComponente) throws cDatosException {
         proveedorcomponente unProveedorComponente = new proveedorcomponente();
         if (pProveedorComponente != null) {
-            if (pProveedorComponente.getIdProveedorProveedorComponente().getIdProveedor() != 0 && pProveedorComponente.getIdComponenteProveedorComponente().getIdComp() != 0 ) {
+            if (pProveedorComponente.getIdProveedorProveedorComponente().getIdProveedor() != 0 && pProveedorComponente.getIdComponenteProveedorComponente().getIdComp() != 0) {
                 try {
-                    unProveedorComponente= empresaProveedorComponente.buscar(pProveedorComponente);
+                    unProveedorComponente = empresaProveedorComponente.buscar(pProveedorComponente);
                 } catch (cDatosException ex) {
                     throw new cDatosException("Error al buscar proveedor-componente:" + ex.getMessage());
                 }
@@ -718,7 +734,7 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
             return null;
         }
     }
-    
+
     public ArrayList buscarTodosProveedoresComponentesSinEliminados() throws cDatosException {
         dProveedorComponente unProveedorComponente = new dProveedorComponente();
         ArrayList coleccion;
@@ -735,10 +751,8 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
         }
     }
 
-    
-
     public boolean agregarProveedorComponente(proveedorcomponente provcompo) throws cDatosException {
-        if (provcompo!= null) {
+        if (provcompo != null) {
             try {
                 empresaProveedorComponente.Alta(provcompo);
                 return true;
@@ -746,13 +760,10 @@ public ArrayList buscarTodosComponentesSinEliminados() throws cDatosException {
                 throw new cDatosException("Error al ingresar el proveedor-componente:" + ex.getMessage());
             }
 
-
         } else {
             return false;
         }
     }
-
-    
 
     public boolean eliminarProveedorComponente(proveedorcomponente provcomp) throws cDatosException {
         if (provcomp != null) {

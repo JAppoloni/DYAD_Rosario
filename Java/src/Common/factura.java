@@ -17,28 +17,11 @@ public class factura {
     private int idFactura;
     private Date fechaPagoFactura;
     private pedido idPedidoFactura;
-    private boolean idDeleted;
-
-    public factura(int idFactura, Date fechaPagoFactura, pedido idPedidoFactura, boolean idDeleted) {
-        this.idFactura = idFactura;
-        this.fechaPagoFactura = fechaPagoFactura;
-        this.idPedidoFactura = idPedidoFactura;
-        this.idDeleted = idDeleted;
-    }
+    private boolean isDeleted;
 
     public factura() {
     }
 
-    
-    public boolean isIdDeletedFactura() {
-        return idDeleted;
-    }
-
-    public void setIdDeletedFactura(boolean idDeletedFactura) {
-        this.idDeleted = idDeletedFactura;
-    }
-
-   
     public int getIdFactura() {
         return idFactura;
     }
@@ -62,6 +45,23 @@ public class factura {
     public void setIdPedidoFactura(pedido idPedidoFactura) {
         this.idPedidoFactura = idPedidoFactura;
     }
+
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public factura(int idFactura, Date fechaPagoFactura, pedido idPedidoFactura, boolean isDeleted) {
+        this.idFactura = idFactura;
+        this.fechaPagoFactura = fechaPagoFactura;
+        this.idPedidoFactura = idPedidoFactura;
+        this.isDeleted = isDeleted;
+    }
+
+   
     
 
 }

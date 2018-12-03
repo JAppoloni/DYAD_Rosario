@@ -6,12 +6,16 @@
 package Interfase;
 
 import Common.Utilidades;
+import Common.cDatosException;
 import Dominio.dEmpresa;
 import Common.factura;
 import Common.pedido;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,19 +24,20 @@ import javax.swing.table.DefaultTableModel;
  * @author Felipe
  */
 public class vFactura extends javax.swing.JFrame {
-private ArrayList<pedido> ListaPedido = new ArrayList<pedido>();
-private ArrayList<factura> ListaFactura = new ArrayList<factura>();
-    
+
+    private ArrayList<pedido> ListaPedido = new ArrayList<pedido>();
+    private ArrayList<factura> ListaFactura = new ArrayList<factura>();
 
     public vFactura() {
         initComponents();
     }
     private dEmpresa dEmpresa;
-    
+
     public vFactura(dEmpresa pEmp) {
         initComponents();
         dEmpresa = pEmp;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,6 +57,8 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
         jLabel5 = new javax.swing.JLabel();
         txtIdPedido = new javax.swing.JTextField();
         jdcFechaPago = new com.toedter.calendar.JDateChooser();
+        jLabel6 = new javax.swing.JLabel();
+        txtCosto = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEliFact = new javax.swing.JTable();
@@ -86,9 +93,16 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tblIngPed.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -100,6 +114,8 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
 
         jLabel5.setText("Id Pedido:");
 
+        jLabel6.setText("Costo:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -107,7 +123,9 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAgregar)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAgregar))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,7 +138,11 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jdcFechaPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtIdPedido))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCosto)
+                        .addGap(328, 328, 328)))
                 .addGap(37, 37, 37))
         );
         jPanel1Layout.setVerticalGroup(
@@ -135,12 +157,14 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
                     .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
-                        .addComponent(txtIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)
+                        .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAgregar)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(212, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Agregar", jPanel1);
@@ -156,9 +180,16 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tblEliFact.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -177,10 +208,10 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
             }
         });
         tblEliFact.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 tblEliFactCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblEliFact.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -231,9 +262,9 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtIdEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnEliminar)
                 .addContainerGap(160, Short.MAX_VALUE))
         );
@@ -262,36 +293,37 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
         factura unaFactura;
-        pedido unPedido=new pedido();
+        pedido unPedido;
         int num;
 
         try {
             //Verifica el ingreso de los datos requeridos
-            if (this.txtIdPedido.getText().length() > 0 && this.jdcFechaPago.getDate().after(Utilidades.fechaDeHoy())||this.jdcFechaPago.getDate().equals(Utilidades.fechaDeHoy())) {
+            if (this.txtIdPedido.getText().length() > 0 && this.jdcFechaPago.getDate().after(Utilidades.fechaDeHoy()) || this.jdcFechaPago.getDate().equals(Utilidades.fechaDeHoy())) {
                 String ID = this.txtIdPedido.getText().toString();
                 //Verifico que hayan ingresado un número
                 if (Utilidades.isNumeric(ID) == true) {
                     //Busco si el tipo ya no ha sido ingresado
                     unaFactura = new factura();
+                    unPedido = new pedido();
                     num = Integer.parseInt(this.txtIdPedido.getText());
                     unPedido.setIdPedido(num);
-                    unaFactura.setIdPedidoFactura(dEmpresa.buscarPedido(unPedido));
+                    unPedido = dEmpresa.buscarPedido(unPedido);
+                    unaFactura.setIdPedidoFactura(unPedido);
                     unaFactura.setFechaPagoFactura(this.jdcFechaPago.getDate());
-                   
+
                     dEmpresa.agregarFactura(unaFactura);
-                    JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Tipo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Se dado de alta correctamente", "Factura", JOptionPane.INFORMATION_MESSAGE);
 
                     ReiniciarControles();
 
-                  
                 } else {
-                    JOptionPane.showMessageDialog(this, "El número del código del tipo debe ser un número", "Tipo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "El número del código del tipo debe ser un número", "Factura", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Datos ingresados incorrectamente", "Accion", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Common.cDatosException e) {
-            JOptionPane.showMessageDialog(this, e.toString(), "Tipo", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.toString(), "Factura", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -305,10 +337,8 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
 
                 // tomo los datos de los tipos existentes
                 String id = String.valueOf(tm.getValueAt(fila, 0));
-                
 
                 this.txtIdEliminar.setText(id);
-                
 
             }
         }
@@ -356,6 +386,7 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.txtIdEliminar.setEditable(false);
         this.txtIdPedido.setEditable(false);
+        this.txtCosto.setEditable(false);
         ReiniciarControles();
     }//GEN-LAST:event_formWindowOpened
 
@@ -369,9 +400,15 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
 
                 // tomo los datos de los tipos existentes
                 String id = String.valueOf(tm.getValueAt(fila, 0));
-                
 
                 this.txtIdPedido.setText(id);
+                try {
+                    CargarCosto(id);
+                } catch (cDatosException ex) {
+                     JOptionPane.showMessageDialog(this, ex.toString(), "Factura", JOptionPane.ERROR_MESSAGE);
+                } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(this, ex.toString(), "Factura", JOptionPane.ERROR_MESSAGE);
+                }
                 
 
             }
@@ -412,21 +449,30 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
             }
         });
     }
-  private void ReiniciarControles() {
+
+    private void ReiniciarControles() {
         this.LimpiarCampos();
-        this.LimpiarList();
+        this.LimpiarListFac();
+        this.LimpiarListPed();
         this.CargarDatosListPedido();
         this.CargarDatosListFactura();
     }
-   public void LimpiarList() {
+
+    public void LimpiarListFac() {
         DefaultTableModel dm = (DefaultTableModel) this.tblIngPed.getModel();
         dm.setRowCount(0);
         this.tblIngPed.setModel(dm);//limpia el jtable
     }
 
+    public void LimpiarListPed() {
+        DefaultTableModel dm = (DefaultTableModel) this.tblEliFact.getModel();
+        dm.setRowCount(0);
+        this.tblEliFact.setModel(dm);//limpia el jtable
+    }
+
     public void CargarDatosListPedido() {
         ArrayList<pedido> coleccion = new ArrayList<pedido>();
-        
+
         try {
             coleccion = dEmpresa.buscarTodosPedidosSinEliminados();
             ListaPedido = coleccion;
@@ -435,20 +481,20 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
                 pedido unPedido = it.next();
                 DefaultTableModel tm = (DefaultTableModel) tblIngPed.getModel();
                 tm.addRow(new Object[]{new Integer(unPedido.getIdPedido()),
-                new Integer(unPedido.getIdClientePedido().getIdClie()),
-                new String(Utilidades.convertirDateUtilAString(unPedido.getFechaDeEntregaPedido())),
-                new Integer(unPedido.getIdMotorPedido().getIdMotor())});
-                
+                    new Integer(unPedido.getIdClientePedido().getIdClie()),
+                    new String(Utilidades.convertirDateUtilAString(unPedido.getFechaDeEntregaPedido())),
+                    new Integer(unPedido.getIdMotorPedido().getIdMotor())});
+
                 tblIngPed.setModel(tm);
             }
         } catch (Common.cDatosException e) {
             JOptionPane.showMessageDialog(this, e.toString(), "Pedido", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void CargarDatosListFactura() {
         ArrayList<factura> coleccion = new ArrayList<factura>();
-        
+
         try {
             coleccion = dEmpresa.buscarTodosFacturasSinEliminados();
             ListaFactura = coleccion;
@@ -457,19 +503,30 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
                 factura unaFactura = it.next();
                 DefaultTableModel tm = (DefaultTableModel) tblEliFact.getModel();
                 tm.addRow(new Object[]{new Integer(unaFactura.getIdFactura()),
-                new String(Utilidades.convertirDateUtilAString(unaFactura.getFechaPagoFactura())),
-                new Integer(unaFactura.getIdPedidoFactura().getIdPedido())});
-                
-                tblIngPed.setModel(tm);
+                    new String(Utilidades.convertirDateUtilAString(unaFactura.getFechaPagoFactura())),
+                    new Integer(unaFactura.getIdPedidoFactura().getIdPedido())});
+
+                tblEliFact.setModel(tm);
             }
         } catch (Common.cDatosException e) {
             JOptionPane.showMessageDialog(this, e.toString(), "Factura", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void LimpiarCampos() {
-        this.txtIdPedido.setText("");       
-        this.txtIdEliminar.setText("");       
+        this.txtIdPedido.setText("");
+        this.txtIdEliminar.setText("");
+        this.txtCosto.setText("");
+    }
+
+    private void CargarCosto(String id) throws cDatosException, SQLException {
+        if (Utilidades.isNumeric(id)) {
+            pedido unPedido = new pedido();
+            unPedido.setIdPedido(Integer.parseInt(id));
+            String num=String.valueOf(dEmpresa.calcularCostoXPedido(dEmpresa.buscarPedido(unPedido)));
+            this.txtCosto.setText(num);
+            
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
@@ -478,6 +535,7 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -486,7 +544,9 @@ private ArrayList<factura> ListaFactura = new ArrayList<factura>();
     private com.toedter.calendar.JDateChooser jdcFechaPago;
     private javax.swing.JTable tblEliFact;
     private javax.swing.JTable tblIngPed;
+    private javax.swing.JTextField txtCosto;
     private javax.swing.JTextField txtIdEliminar;
     private javax.swing.JTextField txtIdPedido;
     // End of variables declaration//GEN-END:variables
+
 }

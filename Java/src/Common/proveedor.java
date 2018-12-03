@@ -16,6 +16,11 @@ private String nombreProveedor;
 private String descProveedor;
 private boolean IsDeleted;
 
+    @Override
+    public String toString() {
+        return  idProveedor + ", " + nombreProveedor ;
+    }
+
     public int getIdProveedor() {
         return idProveedor;
     }

@@ -5,6 +5,7 @@
  */
 package Interfase;
 
+import Common.Utilidades;
 import Common.componente;
 import Common.motorcomponente;
 import Common.motores;
@@ -15,6 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Common.cDatosException;
 import Dominio.dEmpresa;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,6 +29,7 @@ public class vMotorComponente extends javax.swing.JFrame {
     private int idComp = -1;
     private int idMotMC = -1;
     private int idCompMC = -1;
+    private int cantMC = -1;
     private ArrayList<motores> ListaMotores = new ArrayList<motores>();
     private ArrayList<componente> ListaComponente = new ArrayList<componente>();
     private ArrayList<motorcomponente> ListaMotorComponente = new ArrayList<motorcomponente>();
@@ -62,6 +66,7 @@ public class vMotorComponente extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
+        btnModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -105,14 +110,14 @@ public class vMotorComponente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id Motor", "Id Componente"
+                "Id Motor", "Id Componente", "Cantidad"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -142,7 +147,7 @@ public class vMotorComponente extends javax.swing.JFrame {
                 java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -178,15 +183,24 @@ public class vMotorComponente extends javax.swing.JFrame {
 
         txtCantidad.setText("1");
 
+        btnModificar.setText("Modificar cantidad");
+        btnModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModificarMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(213, 213, 213)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(177, 177, 177)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEliminar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(31, 31, 31)
@@ -198,7 +212,7 @@ public class vMotorComponente extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(55, 55, 55))
         );
@@ -214,15 +228,18 @@ public class vMotorComponente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAgregar)
                         .addGap(106, 106, 106)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnModificar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar)))
                 .addContainerGap())
         );
 
@@ -230,7 +247,7 @@ public class vMotorComponente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+        this.btnAgregar.setEnabled(false);
         motorcomponente unMotorComponente;
         motores unMotor;
         componente unComponente;
@@ -244,22 +261,48 @@ public class vMotorComponente extends javax.swing.JFrame {
 
             unMotor.setIdMotor(idMot);
             unComponente.setIdComp(idComp);
+            unMotor = dEmpresa.buscarMotor(unMotor);
+            unComponente = dEmpresa.buscarComponente(unComponente);
             unMotorComponente.setIdMotorMotorComponente(unMotor);
             unMotorComponente.setIdComponenteMotorComponente(unComponente);
             unMotorComponente.setCantidadMotorComponente(Integer.parseInt(this.txtCantidad.getText()));
-
-            dEmpresa.agregarMotorComponente(unMotorComponente);
-            JOptionPane.showMessageDialog(this, "Se ha dado de alta correctamente", "Cliente", JOptionPane.INFORMATION_MESSAGE);
-
-            ReiniciarControles();
+            if (ConsultarStock(unMotorComponente)) {
+                dEmpresa.agregarMotorComponente(unMotorComponente);
+                RestarDeStock(unMotorComponente);
+                JOptionPane.showMessageDialog(this, "Se ha dado de alta correctamente", "Motor-Componente", JOptionPane.INFORMATION_MESSAGE);
+                ReiniciarControles();
+            }
 
         } catch (Common.cDatosException e) {
             JOptionPane.showMessageDialog(this, e.toString(), "Cliente", JOptionPane.ERROR_MESSAGE);
         }
+        this.btnAgregar.setEnabled(true);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        this.btnEliminar.setEnabled(false);
+        componente unComp = new componente();
+        unComp.setIdComp(idCompMC);
+        motores unMot = new motores();
+        unMot.setIdMotor(idMotMC);
+
+        try {
+            unComp = dEmpresa.buscarComponente(unComp);
+            unMot = dEmpresa.buscarMotor(unMot);
+
+            motorcomponente unMotComp = new motorcomponente();
+            unMotComp.setIdComponenteMotorComponente(unComp);
+            unMotComp.setIdMotorMotorComponente(unMot);
+            unMotComp = dEmpresa.buscarMotorComponente(unMotComp);
+            dEmpresa.eliminarMotorComponente(unMotComp);
+            DevolverComponente(unMotComp);
+            ReiniciarControles();
+            JOptionPane.showMessageDialog(this, "Se ha dado eliminado correctamente", "Motor-Componente", JOptionPane.INFORMATION_MESSAGE);
+        } catch (cDatosException ex) {
+            JOptionPane.showMessageDialog(this, ex.toString(), "Cliente", JOptionPane.ERROR_MESSAGE);
+        }
+        this.btnEliminar.setEnabled(true);
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -304,8 +347,49 @@ public class vMotorComponente extends javax.swing.JFrame {
                 // tomo los datos de los clientes existentes
                 idMotMC = (int) tm.getValueAt(fila, 0);
                 idCompMC = (int) tm.getValueAt(fila, 1);
+                this.txtCantidad.setText(String.valueOf(tm.getValueAt(fila, 2)));
             }
         }    }//GEN-LAST:event_tblMotorComponenteMouseClicked
+
+    private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
+        this.btnModificar.setEnabled(false);
+        if (!this.txtCantidad.getText().equals("") && Utilidades.isNumeric(this.txtCantidad.getText()) && Integer.parseInt(this.txtCantidad.getText()) != cantMC) {
+
+            motorcomponente unMotComp = new motorcomponente();
+            motores unMot = new motores();
+            componente unComp = new componente();
+            try {
+//Ver para restar solo los componentes nuevos que se agregan yno todos otra vez
+                Integer comp;
+                Integer mot;
+                Integer cant;
+                mot = idMotMC;
+                comp = idCompMC;
+                cant = Integer.parseInt(this.txtCantidad.getText());
+
+                unMot.setIdMotor(mot);
+                unMotComp.setIdMotorMotorComponente(dEmpresa.buscarMotor(unMot));
+                unComp.setIdComp(comp);
+                unMotComp.setIdComponenteMotorComponente(unComp);
+                unMotComp.setCantidadMotorComponente(cant);
+                if (ConsultarStockModif(unMotComp)) {
+                    RestarDeStockModif(unMotComp);//Va antes del modificar para tener viejo y nuevo
+                    dEmpresa.modificarMotorComponente(unMotComp);
+                    ReiniciarControles();
+                    JOptionPane.showMessageDialog(this, "Se ha modificado correctamente", "Motor-Componente", JOptionPane.INFORMATION_MESSAGE);
+                }
+                idMotMC = -1;
+                idCompMC = -1;
+                cantMC = -1;
+            } catch (cDatosException e) {
+                JOptionPane.showMessageDialog(this, e.toString(), "Motor-Componente", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Datos ingresados incorrectamente", "Accion", JOptionPane.ERROR_MESSAGE);
+        }
+        this.btnModificar.setEnabled(true);
+    }//GEN-LAST:event_btnModificarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -345,6 +429,7 @@ public class vMotorComponente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -398,28 +483,34 @@ public class vMotorComponente extends javax.swing.JFrame {
             while (it.hasNext()) {
                 motorcomponente unMotorComponente = it.next();
                 DefaultTableModel tm = (DefaultTableModel) tblMotorComponente.getModel();
-                tm.addRow(new Object[]{new Integer(unMotorComponente.getIdMotorMotorComponente().getIdMotor()), new Integer(unMotorComponente.getIdComponenteMotorComponente().getIdComp())});
+                tm.addRow(new Object[]{new Integer(unMotorComponente.getIdMotorMotorComponente().getIdMotor()),
+                    new Integer(unMotorComponente.getIdComponenteMotorComponente().getIdComp()),
+                    new Integer(unMotorComponente.getCantidadMotorComponente())});
                 tblMotorComponente.setModel(tm);
             }
         } catch (Common.cDatosException e) {
             JOptionPane.showMessageDialog(this, e.toString(), "Motor Componente", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     public void LimpiarListMotorComponente() {
         DefaultTableModel dm = (DefaultTableModel) this.tblMotorComponente.getModel();
         dm.setRowCount(0);
         this.tblMotorComponente.setModel(dm);//limpia el jtable
     }
+
     public void LimpiarListComponente() {
         DefaultTableModel dm = (DefaultTableModel) this.tblComponente.getModel();
         dm.setRowCount(0);
         this.tblComponente.setModel(dm);//limpia el jtable
     }
+
     public void LimpiarListMotor() {
         DefaultTableModel dm = (DefaultTableModel) this.tblMotores.getModel();
         dm.setRowCount(0);
         this.tblMotores.setModel(dm);//limpia el jtable
     }
+
     private void ReiniciarControles() {
         LimpiarListComponente();
         LimpiarListMotor();
@@ -427,7 +518,98 @@ public class vMotorComponente extends javax.swing.JFrame {
         CargarDatosMotor();
         CargarDatosComponente();
         CargarDatosMotorComponente();
-        
+
+    }
+
+    private boolean ConsultarStock(motorcomponente unMotComp) throws cDatosException {
+        componente unComp = new componente();
+        unComp.setIdComp(unMotComp.getIdComponenteMotorComponente().getIdComp());
+        unComp = dEmpresa.buscarComponente(unComp);
+        if (unMotComp.getCantidadMotorComponente() <= unComp.getCantStockComp()) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(this, "Stock insuficiente", "Componente", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+
+        }
+    }
+
+    private void RestarDeStock(motorcomponente unMotComp) throws cDatosException {
+        componente unComp = new componente();
+        unComp.setIdComp(unMotComp.getIdComponenteMotorComponente().getIdComp());
+        unComp = dEmpresa.buscarComponente(unComp);
+
+        try {
+            int resta = unComp.getCantStockComp() - unMotComp.getCantidadMotorComponente();
+            unComp.setCantStockComp(resta);
+            dEmpresa.modificarComponente(unComp);
+            if (resta < unComp.getCantMinStockComp()) {
+                JOptionPane.showMessageDialog(this, "El stock minimo fue alcanzado", "Componente", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } catch (cDatosException e) {
+            JOptionPane.showMessageDialog(this, e.toString(), "Componente", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    private boolean ConsultarStockModif(motorcomponente unMotComp) throws cDatosException {
+        componente unComp = new componente();
+        unComp.setIdComp(unMotComp.getIdComponenteMotorComponente().getIdComp());
+        unComp = dEmpresa.buscarComponente(unComp);
+
+        motorcomponente unMotCompViejo = new motorcomponente();
+        unMotCompViejo.setIdComponenteMotorComponente(unMotComp.getIdComponenteMotorComponente());
+        unMotCompViejo.setIdMotorMotorComponente(unMotComp.getIdMotorMotorComponente());
+        unMotCompViejo = dEmpresa.buscarMotorComponente(unMotComp);
+
+        //Si restamos el nuevo al viejo se va a saber cuento es lo que en verdad se suma o se resta sin contar lo que ya esta
+        int seResta = unMotComp.getCantidadMotorComponente() - unMotCompViejo.getCantidadMotorComponente();
+        if (seResta <= unComp.getCantStockComp()) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(this, "Stock insuficiente", "Componente", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+
+        }
+    }
+
+    private void RestarDeStockModif(motorcomponente unMotComp) throws cDatosException {
+        componente unComp = new componente();
+        unComp.setIdComp(unMotComp.getIdComponenteMotorComponente().getIdComp());
+        unComp = dEmpresa.buscarComponente(unComp);
+
+        motorcomponente unMotCompViejo = new motorcomponente();
+        unMotCompViejo.setIdComponenteMotorComponente(unMotComp.getIdComponenteMotorComponente());
+        unMotCompViejo.setIdMotorMotorComponente(unMotComp.getIdMotorMotorComponente());
+        unMotCompViejo = dEmpresa.buscarMotorComponente(unMotComp);
+        int resta;//Identifica cuando se descuentan partes
+        int suma;//Identifica cuando se devuelven partes
+        //Si restamos el nuevo al viejo se va a saber cuento es lo que en verdad se suma o se resta sin contar lo que ya esta
+        int diferencia = unMotComp.getCantidadMotorComponente() - unMotCompViejo.getCantidadMotorComponente();//Si la diferencia es negativa es porque estan sacando partes 
+        if (diferencia >= 0) {
+            resta = unComp.getCantStockComp() - diferencia;
+            unComp.setCantStockComp(resta);
+            dEmpresa.modificarComponente(unComp);
+            if (resta < unComp.getCantMinStockComp()) {
+                JOptionPane.showMessageDialog(this, "El stock minimo fue alcanzado", "Componente", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            int aux = diferencia * -1;
+            suma = unComp.getCantStockComp() + aux;
+            unComp.setCantStockComp(suma);
+            dEmpresa.modificarComponente(unComp);
+        }
+    }
+
+    private void DevolverComponente(motorcomponente unMotComp) throws cDatosException {
+        componente unComp = new componente();
+        unComp.setIdComp(unMotComp.getIdComponenteMotorComponente().getIdComp());
+        unComp = dEmpresa.buscarComponente(unComp);
+
+        int suma = unComp.getCantStockComp() + unMotComp.getCantidadMotorComponente();//Devuelve los componentes al stock
+        unComp.setCantStockComp(suma);
+        dEmpresa.modificarComponente(unComp);
     }
 
 }

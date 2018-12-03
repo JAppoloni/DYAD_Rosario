@@ -18,6 +18,11 @@ private int cantStockComp;
 private int cantMinStockComp;
 private boolean isDeleted;
 
+    @Override
+    public String toString() {
+        return  idComp + ", " + descripcionComp ;
+    }
+
     public componente(int idComp, String descripcionComp, int costoComp, int cantStockComp, int cantMinStockComp, boolean isDeleted) {
         this.idComp = idComp;
         this.descripcionComp = descripcionComp;

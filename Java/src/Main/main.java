@@ -5,6 +5,8 @@
 package Main;
 
 import Dominio.dEmpresa;
+import Interfase.observer;
+import Interfase.vObservable;
 import Interfase.vPrincipal;
 
 
@@ -19,9 +21,14 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        vPrincipal ventanaPrincipal = new vPrincipal(Dominio.dEmpresa.getInstancia());
+        observer obs = new observer();
+        vPrincipal ventanaPrincipal = new vPrincipal(Dominio.dEmpresa.getInstancia(), obs);
         ventanaPrincipal.setLocationRelativeTo(null);
         ventanaPrincipal.setVisible(true);
+        vObservable ventanaObservable = new vObservable(Dominio.dEmpresa.getInstancia(), obs);
+        obs.addObserver(ventanaObservable);
+        ventanaObservable.setLocationRelativeTo(null);
+        ventanaObservable.setVisible(true);
     }
 
     public dEmpresa getEmpresa() {

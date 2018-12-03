@@ -35,7 +35,7 @@ public class dPedido {
 
     public pedido buscar(pedido ppedido) throws cDatosException {
         pedido unpedido = new pedido();
-        if (ppedido == null) {
+        if (ppedido.getIdPedido()!=0) {
             pGenerico persistencia = new pGenerico();
             unpedido = (pedido) persistencia.TraerEspecifico(ppedido);
         }
