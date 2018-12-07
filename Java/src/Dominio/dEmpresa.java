@@ -320,6 +320,12 @@ public class dEmpresa {
             return 0;
         }
     }
+    
+     public int TotalFacturado(Object o , Object o1) throws cDatosException, SQLException {
+            return  empresaFactura.TotalFacturado(o, o1);
+    }
+    
+    
 // </editor-fold>
 
     private dMotorComponente empresaMotorComponente = new dMotorComponente();

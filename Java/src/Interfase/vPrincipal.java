@@ -232,7 +232,7 @@ public class vPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmProveedorActionPerformed
 
     private void jmListadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmListadosActionPerformed
-         Listados ventnaListados = new Listados(empresa);
+         vListados ventnaListados = new vListados(empresa);
         //centra la ventana en la pantalla
         ventnaListados.setLocationRelativeTo(null);
         ventnaListados.setVisible(true);
