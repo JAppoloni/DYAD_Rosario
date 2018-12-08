@@ -5,7 +5,6 @@ import Common.factura;
 import Common.proveedorcomponente;
 import Dominio.dEmpresa;
 import com.toedter.calendar.JDateChooser;
-import datechooser.beans.DateChooserCombo;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
