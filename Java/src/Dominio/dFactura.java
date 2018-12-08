@@ -91,4 +91,9 @@ public class dFactura {
             return 0;
         }
     }
+    
+    public int TotalFacturado(Object o, Object o1) throws cDatosException, SQLException {
+            pFactura persistencia = new pFactura();
+         return (int) persistencia.TotalFacturado(o, o1);
+    }
 }

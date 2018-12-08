@@ -1,0 +1,1521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Java">
+  <ClassDiagramComponents>
+    <Class name="cDatosException" package="Common" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="msg"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="cliente" package="Common" visibility="public" xPosition="786.0" yPosition="3432.0">
+      <Fields>
+        <Field name="idClie" type="int" visibility="private"/>
+        <Field name="nombreEmpresaClie" type="String" visibility="private"/>
+        <Field name="nombreFantasiaClie" type="String" visibility="private"/>
+        <Field name="paisClie" type="String" visibility="private"/>
+        <Field name="direccionClie" type="String" visibility="private"/>
+        <Field name="contactoClie" type="String" visibility="private"/>
+        <Field name="isDeleted" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="int" name="idClie"/>
+          <Argument type="String" name="nombreEmpresaClie"/>
+          <Argument type="String" name="nombreFantasiaClie"/>
+          <Argument type="String" name="paisClie"/>
+          <Argument type="String" name="direccionClie"/>
+          <Argument type="String" name="contactoClie"/>
+          <Argument type="boolean" name="idDeleted"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="getIdClie" returnType="int" visibility="public"/>
+        <Method name="setIdClie" returnType="void" visibility="public">
+          <Argument type="int" name="idClie"/>
+        </Method>
+        <Method name="getNombreEmpresaClie" returnType="String" visibility="public"/>
+        <Method name="setNombreEmpresaClie" returnType="void" visibility="public">
+          <Argument type="String" name="nombreEmpresaClie"/>
+        </Method>
+        <Method name="getNombreFantasiaClie" returnType="String" visibility="public"/>
+        <Method name="setNombreFantasiaClie" returnType="void" visibility="public">
+          <Argument type="String" name="nombreFantasiaClie"/>
+        </Method>
+        <Method name="getPaisClie" returnType="String" visibility="public"/>
+        <Method name="setPaisClie" returnType="void" visibility="public">
+          <Argument type="String" name="paisClie"/>
+        </Method>
+        <Method name="getDireccionClie" returnType="String" visibility="public"/>
+        <Method name="setDireccionClie" returnType="void" visibility="public">
+          <Argument type="String" name="direccionClie"/>
+        </Method>
+        <Method name="getContactoClie" returnType="String" visibility="public"/>
+        <Method name="setContactoClie" returnType="void" visibility="public">
+          <Argument type="String" name="contactoClie"/>
+        </Method>
+        <Method name="isIdDeleted" returnType="boolean" visibility="public"/>
+        <Method name="setIdDeleted" returnType="void" visibility="public">
+          <Argument type="boolean" name="idDeleted"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="componente" package="Common" visibility="public" xPosition="361.0" yPosition="1214.0">
+      <Fields>
+        <Field name="idComp" type="int" visibility="private"/>
+        <Field name="descripcionComp" type="String" visibility="private"/>
+        <Field name="costoComp" type="int" visibility="private"/>
+        <Field name="cantStockComp" type="int" visibility="private"/>
+        <Field name="cantMinStockComp" type="int" visibility="private"/>
+        <Field name="isDeleted" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="idComp"/>
+          <Argument type="String" name="descripcionComp"/>
+          <Argument type="int" name="costoComp"/>
+          <Argument type="int" name="cantStockComp"/>
+          <Argument type="int" name="cantMinStockComp"/>
+          <Argument type="boolean" name="isDeleted"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="getIdComp" returnType="int" visibility="public"/>
+        <Method name="setIdComp" returnType="void" visibility="public">
+          <Argument type="int" name="idComp"/>
+        </Method>
+        <Method name="getDescripcionComp" returnType="String" visibility="public"/>
+        <Method name="setDescripcionComp" returnType="void" visibility="public">
+          <Argument type="String" name="descripcionComp"/>
+        </Method>
+        <Method name="getCostoComp" returnType="int" visibility="public"/>
+        <Method name="setCostoComp" returnType="void" visibility="public">
+          <Argument type="int" name="costoComp"/>
+        </Method>
+        <Method name="getCantStockComp" returnType="int" visibility="public"/>
+        <Method name="setCantStockComp" returnType="void" visibility="public">
+          <Argument type="int" name="cantStockComp"/>
+        </Method>
+        <Method name="getCantMinStockComp" returnType="int" visibility="public"/>
+        <Method name="setCantMinStockComp" returnType="void" visibility="public">
+          <Argument type="int" name="cantMinStockComp"/>
+        </Method>
+        <Method name="isIsDeleted" returnType="boolean" visibility="public"/>
+        <Method name="setIsDeleted" returnType="void" visibility="public">
+          <Argument type="boolean" name="isDeletedComp"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="factura" package="Common" visibility="public" xPosition="1882.0" yPosition="131.0">
+      <Fields>
+        <Field name="idFactura" type="int" visibility="private"/>
+        <Field name="fechaPagoFactura" type="Date" visibility="private"/>
+        <Field name="idPedidoFactura" type="pedido" visibility="private"/>
+        <Field name="isDeleted" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="int" name="idFactura"/>
+          <Argument type="Date" name="fechaPagoFactura"/>
+          <Argument type="pedido" name="idPedidoFactura"/>
+          <Argument type="boolean" name="isDeleted"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getIdFactura" returnType="int" visibility="public"/>
+        <Method name="setIdFactura" returnType="void" visibility="public">
+          <Argument type="int" name="idFactura"/>
+        </Method>
+        <Method name="getFechaPagoFactura" returnType="Date" visibility="public"/>
+        <Method name="setFechaPagoFactura" returnType="void" visibility="public">
+          <Argument type="Date" name="fechaPagoFactura"/>
+        </Method>
+        <Method name="getIdPedidoFactura" returnType="pedido" visibility="public"/>
+        <Method name="setIdPedidoFactura" returnType="void" visibility="public">
+          <Argument type="pedido" name="idPedidoFactura"/>
+        </Method>
+        <Method name="isIsDeleted" returnType="boolean" visibility="public"/>
+        <Method name="setIsDeleted" returnType="void" visibility="public">
+          <Argument type="boolean" name="isDeleted"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="motorcomponente" package="Common" visibility="public" xPosition="1191.0" yPosition="530.0">
+      <Fields>
+        <Field name="idMotorMotorComponente" type="motores" visibility="private"/>
+        <Field name="idComponenteMotorComponente" type="componente" visibility="private"/>
+        <Field name="cantidadMotorComponente" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="motores" name="idMotorMotorComponente"/>
+          <Argument type="componente" name="idComponenteMotorComponente"/>
+          <Argument type="int" name="cantidadMotorComponente"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getIdMotorMotorComponente" returnType="motores" visibility="public"/>
+        <Method name="setIdMotorMotorComponente" returnType="void" visibility="public">
+          <Argument type="motores" name="idMotorMotorComponente"/>
+        </Method>
+        <Method name="getIdComponenteMotorComponente" returnType="componente" visibility="public"/>
+        <Method name="setIdComponenteMotorComponente" returnType="void" visibility="public">
+          <Argument type="componente" name="idComponenteMotorComponente"/>
+        </Method>
+        <Method name="getCantidadMotorComponente" returnType="int" visibility="public"/>
+        <Method name="setCantidadMotorComponente" returnType="void" visibility="public">
+          <Argument type="int" name="cantidadMotorComponente"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="motores" package="Common" visibility="public" xPosition="6922.0" yPosition="1552.0">
+      <Fields>
+        <Field name="idMotor" type="int" visibility="private"/>
+        <Field name="nombreMotor" type="String" visibility="private"/>
+        <Field name="isDeleted" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="idMotor"/>
+          <Argument type="String" name="nombreMotor"/>
+          <Argument type="boolean" name="isDeleted"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getIdMotor" returnType="int" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="setIdMotor" returnType="void" visibility="public">
+          <Argument type="int" name="idMotor"/>
+        </Method>
+        <Method name="getNombreMotor" returnType="String" visibility="public"/>
+        <Method name="setNombreMotor" returnType="void" visibility="public">
+          <Argument type="String" name="nombreMotor"/>
+        </Method>
+        <Method name="isIsDeleted" returnType="boolean" visibility="public"/>
+        <Method name="setIsDeleted" returnType="void" visibility="public">
+          <Argument type="boolean" name="isDeleted"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="pedido" package="Common" visibility="public" xPosition="5076.0" yPosition="2536.0">
+      <Fields>
+        <Field name="idPedido" type="int" visibility="private"/>
+        <Field name="idClientePedido" type="cliente" visibility="private"/>
+        <Field name="fechaDeEntregaPedido" type="Date" visibility="private"/>
+        <Field name="isDeleted" type="boolean" visibility="private"/>
+        <Field name="idMotorPedido" type="motores" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="idPedido"/>
+          <Argument type="cliente" name="idClientePedido"/>
+          <Argument type="Date" name="fechaDeEntregaPedido"/>
+          <Argument type="boolean" name="isDeleted"/>
+          <Argument type="motores" name="idMotorPedido"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getIdPedido" returnType="int" visibility="public"/>
+        <Method name="setIdPedido" returnType="void" visibility="public">
+          <Argument type="int" name="idPedido"/>
+        </Method>
+        <Method name="getIdClientePedido" returnType="cliente" visibility="public"/>
+        <Method name="setIdClientePedido" returnType="void" visibility="public">
+          <Argument type="cliente" name="idClientePedido"/>
+        </Method>
+        <Method name="getFechaDeEntregaPedido" returnType="Date" visibility="public"/>
+        <Method name="setFechaDeEntregaPedido" returnType="void" visibility="public">
+          <Argument type="Date" name="fechaDeEntregaPedido"/>
+        </Method>
+        <Method name="isIsDeleted" returnType="boolean" visibility="public"/>
+        <Method name="setIsDeleted" returnType="void" visibility="public">
+          <Argument type="boolean" name="isDeleted"/>
+        </Method>
+        <Method name="getIdMotorPedido" returnType="motores" visibility="public"/>
+        <Method name="setIdMotorPedido" returnType="void" visibility="public">
+          <Argument type="motores" name="idMotorPedido"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="proveedor" package="Common" visibility="public" xPosition="4376.0" yPosition="52.0">
+      <Fields>
+        <Field name="idProveedor" type="int" visibility="private"/>
+        <Field name="nombreProveedor" type="String" visibility="private"/>
+        <Field name="descProveedor" type="String" visibility="private"/>
+        <Field name="IsDeleted" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="idProveedor"/>
+          <Argument type="String" name="nombreProveedor"/>
+          <Argument type="String" name="descProveedor"/>
+          <Argument type="boolean" name="IsDeleted"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="getIdProveedor" returnType="int" visibility="public"/>
+        <Method name="setIdProveedor" returnType="void" visibility="public">
+          <Argument type="int" name="idProveedor"/>
+        </Method>
+        <Method name="getNombreProveedor" returnType="String" visibility="public"/>
+        <Method name="setNombreProveedor" returnType="void" visibility="public">
+          <Argument type="String" name="nombreProveedor"/>
+        </Method>
+        <Method name="getDescProveedor" returnType="String" visibility="public"/>
+        <Method name="setDescProveedor" returnType="void" visibility="public">
+          <Argument type="String" name="descProveedor"/>
+        </Method>
+        <Method name="isIsDeleted" returnType="boolean" visibility="public"/>
+        <Method name="setIsDeleted" returnType="void" visibility="public">
+          <Argument type="boolean" name="IsDeleted"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="proveedorcomponente" package="Common" visibility="public" xPosition="471.0" yPosition="65.0">
+      <Fields>
+        <Field name="idProveedorProveedorComponente" type="proveedor" visibility="private"/>
+        <Field name="idComponenteProveedorComponente" type="componente" visibility="private"/>
+        <Field name="isDeleted" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="proveedor" name="idProveedorProveedorComponente"/>
+          <Argument type="componente" name="idComponenteProveedorComponente"/>
+          <Argument type="boolean" name="isDeletedProveedorComponente"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getIdProveedorProveedorComponente" returnType="proveedor" visibility="public"/>
+        <Method name="setIdProveedorProveedorComponente" returnType="void" visibility="public">
+          <Argument type="proveedor" name="idProveedorProveedorComponente"/>
+        </Method>
+        <Method name="getIdComponenteProveedorComponente" returnType="componente" visibility="public"/>
+        <Method name="setIdComponenteProveedorComponente" returnType="void" visibility="public">
+          <Argument type="componente" name="idComponenteProveedorComponente"/>
+        </Method>
+        <Method name="isIsDeletedProveedorComponente" returnType="boolean" visibility="public"/>
+        <Method name="setIsDeletedProveedorComponente" returnType="void" visibility="public">
+          <Argument type="boolean" name="isDeletedProveedorComponente"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Utilidades" package="Common" visibility="public" xPosition="91.0" yPosition="501.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="isNumeric" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="String" name="cadena"/>
+        </Method>
+        <Method name="validarFecha" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="String" name="fechax"/>
+        </Method>
+        <Method name="convertirSqlToDateUtil" returnType="java.util.Date" visibility="public" isStatic="true">
+          <Argument type="java.sql.Date" name="uDate"/>
+        </Method>
+        <Method name="convertirDateUtilAString" returnType="String" visibility="public" isStatic="true">
+          <Argument type="java.util.Date" name="utilDate"/>
+        </Method>
+        <Method name="convertirDateUtilAStringBD" returnType="String" visibility="public" isStatic="true">
+          <Argument type="java.util.Date" name="utilDate"/>
+        </Method>
+        <Method name="convertirDeStringAUtilDate" returnType="Date" visibility="public" isStatic="true">
+          <Argument type="String" name="fecha"/>
+        </Method>
+        <Method name="fechaDeHoy" returnType="java.util.Date" visibility="public" isStatic="true"/>
+      </Methods>
+    </Class>
+    <Class name="dCliente" package="Dominio" visibility="public" xPosition="501.0" yPosition="511.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="Alta" returnType="void" visibility="public">
+          <Argument type="cliente" name="pCliente"/>
+        </Method>
+        <Method name="modificar" returnType="void" visibility="public">
+          <Argument type="cliente" name="pCliente"/>
+        </Method>
+        <Method name="eliminar" returnType="void" visibility="public">
+          <Argument type="cliente" name="pCliente"/>
+        </Method>
+        <Method name="buscar" returnType="cliente" visibility="public">
+          <Argument type="cliente" name="pCliente"/>
+        </Method>
+        <Method name="BuscarTodosSinEliminados" returnType="ArrayList" visibility="public"/>
+        <Method name="BuscarTodos" returnType="ArrayList" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="dComponente" package="Dominio" visibility="public" xPosition="818.0" yPosition="636.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="Alta" returnType="void" visibility="public">
+          <Argument type="componente" name="pcomponente"/>
+        </Method>
+        <Method name="modificar" returnType="void" visibility="public">
+          <Argument type="componente" name="pcomponente"/>
+        </Method>
+        <Method name="eliminar" returnType="void" visibility="public">
+          <Argument type="componente" name="pcomponente"/>
+        </Method>
+        <Method name="buscar" returnType="componente" visibility="public">
+          <Argument type="componente" name="pcomponente"/>
+        </Method>
+        <Method name="BuscarTodosSinEliminados" returnType="ArrayList" visibility="public"/>
+        <Method name="BuscarTodos" returnType="ArrayList" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="dEmpresa" package="Dominio" visibility="public" xPosition="4390.0" yPosition="594.0">
+      <Fields>
+        <Field name="instancia" type="dEmpresa" visibility="private" isStatic="true"/>
+        <Field name="empresaCliente" type="dCliente" visibility="private"/>
+        <Field name="empresaComponente" type="dComponente" visibility="private"/>
+        <Field name="empresaFactura" type="dFactura" visibility="private"/>
+        <Field name="empresaMotorComponente" type="dMotorComponente" visibility="private"/>
+        <Field name="empresaProveedor" type="dProveedor" visibility="private"/>
+        <Field name="empresaMotor" type="dMotores" visibility="private"/>
+        <Field name="empresaPedido" type="dPedido" visibility="private"/>
+        <Field name="empresaProveedorComponente" type="dProveedorComponente" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getInstancia" returnType="dEmpresa" visibility="public" isStatic="true"/>
+        <Method name="buscarCliente" returnType="cliente" visibility="public">
+          <Argument type="cliente" name="pCliente"/>
+        </Method>
+        <Method name="buscarTodosClientes" returnType="ArrayList" visibility="public"/>
+        <Method name="buscarTodosClientesSinEliminados" returnType="ArrayList" visibility="public"/>
+        <Method name="agregarCliente" returnType="boolean" visibility="public">
+          <Argument type="cliente" name="clien"/>
+        </Method>
+        <Method name="modificarCliente" returnType="boolean" visibility="public">
+          <Argument type="cliente" name="clien"/>
+        </Method>
+        <Method name="eliminarCliente" returnType="boolean" visibility="public">
+          <Argument type="cliente" name="clien"/>
+        </Method>
+        <Method name="buscarComponente" returnType="componente" visibility="public">
+          <Argument type="componente" name="pComponente"/>
+        </Method>
+        <Method name="buscarTodosComponentes" returnType="ArrayList" visibility="public"/>
+        <Method name="buscarTodosComponentesSinEliminados" returnType="ArrayList" visibility="public"/>
+        <Method name="agregarComponente" returnType="boolean" visibility="public">
+          <Argument type="componente" name="compo"/>
+        </Method>
+        <Method name="modificarComponente" returnType="boolean" visibility="public">
+          <Argument type="componente" name="compo"/>
+        </Method>
+        <Method name="eliminarComponente" returnType="boolean" visibility="public">
+          <Argument type="componente" name="compo"/>
+        </Method>
+        <Method name="buscarFactura" returnType="factura" visibility="public">
+          <Argument type="factura" name="pFactura"/>
+        </Method>
+        <Method name="buscarTodosFacturas" returnType="ArrayList" visibility="public"/>
+        <Method name="buscarTodosFacturasSinEliminados" returnType="ArrayList" visibility="public"/>
+        <Method name="agregarFactura" returnType="boolean" visibility="public">
+          <Argument type="factura" name="factu"/>
+        </Method>
+        <Method name="modificarFactura" returnType="boolean" visibility="public">
+          <Argument type="factura" name="fact"/>
+        </Method>
+        <Method name="eliminarFactura" returnType="boolean" visibility="public">
+          <Argument type="factura" name="fact"/>
+        </Method>
+        <Method name="calcularCostoXPedido" returnType="int" visibility="public">
+          <Argument type="pedido" name="ppedido"/>
+        </Method>
+        <Method name="buscarMotorComponente" returnType="motorcomponente" visibility="public">
+          <Argument type="motorcomponente" name="pMotorComponente"/>
+        </Method>
+        <Method name="buscarTodosMotoresComponentes" returnType="ArrayList" visibility="public"/>
+        <Method name="buscarTodosMotoresComponentesSinEliminados" returnType="ArrayList" visibility="public"/>
+        <Method name="agregarMotorComponente" returnType="boolean" visibility="public">
+          <Argument type="motorcomponente" name="motcompo"/>
+        </Method>
+        <Method name="eliminarMotorComponente" returnType="boolean" visibility="public">
+          <Argument type="motorcomponente" name="motcompo"/>
+        </Method>
+        <Method name="modificarMotorComponente" returnType="boolean" visibility="public">
+          <Argument type="motorcomponente" name="motcomp"/>
+        </Method>
+        <Method name="buscarProveedor" returnType="proveedor" visibility="public">
+          <Argument type="proveedor" name="pProveedor"/>
+        </Method>
+        <Method name="buscarTodosProveedor" returnType="ArrayList" visibility="public"/>
+        <Method name="buscarTodosProveedorSinEliminados" returnType="ArrayList" visibility="public"/>
+        <Method name="agregarProveedor" returnType="boolean" visibility="public">
+          <Argument type="proveedor" name="prov"/>
+        </Method>
+        <Method name="modificarProveedor" returnType="boolean" visibility="public">
+          <Argument type="proveedor" name="prov"/>
+        </Method>
+        <Method name="eliminarProveedor" returnType="boolean" visibility="public">
+          <Argument type="proveedor" name="prov"/>
+        </Method>
+        <Method name="buscarMotor" returnType="motores" visibility="public">
+          <Argument type="motores" name="pMotor"/>
+        </Method>
+        <Method name="buscarTodosMotores" returnType="ArrayList" visibility="public"/>
+        <Method name="buscarTodosMotoresSinEliminados" returnType="ArrayList" visibility="public"/>
+        <Method name="agregarMotor" returnType="boolean" visibility="public">
+          <Argument type="motores" name="moto"/>
+        </Method>
+        <Method name="modificarMotor" returnType="boolean" visibility="public">
+          <Argument type="motores" name="moto"/>
+        </Method>
+        <Method name="eliminarMotor" returnType="boolean" visibility="public">
+          <Argument type="motores" name="moto"/>
+        </Method>
+        <Method name="buscarPedido" returnType="pedido" visibility="public">
+          <Argument type="pedido" name="pPedido"/>
+        </Method>
+        <Method name="buscarTodosPedidos" returnType="ArrayList" visibility="public"/>
+        <Method name="buscarTodosPedidosSinEliminados" returnType="ArrayList" visibility="public"/>
+        <Method name="agregarPedido" returnType="boolean" visibility="public">
+          <Argument type="pedido" name="pedid"/>
+        </Method>
+        <Method name="modificarPedido" returnType="boolean" visibility="public">
+          <Argument type="pedido" name="pedid"/>
+        </Method>
+        <Method name="eliminarPedido" returnType="boolean" visibility="public">
+          <Argument type="pedido" name="pedid"/>
+        </Method>
+        <Method name="buscarProveedorComponente" returnType="proveedorcomponente" visibility="public">
+          <Argument type="proveedorcomponente" name="pProveedorComponente"/>
+        </Method>
+        <Method name="buscarTodosProveedoresComponentes" returnType="ArrayList" visibility="public"/>
+        <Method name="buscarTodosProveedoresComponentesSinEliminados" returnType="ArrayList" visibility="public"/>
+        <Method name="agregarProveedorComponente" returnType="boolean" visibility="public">
+          <Argument type="proveedorcomponente" name="provcompo"/>
+        </Method>
+        <Method name="eliminarProveedorComponente" returnType="boolean" visibility="public">
+          <Argument type="proveedorcomponente" name="provcomp"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="dFactura" package="Dominio" visibility="public" xPosition="2918.0" yPosition="52.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="Alta" returnType="void" visibility="public">
+          <Argument type="factura" name="pfactura"/>
+        </Method>
+        <Method name="modificar" returnType="void" visibility="public">
+          <Argument type="factura" name="pfactura"/>
+        </Method>
+        <Method name="eliminar" returnType="void" visibility="public">
+          <Argument type="factura" name="pfactura"/>
+        </Method>
+        <Method name="buscar" returnType="factura" visibility="public">
+          <Argument type="factura" name="pfactura"/>
+        </Method>
+        <Method name="BuscarTodosSinEliminados" returnType="ArrayList" visibility="public"/>
+        <Method name="BuscarTodos" returnType="ArrayList" visibility="public"/>
+        <Method name="calcularCostoXPedido" returnType="int" visibility="public">
+          <Argument type="pedido" name="ppedido"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="dMotorComponente" package="Dominio" visibility="public" xPosition="1746.0" yPosition="1017.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="agregar" returnType="void" visibility="public">
+          <Argument type="motorcomponente" name="pmotorcomponente"/>
+        </Method>
+        <Method name="modificar" returnType="void" visibility="public">
+          <Argument type="motorcomponente" name="pmotorcomponente"/>
+        </Method>
+        <Method name="eliminar" returnType="void" visibility="public">
+          <Argument type="motorcomponente" name="pmotorcomponente"/>
+        </Method>
+        <Method name="Buscar" returnType="motorcomponente" visibility="public">
+          <Argument type="motorcomponente" name="pmotorcomponente"/>
+        </Method>
+        <Method name="BuscarTodos" returnType="ArrayList" visibility="public"/>
+        <Method name="BuscarTodosSinELiminados" returnType="ArrayList" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="dMotores" package="Dominio" visibility="public" xPosition="4461.0" yPosition="2154.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="agregar" returnType="void" visibility="public">
+          <Argument type="motores" name="pmotores"/>
+        </Method>
+        <Method name="modificar" returnType="void" visibility="public">
+          <Argument type="motores" name="pmotores"/>
+        </Method>
+        <Method name="eliminar" returnType="void" visibility="public">
+          <Argument type="motores" name="pmotores"/>
+        </Method>
+        <Method name="Buscar" returnType="motores" visibility="public">
+          <Argument type="motores" name="pmotores"/>
+        </Method>
+        <Method name="BuscarTodos" returnType="ArrayList" visibility="public"/>
+        <Method name="BuscarTodosSinELiminados" returnType="ArrayList" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="dPedido" package="Dominio" visibility="public" xPosition="20.0" yPosition="820.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="Alta" returnType="void" visibility="public">
+          <Argument type="pedido" name="ppedido"/>
+        </Method>
+        <Method name="modificar" returnType="void" visibility="public">
+          <Argument type="pedido" name="ppedido"/>
+        </Method>
+        <Method name="eliminar" returnType="void" visibility="public">
+          <Argument type="pedido" name="ppedido"/>
+        </Method>
+        <Method name="buscar" returnType="pedido" visibility="public">
+          <Argument type="pedido" name="ppedido"/>
+        </Method>
+        <Method name="BuscarTodosSinEliminados" returnType="ArrayList" visibility="public"/>
+        <Method name="BuscarTodos" returnType="ArrayList" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="dProveedor" package="Dominio" visibility="public" xPosition="320.0" yPosition="820.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="Alta" returnType="void" visibility="public">
+          <Argument type="proveedor" name="pproveedor"/>
+        </Method>
+        <Method name="modificar" returnType="void" visibility="public">
+          <Argument type="proveedor" name="pproveedor"/>
+        </Method>
+        <Method name="eliminar" returnType="void" visibility="public">
+          <Argument type="proveedor" name="pproveedor"/>
+        </Method>
+        <Method name="buscar" returnType="proveedor" visibility="public">
+          <Argument type="proveedor" name="pproveedor"/>
+        </Method>
+        <Method name="BuscarTodosSinEliminados" returnType="ArrayList" visibility="public"/>
+        <Method name="BuscarTodos" returnType="ArrayList" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="dProveedorComponente" package="Dominio" visibility="public" xPosition="1205.0" yPosition="1441.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="Alta" returnType="void" visibility="public">
+          <Argument type="proveedorcomponente" name="pproveedorcomponente"/>
+        </Method>
+        <Method name="modificar" returnType="void" visibility="public">
+          <Argument type="proveedorcomponente" name="pproveedorcomponente"/>
+        </Method>
+        <Method name="eliminar" returnType="void" visibility="public">
+          <Argument type="proveedorcomponente" name="pproveedorcomponente"/>
+        </Method>
+        <Method name="buscar" returnType="proveedorcomponente" visibility="public">
+          <Argument type="proveedorcomponente" name="pproveedorcomponente"/>
+        </Method>
+        <Method name="BuscarTodosSinEliminados" returnType="ArrayList" visibility="public"/>
+        <Method name="BuscarTodos" returnType="ArrayList" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="observer" package="Interfase" visibility="public" xPosition="2178.0" yPosition="1620.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="notificar" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="vCliente" package="Interfase" visibility="public" xPosition="2543.0" yPosition="1354.0">
+      <Fields>
+        <Field name="ListaClientes" type="ArrayList&lt;cliente&gt;" visibility="private"/>
+        <Field name="dEmpresa" type="dEmpresa" visibility="private"/>
+        <Field name="btnAgregar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnEliminar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnModificar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel10" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel11" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel12" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel13" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel14" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel15" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel5" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel7" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel8" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel9" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel1" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPanel2" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPanel3" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jTabbedPane1" type="javax.swing.JTabbedPane" visibility="private"/>
+        <Field name="jTabbedPane3" type="javax.swing.JTabbedPane" visibility="private"/>
+        <Field name="tblEliCli" type="javax.swing.JTable" visibility="private"/>
+        <Field name="txtDirCli" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtDirCli1" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtIdCli" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtIdCli1" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtNomEmpCli" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtNomEmpCli1" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtNomFanCli" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtNomFanCli1" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtPaisCli" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtPaisCli1" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtTelCli" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtTelCli1" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="dEmpresa" name="pEmp"/>
+        </Constructor>
+        <Constructor visibility="private"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="btnAgregarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliCliMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliCliFocusGained" returnType="void" visibility="private">
+          <Argument type="java.awt.event.FocusEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliCliHierarchyChanged" returnType="void" visibility="private">
+          <Argument type="java.awt.event.HierarchyEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliCliCaretPositionChanged" returnType="void" visibility="private">
+          <Argument type="java.awt.event.InputMethodEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliCliPropertyChange" returnType="void" visibility="private">
+          <Argument type="java.beans.PropertyChangeEvent" name="evt"/>
+        </Method>
+        <Method name="btnEliminarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnModificarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="txtNomFanCliActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="formWindowOpened" returnType="void" visibility="private">
+          <Argument type="java.awt.event.WindowEvent" name="evt"/>
+        </Method>
+        <Method name="txtNomFanCli1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="ReiniciarControles" returnType="void" visibility="private"/>
+        <Method name="LimpiarList" returnType="void" visibility="public"/>
+        <Method name="CargarDatosList" returnType="void" visibility="public"/>
+        <Method name="LimpiarCampos" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="vComponente" package="Interfase" visibility="public" xPosition="5350.0" yPosition="820.0">
+      <Fields>
+        <Field name="ListaComponentes" type="ArrayList&lt;componente&gt;" visibility="private"/>
+        <Field name="dEmpresa" type="dEmpresa" visibility="private"/>
+        <Field name="btnAgregar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnEliminar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnModificar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel10" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel11" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel12" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel13" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel5" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel7" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel8" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel9" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel1" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPanel3" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jTabbedPane1" type="javax.swing.JTabbedPane" visibility="private"/>
+        <Field name="tblEliComp" type="javax.swing.JTable" visibility="private"/>
+        <Field name="txtCantMinStockComp" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtCantMinStockComp1" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtCantStockComp" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtCantStockComp1" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtCostoComp" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtCostoComp1" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtDescComp" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtDescComp1" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtIdComp1" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="dEmpresa" name="pEmp"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="btnAgregarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliCompMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliCompFocusGained" returnType="void" visibility="private">
+          <Argument type="java.awt.event.FocusEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliCompHierarchyChanged" returnType="void" visibility="private">
+          <Argument type="java.awt.event.HierarchyEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliCompCaretPositionChanged" returnType="void" visibility="private">
+          <Argument type="java.awt.event.InputMethodEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliCompPropertyChange" returnType="void" visibility="private">
+          <Argument type="java.beans.PropertyChangeEvent" name="evt"/>
+        </Method>
+        <Method name="btnEliminarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnModificarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="txtIdComp1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="formWindowOpened" returnType="void" visibility="private">
+          <Argument type="java.awt.event.WindowEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="ReiniciarControles" returnType="void" visibility="private"/>
+        <Method name="LimpiarList" returnType="void" visibility="public"/>
+        <Method name="CargarDatosList" returnType="void" visibility="public"/>
+        <Method name="LimpiarCampos" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="vFactura" package="Interfase" visibility="public" xPosition="2619.0" yPosition="369.0">
+      <Fields>
+        <Field name="ListaPedido" type="ArrayList&lt;pedido&gt;" visibility="private"/>
+        <Field name="ListaFactura" type="ArrayList&lt;factura&gt;" visibility="private"/>
+        <Field name="dEmpresa" type="dEmpresa" visibility="private"/>
+        <Field name="btnAgregar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnEliminar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel5" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel6" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel1" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPanel3" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane2" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jTabbedPane1" type="javax.swing.JTabbedPane" visibility="private"/>
+        <Field name="jdcFechaPago" type="com.toedter.calendar.JDateChooser" visibility="private"/>
+        <Field name="tblEliFact" type="javax.swing.JTable" visibility="private"/>
+        <Field name="tblIngPed" type="javax.swing.JTable" visibility="private"/>
+        <Field name="txtCosto" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtIdEliminar" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtIdPedido" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="dEmpresa" name="pEmp"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="btnAgregarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliFactMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliFactFocusGained" returnType="void" visibility="private">
+          <Argument type="java.awt.event.FocusEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliFactHierarchyChanged" returnType="void" visibility="private">
+          <Argument type="java.awt.event.HierarchyEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliFactCaretPositionChanged" returnType="void" visibility="private">
+          <Argument type="java.awt.event.InputMethodEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliFactPropertyChange" returnType="void" visibility="private">
+          <Argument type="java.beans.PropertyChangeEvent" name="evt"/>
+        </Method>
+        <Method name="btnEliminarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="txtIdEliminarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="formWindowOpened" returnType="void" visibility="private">
+          <Argument type="java.awt.event.WindowEvent" name="evt"/>
+        </Method>
+        <Method name="tblIngPedMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="ReiniciarControles" returnType="void" visibility="private"/>
+        <Method name="LimpiarListFac" returnType="void" visibility="public"/>
+        <Method name="LimpiarListPed" returnType="void" visibility="public"/>
+        <Method name="CargarDatosListPedido" returnType="void" visibility="public"/>
+        <Method name="CargarDatosListFactura" returnType="void" visibility="public"/>
+        <Method name="LimpiarCampos" returnType="void" visibility="public"/>
+        <Method name="CargarCosto" returnType="void" visibility="private">
+          <Argument type="String" name="id"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="vMotor" package="Interfase" visibility="public" xPosition="5861.0" yPosition="167.0">
+      <Fields>
+        <Field name="ListaMotores" type="ArrayList&lt;motores&gt;" visibility="private"/>
+        <Field name="dEmpresa" type="dEmpresa" visibility="private"/>
+        <Field name="btnAgregar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnEliminar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnModificar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel4" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel1" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPanel3" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jScrollPane2" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jTabbedPane1" type="javax.swing.JTabbedPane" visibility="private"/>
+        <Field name="tblEliMot" type="javax.swing.JTable" visibility="private"/>
+        <Field name="txtIdEli" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtNomEli" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtNomMot" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="dEmpresa" name="pEmp"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="btnAgregarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnEliminarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="txtIdEliActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnModificarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="formWindowOpened" returnType="void" visibility="private">
+          <Argument type="java.awt.event.WindowEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliMotMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="ReiniciarControles" returnType="void" visibility="private"/>
+        <Method name="LimpiarList" returnType="void" visibility="public"/>
+        <Method name="CargarDatosList" returnType="void" visibility="public"/>
+        <Method name="LimpiarCampos" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="vMotorComponente" package="Interfase" visibility="public" xPosition="1545.0" yPosition="2338.0">
+      <Fields>
+        <Field name="idMot" type="int" visibility="private"/>
+        <Field name="idComp" type="int" visibility="private"/>
+        <Field name="idMotMC" type="int" visibility="private"/>
+        <Field name="idCompMC" type="int" visibility="private"/>
+        <Field name="cantMC" type="int" visibility="private"/>
+        <Field name="ListaMotores" type="ArrayList&lt;motores&gt;" visibility="private"/>
+        <Field name="ListaComponente" type="ArrayList&lt;componente&gt;" visibility="private"/>
+        <Field name="ListaMotorComponente" type="ArrayList&lt;motorcomponente&gt;" visibility="private"/>
+        <Field name="dEmpresa" type="dEmpresa" visibility="private"/>
+        <Field name="btnAgregar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnEliminar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnModificar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane2" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane3" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="tblComponente" type="javax.swing.JTable" visibility="private"/>
+        <Field name="tblMotorComponente" type="javax.swing.JTable" visibility="private"/>
+        <Field name="tblMotores" type="javax.swing.JTable" visibility="private"/>
+        <Field name="txtCantidad" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="dEmpresa" name="pEmp"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="btnAgregarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnEliminarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="formWindowOpened" returnType="void" visibility="private">
+          <Argument type="java.awt.event.WindowEvent" name="evt"/>
+        </Method>
+        <Method name="tblMotoresMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="tblComponenteMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="tblMotorComponenteMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="btnModificarMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="CargarDatosMotor" returnType="void" visibility="public"/>
+        <Method name="CargarDatosComponente" returnType="void" visibility="public"/>
+        <Method name="CargarDatosMotorComponente" returnType="void" visibility="public"/>
+        <Method name="LimpiarListMotorComponente" returnType="void" visibility="public"/>
+        <Method name="LimpiarListComponente" returnType="void" visibility="public"/>
+        <Method name="LimpiarListMotor" returnType="void" visibility="public"/>
+        <Method name="ReiniciarControles" returnType="void" visibility="private"/>
+        <Method name="ConsultarStock" returnType="boolean" visibility="private">
+          <Argument type="motorcomponente" name="unMotComp"/>
+        </Method>
+        <Method name="RestarDeStock" returnType="void" visibility="private">
+          <Argument type="motorcomponente" name="unMotComp"/>
+        </Method>
+        <Method name="ConsultarStockModif" returnType="boolean" visibility="private">
+          <Argument type="motorcomponente" name="unMotComp"/>
+        </Method>
+        <Method name="RestarDeStockModif" returnType="void" visibility="private">
+          <Argument type="motorcomponente" name="unMotComp"/>
+        </Method>
+        <Method name="DevolverComponente" returnType="void" visibility="private">
+          <Argument type="motorcomponente" name="unMotComp"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="vObservable" package="Interfase" visibility="public" xPosition="3487.0" yPosition="3248.0">
+      <Fields>
+        <Field name="ListaPedidos" type="ArrayList&lt;pedido&gt;" visibility="private"/>
+        <Field name="empresa" type="dEmpresa" visibility="private"/>
+        <Field name="obser" type="observer" visibility="private"/>
+        <Field name="jScrollPane2" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="tblTiposObs" type="javax.swing.JTable" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="dEmpresa" name="emp"/>
+          <Argument type="observer" name="obs"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="CargarDatosList" returnType="void" visibility="public"/>
+        <Method name="update" returnType="void" visibility="public">
+          <Argument type="Observable" name="o"/>
+          <Argument type="Object" name="arg"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="vPedido" package="Interfase" visibility="public" xPosition="6490.0" yPosition="2079.0">
+      <Fields>
+        <Field name="ListaPedidos" type="ArrayList&lt;pedido&gt;" visibility="private"/>
+        <Field name="dEmpresa" type="dEmpresa" visibility="private"/>
+        <Field name="obser" type="observer" visibility="private"/>
+        <Field name="btnAgregar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnEliminar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnModificar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel10" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel11" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel13" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel5" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel8" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel9" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel1" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPanel3" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jTabbedPane1" type="javax.swing.JTabbedPane" visibility="private"/>
+        <Field name="jcbCliPed" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="jcbMotPed" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="jdcFchPed" type="com.toedter.calendar.JDateChooser" visibility="private"/>
+        <Field name="jdcFchPed1" type="com.toedter.calendar.JDateChooser" visibility="private"/>
+        <Field name="tblPed" type="javax.swing.JTable" visibility="private"/>
+        <Field name="txtCliPed1" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtIdPed1" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtMotPed1" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="dEmpresa" name="pEmp"/>
+          <Argument type="observer" name="pObs"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="tblPedHierarchyChanged" returnType="void" visibility="private">
+          <Argument type="java.awt.event.HierarchyEvent" name="evt"/>
+        </Method>
+        <Method name="tblPedFocusGained" returnType="void" visibility="private">
+          <Argument type="java.awt.event.FocusEvent" name="evt"/>
+        </Method>
+        <Method name="tblPedMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="tblPedCaretPositionChanged" returnType="void" visibility="private">
+          <Argument type="java.awt.event.InputMethodEvent" name="evt"/>
+        </Method>
+        <Method name="tblPedPropertyChange" returnType="void" visibility="private">
+          <Argument type="java.beans.PropertyChangeEvent" name="evt"/>
+        </Method>
+        <Method name="btnEliminarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnModificarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="txtIdPed1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnAgregarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="txtCliPed1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="txtMotPed1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jcbCliPedActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="formWindowOpened" returnType="void" visibility="private">
+          <Argument type="java.awt.event.WindowEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="ReiniciarControles" returnType="void" visibility="private"/>
+        <Method name="LimpiarList" returnType="void" visibility="public"/>
+        <Method name="CargarDatosList" returnType="void" visibility="public"/>
+        <Method name="LimpiarCampos" returnType="void" visibility="public"/>
+        <Method name="CargarComboCliente" returnType="void" visibility="public"/>
+        <Method name="CargarComboMotor" returnType="void" visibility="public"/>
+        <Method name="update" returnType="void" visibility="public">
+          <Argument type="Observable" name="o"/>
+          <Argument type="Object" name="arg"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="vPrincipal" package="Interfase" visibility="public" xPosition="3549.0" yPosition="90.0">
+      <Fields>
+        <Field name="empresa" type="dEmpresa" visibility="private"/>
+        <Field name="obser" type="observer" visibility="private"/>
+        <Field name="Cliente" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="exitMenuItem" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="fileMenu" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="jCheckBoxMenuItem1" type="javax.swing.JCheckBoxMenuItem" visibility="private"/>
+        <Field name="jMenu1" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="jMenu2" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="jMenu3" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="jMenuBar1" type="javax.swing.JMenuBar" visibility="private"/>
+        <Field name="jMenuItem1" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="jmComponente" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="jmFactura" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="jmMotor" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="jmMotorComponente" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="jmPedido" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="jmProveedor" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="jmProveedorCompnente" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="menuBar" type="javax.swing.JMenuBar" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="dEmpresa" name="pEmp"/>
+          <Argument type="observer" name="pObs"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="exitMenuItemActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jmComponenteActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jmFacturaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jmMotorActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jmMotorComponenteActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jmPedidoActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jmProveedorCompnenteActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="ClienteActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jmProveedorActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="vProveedor" package="Interfase" visibility="public" xPosition="3504.0" yPosition="822.0">
+      <Fields>
+        <Field name="ListaProveedores" type="ArrayList&lt;proveedor&gt;" visibility="private"/>
+        <Field name="dEmpresa" type="dEmpresa" visibility="private"/>
+        <Field name="btnAgregar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnEliminar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnModificar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel4" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel5" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel6" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel1" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPanel3" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jScrollPane2" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jTabbedPane1" type="javax.swing.JTabbedPane" visibility="private"/>
+        <Field name="tblEliProv" type="javax.swing.JTable" visibility="private"/>
+        <Field name="txtDesEli" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtDescProv" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtIdEli" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtNomEli" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtNomProv" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="dEmpresa" name="pEmp"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="btnAgregarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnEliminarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="txtIdEliActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnModificarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="txtNomProvActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="formWindowOpened" returnType="void" visibility="private">
+          <Argument type="java.awt.event.WindowEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliProvMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="ReiniciarControles" returnType="void" visibility="private"/>
+        <Method name="LimpiarList" returnType="void" visibility="public"/>
+        <Method name="CargarDatosList" returnType="void" visibility="public"/>
+        <Method name="LimpiarCampos" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="vProveedorComponente" package="Interfase" visibility="public" xPosition="3528.0" yPosition="1722.0">
+      <Fields>
+        <Field name="ListaProvComp" type="ArrayList&lt;proveedorcomponente&gt;" visibility="private"/>
+        <Field name="dEmpresa" type="dEmpresa" visibility="private"/>
+        <Field name="btnAgregar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnEliminar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel4" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel5" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel1" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPanel3" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jScrollPane2" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jTabbedPane1" type="javax.swing.JTabbedPane" visibility="private"/>
+        <Field name="jcbComp" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="jcbProv" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="tblEliProvCom" type="javax.swing.JTable" visibility="private"/>
+        <Field name="txtIdComEli" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtIdProvEli" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="dEmpresa" name="pEmp"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="btnAgregarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="tblEliProvComMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="txtIdProvEliActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnEliminarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="formWindowOpened" returnType="void" visibility="private">
+          <Argument type="java.awt.event.WindowEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="ReiniciarControles" returnType="void" visibility="private"/>
+        <Method name="LimpiarList" returnType="void" visibility="public"/>
+        <Method name="CargarDatosList" returnType="void" visibility="public"/>
+        <Method name="LimpiarCampos" returnType="void" visibility="public"/>
+        <Method name="CargarComboComponente" returnType="void" visibility="public"/>
+        <Method name="CargarComboProveedor" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="main" package="Main" visibility="public" xPosition="2178.0" yPosition="806.0">
+      <Fields>
+        <Field name="empresa" type="dEmpresa" visibility="public" isStatic="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+        <Method name="getEmpresa" returnType="dEmpresa" visibility="public"/>
+        <Method name="setEmpresa" returnType="void" visibility="public">
+          <Argument type="dEmpresa" name="pEmp"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="pComponente" package="Persistencia" visibility="public" xPosition="2305.0" yPosition="1315.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="pFactura" package="Persistencia" visibility="public" xPosition="856.0" yPosition="2611.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="calcularCostoXPedido" returnType="int" visibility="public">
+          <Argument type="java.lang.Object" name="o"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="pGenerico" package="Persistencia" visibility="public" xPosition="4641.0" yPosition="3374.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="IsPrimitio" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="Field" name="propiedades"/>
+        </Method>
+        <Method name="getPropertiesFields" returnType="java.lang.reflect.Field[]" visibility="public" isStatic="true">
+          <Argument type="Object" name="pObject"/>
+        </Method>
+        <Method name="CreateInstance" returnType="Object" visibility="public" isStatic="true">
+          <Argument type="Object" name="pObject"/>
+        </Method>
+        <Method name="CreateInstanceConGET" returnType="Object" visibility="public" isStatic="true">
+          <Argument type="Field" name="pObject"/>
+        </Method>
+        <Method name="SetValorObjeto" returnType="Object" visibility="public">
+          <Argument type="Object" name="pObject"/>
+          <Argument type="ResultSet" name="reader"/>
+        </Method>
+        <Method name="EsString" returnType="Boolean" visibility="public" isStatic="true">
+          <Argument type="Object" name="pObject"/>
+        </Method>
+        <Method name="IsPK" returnType="Boolean" visibility="public">
+          <Argument type="String" name="TablaSQL"/>
+          <Argument type="String" name="Campo"/>
+        </Method>
+        <Method name="IsAutoincremental" returnType="Boolean" visibility="public">
+          <Argument type="String" name="TablaSQL"/>
+          <Argument type="String" name="Campo"/>
+        </Method>
+        <Method name="pasar_Fecha_JAVA" returnType="java.util.Date" visibility="public" isStatic="true">
+          <Argument type="String" name="uDate"/>
+        </Method>
+        <Method name="pasar_SQL_Fecha" returnType="String" visibility="public" isStatic="true">
+          <Argument type="java.util.Date" name="utilDate"/>
+        </Method>
+        <Method name="PasarAString" returnType="String" visibility="public" isStatic="true">
+          <Argument type="Object" name="pObject"/>
+        </Method>
+        <Method name="DevolverValor" returnType="Object" visibility="public">
+          <Argument type="Object" name="pObject"/>
+          <Argument type="Field" name="property"/>
+          <Argument type="Boolean" name="IsRecursivo"/>
+        </Method>
+        <Method name="agregar" returnType="boolean" visibility="public">
+          <Argument type="Object" name="pObject"/>
+        </Method>
+        <Method name="modificar" returnType="boolean" visibility="public">
+          <Argument type="Object" name="pObject"/>
+        </Method>
+        <Method name="eliminar_Logico" returnType="boolean" visibility="public">
+          <Argument type="Object" name="pObject"/>
+        </Method>
+        <Method name="eliminar" returnType="boolean" visibility="public">
+          <Argument type="Object" name="pObject"/>
+        </Method>
+        <Method name="TraerTodosSinEliminados" returnType="Object" visibility="public">
+          <Argument type="Object" name="pObject"/>
+        </Method>
+        <Method name="TraerEspecifico" returnType="Object" visibility="public">
+          <Argument type="Object" name="pObject"/>
+        </Method>
+        <Method name="TraerTodos" returnType="Object" visibility="public">
+          <Argument type="Object" name="pObject"/>
+        </Method>
+        <Method name="TraerTodos_PorFKs" returnType="ArrayList&lt;Object&gt;" visibility="public">
+          <Argument type="Object" name="pObject"/>
+          <Argument type="String" name="SecuenciaSQL"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="pPersistencia" package="Persistencia" visibility="public" xPosition="1478.0" yPosition="1940.0">
+      <Fields>
+        <Field name="instancia" type="pPersistencia" visibility="private" isStatic="true"/>
+        <Field name="distribuidora" type="Connection" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getInstancia" returnType="pPersistencia" visibility="public"/>
+        <Method name="abrirConexion" returnType="void" visibility="public"/>
+        <Method name="cerrarConexion" returnType="void" visibility="public"/>
+        <Method name="setInstancia" returnType="void" visibility="public">
+          <Argument type="pPersistencia" name="val"/>
+        </Method>
+        <Method name="getDistribuidora" returnType="Connection" visibility="public"/>
+        <Method name="setDistribuidora" returnType="void" visibility="public">
+          <Argument type="Connection" name="val"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="ListaPedido" source="Interfase.vFactura" target="Common.pedido" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;pedido&gt;"/>
+    <HasRelation name="empresaComponente" source="Dominio.dEmpresa" target="Dominio.dComponente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Common.proveedorcomponente" target="Common.proveedor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Common.proveedorcomponente" target="Common.componente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="ListaMotores" source="Interfase.vMotorComponente" target="Common.motores" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;motores&gt;"/>
+    <HasRelation name="idMotorMotorComponente" source="Common.motorcomponente" target="Common.motores" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dEmpresa" source="Interfase.vCliente" target="Dominio.dEmpresa" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Common.pedido" target="Common.motores" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dominio.dMotorComponente" target="Common.motorcomponente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dominio.dComponente" target="Common.componente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Persistencia.pFactura" target="Persistencia.pPersistencia"/>
+    <UseRelation source="Dominio.dEmpresa" target="Dominio.dEmpresa" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Common.motorcomponente" target="Common.motores" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dominio.dFactura" target="Common.factura" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="empresa" source="Main.main" target="Dominio.dEmpresa" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Common.pedido" target="Common.cliente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="ListaComponente" source="Interfase.vMotorComponente" target="Common.componente" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;componente&gt;"/>
+    <UseRelation source="Main.main" target="Dominio.dEmpresa" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dominio.dEmpresa" target="Common.motores" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="ListaProveedores" source="Interfase.vProveedor" target="Common.proveedor" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;proveedor&gt;"/>
+    <HasRelation name="idProveedorProveedorComponente" source="Common.proveedorcomponente" target="Common.proveedor" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="ListaMotores" source="Interfase.vMotor" target="Common.motores" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;motores&gt;"/>
+    <HasRelation name="idClientePedido" source="Common.pedido" target="Common.cliente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dominio.dMotores" target="Common.motores" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dominio.dEmpresa" target="Common.cliente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dominio.dPedido" target="Common.pedido" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="ListaComponentes" source="Interfase.vComponente" target="Common.componente" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;componente&gt;"/>
+    <HasRelation name="dEmpresa" source="Interfase.vPedido" target="Dominio.dEmpresa" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Persistencia.pGenerico" target="Persistencia.pPersistencia"/>
+    <HasRelation name="idPedidoFactura" source="Common.factura" target="Common.pedido" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dominio.dProveedorComponente" target="Common.proveedorcomponente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="idComponenteMotorComponente" source="Common.motorcomponente" target="Common.componente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dominio.dEmpresa" target="Common.proveedorcomponente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dominio.dEmpresa" target="Common.componente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dominio.dFactura" target="Common.pedido" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dEmpresa" source="Interfase.vProveedorComponente" target="Dominio.dEmpresa" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="idMotorPedido" source="Common.pedido" target="Common.motores" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dominio.dCliente" target="Common.cliente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dEmpresa" source="Interfase.vMotorComponente" target="Dominio.dEmpresa" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dominio.dProveedor" target="Common.proveedor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Common.factura" target="Common.pedido" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dominio.dEmpresa" target="Common.motorcomponente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Interfase.vMotorComponente" target="Common.motorcomponente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="ListaProvComp" source="Interfase.vProveedorComponente" target="Common.proveedorcomponente" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;proveedorcomponente&gt;"/>
+    <UseRelation source="Dominio.dEmpresa" target="Common.pedido" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="empresaProveedorComponente" source="Dominio.dEmpresa" target="Dominio.dProveedorComponente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="obser" source="Interfase.vObservable" target="Interfase.observer" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Common.motorcomponente" target="Common.componente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="ListaPedidos" source="Interfase.vObservable" target="Common.pedido" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;pedido&gt;"/>
+    <HasRelation name="obser" source="Interfase.vPrincipal" target="Interfase.observer" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="ListaPedidos" source="Interfase.vPedido" target="Common.pedido" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;pedido&gt;"/>
+    <HasRelation name="ListaMotorComponente" source="Interfase.vMotorComponente" target="Common.motorcomponente" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;motorcomponente&gt;"/>
+    <HasRelation name="empresaMotorComponente" source="Dominio.dEmpresa" target="Dominio.dMotorComponente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="empresa" source="Interfase.vObservable" target="Dominio.dEmpresa" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dominio.dEmpresa" target="Common.proveedor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="empresaMotor" source="Dominio.dEmpresa" target="Dominio.dMotores" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="empresaPedido" source="Dominio.dEmpresa" target="Dominio.dPedido" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dEmpresa" source="Interfase.vMotor" target="Dominio.dEmpresa" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Persistencia.pPersistencia" target="Persistencia.pPersistencia" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="instancia" source="Dominio.dEmpresa" target="Dominio.dEmpresa" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="empresa" source="Interfase.vPrincipal" target="Dominio.dEmpresa" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="ListaFactura" source="Interfase.vFactura" target="Common.factura" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;factura&gt;"/>
+    <HasRelation name="empresaCliente" source="Dominio.dEmpresa" target="Dominio.dCliente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="empresaFactura" source="Dominio.dEmpresa" target="Dominio.dFactura" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dominio.dEmpresa" target="Common.factura" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="instancia" source="Persistencia.pPersistencia" target="Persistencia.pPersistencia" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dEmpresa" source="Interfase.vFactura" target="Dominio.dEmpresa" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="obser" source="Interfase.vPedido" target="Interfase.observer" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="idComponenteProveedorComponente" source="Common.proveedorcomponente" target="Common.componente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dEmpresa" source="Interfase.vComponente" target="Dominio.dEmpresa" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="empresaProveedor" source="Dominio.dEmpresa" target="Dominio.dProveedor" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dEmpresa" source="Interfase.vProveedor" target="Dominio.dEmpresa" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="ListaClientes" source="Interfase.vCliente" target="Common.cliente" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;cliente&gt;"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

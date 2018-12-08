@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Common">
+  <ClassDiagramComponents>
+    <Class name="cDatosException" package="Common" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="msg"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="cliente" package="Common" visibility="public" xPosition="122.0" yPosition="533.0">
+      <Fields>
+        <Field name="idClie" type="int" visibility="private"/>
+        <Field name="nombreEmpresaClie" type="String" visibility="private"/>
+        <Field name="nombreFantasiaClie" type="String" visibility="private"/>
+        <Field name="paisClie" type="String" visibility="private"/>
+        <Field name="direccionClie" type="String" visibility="private"/>
+        <Field name="contactoClie" type="String" visibility="private"/>
+        <Field name="isDeleted" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="int" name="idClie"/>
+          <Argument type="String" name="nombreEmpresaClie"/>
+          <Argument type="String" name="nombreFantasiaClie"/>
+          <Argument type="String" name="paisClie"/>
+          <Argument type="String" name="direccionClie"/>
+          <Argument type="String" name="contactoClie"/>
+          <Argument type="boolean" name="idDeleted"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="getIdClie" returnType="int" visibility="public"/>
+        <Method name="setIdClie" returnType="void" visibility="public">
+          <Argument type="int" name="idClie"/>
+        </Method>
+        <Method name="getNombreEmpresaClie" returnType="String" visibility="public"/>
+        <Method name="setNombreEmpresaClie" returnType="void" visibility="public">
+          <Argument type="String" name="nombreEmpresaClie"/>
+        </Method>
+        <Method name="getNombreFantasiaClie" returnType="String" visibility="public"/>
+        <Method name="setNombreFantasiaClie" returnType="void" visibility="public">
+          <Argument type="String" name="nombreFantasiaClie"/>
+        </Method>
+        <Method name="getPaisClie" returnType="String" visibility="public"/>
+        <Method name="setPaisClie" returnType="void" visibility="public">
+          <Argument type="String" name="paisClie"/>
+        </Method>
+        <Method name="getDireccionClie" returnType="String" visibility="public"/>
+        <Method name="setDireccionClie" returnType="void" visibility="public">
+          <Argument type="String" name="direccionClie"/>
+        </Method>
+        <Method name="getContactoClie" returnType="String" visibility="public"/>
+        <Method name="setContactoClie" returnType="void" visibility="public">
+          <Argument type="String" name="contactoClie"/>
+        </Method>
+        <Method name="isIdDeleted" returnType="boolean" visibility="public"/>
+        <Method name="setIdDeleted" returnType="void" visibility="public">
+          <Argument type="boolean" name="idDeleted"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="componente" package="Common" visibility="public" xPosition="2937.0" yPosition="454.0">
+      <Fields>
+        <Field name="idComp" type="int" visibility="private"/>
+        <Field name="descripcionComp" type="String" visibility="private"/>
+        <Field name="costoComp" type="int" visibility="private"/>
+        <Field name="cantStockComp" type="int" visibility="private"/>
+        <Field name="cantMinStockComp" type="int" visibility="private"/>
+        <Field name="isDeleted" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="idComp"/>
+          <Argument type="String" name="descripcionComp"/>
+          <Argument type="int" name="costoComp"/>
+          <Argument type="int" name="cantStockComp"/>
+          <Argument type="int" name="cantMinStockComp"/>
+          <Argument type="boolean" name="isDeleted"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="getIdComp" returnType="int" visibility="public"/>
+        <Method name="setIdComp" returnType="void" visibility="public">
+          <Argument type="int" name="idComp"/>
+        </Method>
+        <Method name="getDescripcionComp" returnType="String" visibility="public"/>
+        <Method name="setDescripcionComp" returnType="void" visibility="public">
+          <Argument type="String" name="descripcionComp"/>
+        </Method>
+        <Method name="getCostoComp" returnType="int" visibility="public"/>
+        <Method name="setCostoComp" returnType="void" visibility="public">
+          <Argument type="int" name="costoComp"/>
+        </Method>
+        <Method name="getCantStockComp" returnType="int" visibility="public"/>
+        <Method name="setCantStockComp" returnType="void" visibility="public">
+          <Argument type="int" name="cantStockComp"/>
+        </Method>
+        <Method name="getCantMinStockComp" returnType="int" visibility="public"/>
+        <Method name="setCantMinStockComp" returnType="void" visibility="public">
+          <Argument type="int" name="cantMinStockComp"/>
+        </Method>
+        <Method name="isIsDeleted" returnType="boolean" visibility="public"/>
+        <Method name="setIsDeleted" returnType="void" visibility="public">
+          <Argument type="boolean" name="isDeletedComp"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="factura" package="Common" visibility="public" xPosition="1136.0" yPosition="651.0">
+      <Fields>
+        <Field name="idFactura" type="int" visibility="private"/>
+        <Field name="fechaPagoFactura" type="Date" visibility="private"/>
+        <Field name="idPedidoFactura" type="pedido" visibility="private"/>
+        <Field name="isDeleted" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="int" name="idFactura"/>
+          <Argument type="Date" name="fechaPagoFactura"/>
+          <Argument type="pedido" name="idPedidoFactura"/>
+          <Argument type="boolean" name="isDeleted"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getIdFactura" returnType="int" visibility="public"/>
+        <Method name="setIdFactura" returnType="void" visibility="public">
+          <Argument type="int" name="idFactura"/>
+        </Method>
+        <Method name="getFechaPagoFactura" returnType="Date" visibility="public"/>
+        <Method name="setFechaPagoFactura" returnType="void" visibility="public">
+          <Argument type="Date" name="fechaPagoFactura"/>
+        </Method>
+        <Method name="getIdPedidoFactura" returnType="pedido" visibility="public"/>
+        <Method name="setIdPedidoFactura" returnType="void" visibility="public">
+          <Argument type="pedido" name="idPedidoFactura"/>
+        </Method>
+        <Method name="isIsDeleted" returnType="boolean" visibility="public"/>
+        <Method name="setIsDeleted" returnType="void" visibility="public">
+          <Argument type="boolean" name="isDeleted"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="motorcomponente" package="Common" visibility="public" xPosition="2185.0" yPosition="20.0">
+      <Fields>
+        <Field name="idMotorMotorComponente" type="motores" visibility="private"/>
+        <Field name="idComponenteMotorComponente" type="componente" visibility="private"/>
+        <Field name="cantidadMotorComponente" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="motores" name="idMotorMotorComponente"/>
+          <Argument type="componente" name="idComponenteMotorComponente"/>
+          <Argument type="int" name="cantidadMotorComponente"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getIdMotorMotorComponente" returnType="motores" visibility="public"/>
+        <Method name="setIdMotorMotorComponente" returnType="void" visibility="public">
+          <Argument type="motores" name="idMotorMotorComponente"/>
+        </Method>
+        <Method name="getIdComponenteMotorComponente" returnType="componente" visibility="public"/>
+        <Method name="setIdComponenteMotorComponente" returnType="void" visibility="public">
+          <Argument type="componente" name="idComponenteMotorComponente"/>
+        </Method>
+        <Method name="getCantidadMotorComponente" returnType="int" visibility="public"/>
+        <Method name="setCantidadMotorComponente" returnType="void" visibility="public">
+          <Argument type="int" name="cantidadMotorComponente"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="motores" package="Common" visibility="public" xPosition="1538.0" yPosition="20.0">
+      <Fields>
+        <Field name="idMotor" type="int" visibility="private"/>
+        <Field name="nombreMotor" type="String" visibility="private"/>
+        <Field name="isDeleted" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="idMotor"/>
+          <Argument type="String" name="nombreMotor"/>
+          <Argument type="boolean" name="isDeleted"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getIdMotor" returnType="int" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="setIdMotor" returnType="void" visibility="public">
+          <Argument type="int" name="idMotor"/>
+        </Method>
+        <Method name="getNombreMotor" returnType="String" visibility="public"/>
+        <Method name="setNombreMotor" returnType="void" visibility="public">
+          <Argument type="String" name="nombreMotor"/>
+        </Method>
+        <Method name="isIsDeleted" returnType="boolean" visibility="public"/>
+        <Method name="setIsDeleted" returnType="void" visibility="public">
+          <Argument type="boolean" name="isDeleted"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="pedido" package="Common" visibility="public" xPosition="602.0" yPosition="1.0">
+      <Fields>
+        <Field name="idPedido" type="int" visibility="private"/>
+        <Field name="idClientePedido" type="cliente" visibility="private"/>
+        <Field name="fechaDeEntregaPedido" type="Date" visibility="private"/>
+        <Field name="isDeleted" type="boolean" visibility="private"/>
+        <Field name="idMotorPedido" type="motores" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="idPedido"/>
+          <Argument type="cliente" name="idClientePedido"/>
+          <Argument type="Date" name="fechaDeEntregaPedido"/>
+          <Argument type="boolean" name="isDeleted"/>
+          <Argument type="motores" name="idMotorPedido"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getIdPedido" returnType="int" visibility="public"/>
+        <Method name="setIdPedido" returnType="void" visibility="public">
+          <Argument type="int" name="idPedido"/>
+        </Method>
+        <Method name="getIdClientePedido" returnType="cliente" visibility="public"/>
+        <Method name="setIdClientePedido" returnType="void" visibility="public">
+          <Argument type="cliente" name="idClientePedido"/>
+        </Method>
+        <Method name="getFechaDeEntregaPedido" returnType="Date" visibility="public"/>
+        <Method name="setFechaDeEntregaPedido" returnType="void" visibility="public">
+          <Argument type="Date" name="fechaDeEntregaPedido"/>
+        </Method>
+        <Method name="isIsDeleted" returnType="boolean" visibility="public"/>
+        <Method name="setIsDeleted" returnType="void" visibility="public">
+          <Argument type="boolean" name="isDeleted"/>
+        </Method>
+        <Method name="getIdMotorPedido" returnType="motores" visibility="public"/>
+        <Method name="setIdMotorPedido" returnType="void" visibility="public">
+          <Argument type="motores" name="idMotorPedido"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="proveedor" package="Common" visibility="public" xPosition="3141.0" yPosition="1.0">
+      <Fields>
+        <Field name="idProveedor" type="int" visibility="private"/>
+        <Field name="nombreProveedor" type="String" visibility="private"/>
+        <Field name="descProveedor" type="String" visibility="private"/>
+        <Field name="IsDeleted" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="idProveedor"/>
+          <Argument type="String" name="nombreProveedor"/>
+          <Argument type="String" name="descProveedor"/>
+          <Argument type="boolean" name="IsDeleted"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="getIdProveedor" returnType="int" visibility="public"/>
+        <Method name="setIdProveedor" returnType="void" visibility="public">
+          <Argument type="int" name="idProveedor"/>
+        </Method>
+        <Method name="getNombreProveedor" returnType="String" visibility="public"/>
+        <Method name="setNombreProveedor" returnType="void" visibility="public">
+          <Argument type="String" name="nombreProveedor"/>
+        </Method>
+        <Method name="getDescProveedor" returnType="String" visibility="public"/>
+        <Method name="setDescProveedor" returnType="void" visibility="public">
+          <Argument type="String" name="descProveedor"/>
+        </Method>
+        <Method name="isIsDeleted" returnType="boolean" visibility="public"/>
+        <Method name="setIsDeleted" returnType="void" visibility="public">
+          <Argument type="boolean" name="IsDeleted"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="proveedorcomponente" package="Common" visibility="public" xPosition="1754.0" yPosition="454.0">
+      <Fields>
+        <Field name="idProveedorProveedorComponente" type="proveedor" visibility="private"/>
+        <Field name="idComponenteProveedorComponente" type="componente" visibility="private"/>
+        <Field name="isDeleted" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="proveedor" name="idProveedorProveedorComponente"/>
+          <Argument type="componente" name="idComponenteProveedorComponente"/>
+          <Argument type="boolean" name="isDeletedProveedorComponente"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getIdProveedorProveedorComponente" returnType="proveedor" visibility="public"/>
+        <Method name="setIdProveedorProveedorComponente" returnType="void" visibility="public">
+          <Argument type="proveedor" name="idProveedorProveedorComponente"/>
+        </Method>
+        <Method name="getIdComponenteProveedorComponente" returnType="componente" visibility="public"/>
+        <Method name="setIdComponenteProveedorComponente" returnType="void" visibility="public">
+          <Argument type="componente" name="idComponenteProveedorComponente"/>
+        </Method>
+        <Method name="isIsDeletedProveedorComponente" returnType="boolean" visibility="public"/>
+        <Method name="setIsDeletedProveedorComponente" returnType="void" visibility="public">
+          <Argument type="boolean" name="isDeletedProveedorComponente"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Utilidades" package="Common" visibility="public" xPosition="122.0" yPosition="226.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="isNumeric" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="String" name="cadena"/>
+        </Method>
+        <Method name="validarFecha" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="String" name="fechax"/>
+        </Method>
+        <Method name="convertirSqlToDateUtil" returnType="java.util.Date" visibility="public" isStatic="true">
+          <Argument type="java.sql.Date" name="uDate"/>
+        </Method>
+        <Method name="convertirDateUtilAString" returnType="String" visibility="public" isStatic="true">
+          <Argument type="java.util.Date" name="utilDate"/>
+        </Method>
+        <Method name="convertirDateUtilAStringBD" returnType="String" visibility="public" isStatic="true">
+          <Argument type="java.util.Date" name="utilDate"/>
+        </Method>
+        <Method name="convertirDeStringAUtilDate" returnType="Date" visibility="public" isStatic="true">
+          <Argument type="String" name="fecha"/>
+        </Method>
+        <Method name="fechaDeHoy" returnType="java.util.Date" visibility="public" isStatic="true"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="idPedidoFactura" source="Common.factura" target="Common.pedido" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Common.motorcomponente" target="Common.componente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="idComponenteProveedorComponente" source="Common.proveedorcomponente" target="Common.componente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Common.proveedorcomponente" target="Common.componente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Common.motorcomponente" target="Common.motores" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="idMotorPedido" source="Common.pedido" target="Common.motores" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Common.factura" target="Common.pedido" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="idClientePedido" source="Common.pedido" target="Common.cliente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Common.pedido" target="Common.cliente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Common.proveedorcomponente" target="Common.proveedor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="idProveedorProveedorComponente" source="Common.proveedorcomponente" target="Common.proveedor" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="idComponenteMotorComponente" source="Common.motorcomponente" target="Common.componente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="idMotorMotorComponente" source="Common.motorcomponente" target="Common.motores" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Common.pedido" target="Common.motores" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

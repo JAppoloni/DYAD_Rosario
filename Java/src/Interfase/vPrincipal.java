@@ -52,6 +52,7 @@ public class vPrincipal extends javax.swing.JFrame {
         jmFactura = new javax.swing.JMenuItem();
         jmPedido = new javax.swing.JMenuItem();
         jmProveedorCompnente = new javax.swing.JMenuItem();
+        jmListados = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
@@ -135,6 +136,14 @@ public class vPrincipal extends javax.swing.JFrame {
             }
         });
         fileMenu.add(jmProveedorCompnente);
+
+        jmListados.setText("Listados");
+        jmListados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmListadosActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jmListados);
 
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Salir");
@@ -222,6 +231,13 @@ public class vPrincipal extends javax.swing.JFrame {
         ventnaProveedor.setVisible(true);
     }//GEN-LAST:event_jmProveedorActionPerformed
 
+    private void jmListadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmListadosActionPerformed
+         vListados ventnaListados = new vListados(empresa);
+        //centra la ventana en la pantalla
+        ventnaListados.setLocationRelativeTo(null);
+        ventnaListados.setVisible(true);
+    }//GEN-LAST:event_jmListadosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -268,6 +284,7 @@ public class vPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jmComponente;
     private javax.swing.JMenuItem jmFactura;
+    private javax.swing.JMenuItem jmListados;
     private javax.swing.JMenuItem jmMotor;
     private javax.swing.JMenuItem jmMotorComponente;
     private javax.swing.JMenuItem jmPedido;
